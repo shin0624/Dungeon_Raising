@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class SelectWindowController : MonoBehaviour
     [SerializeField] private GameObject characterWindow;
     [SerializeField] private GameObject jobWindow;
     [SerializeField] private GameObject raceWindow;
+    [SerializeField] private GameObject nicknameWindow;
     [SerializeField] private Image characterButton;
     [SerializeField] private Image jobButton;
     [SerializeField] private Image raceButton;
@@ -44,6 +46,16 @@ public class SelectWindowController : MonoBehaviour
                 raceWindow.SetActive(true);
                 raceButton.color = activeColor;
                 break;
+            case "Nickname": //닉네임 입력 창
+                nicknameWindow.SetActive(true);
+                characterButton.gameObject.SetActive(false);
+                jobButton.gameObject.SetActive(false);
+                raceButton.gameObject.SetActive(false);
+                break;
+            case "UserInfoSave":
+            //추후 사용자 입력 데이터 저장 구현. 그 전에 닉네임 창에서 유효성 검사 로직 구현
+                gameObject.SetActive(false);
+                break;
             default:
                 Debug.LogError("Invalid window name: " + windowName);
                 break;
@@ -63,5 +75,15 @@ public class SelectWindowController : MonoBehaviour
     public void OnRaceButtonClicked()
     {
         ActivateWindow("Race");
+    }
+
+    public void OnNicknameButtonClicked()
+    {
+        ActivateWindow("Nickname");
+    }
+    
+    public void OnOkayButtonClicked()
+    {
+        ActivateWindow("UserInfoSave");
     }
 }
