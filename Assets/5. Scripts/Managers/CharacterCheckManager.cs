@@ -5,7 +5,6 @@ using UnityEngine;
 public class CharacterCheckManager : MonoBehaviour
 {
     // 플레이어 별 캐릭터 생성 여부를 관리하는 스크립트. 캐릭터가 생성되지 않았다면 캐릭터 선택 창을 먼저 띄우고, 이미 생성된 상태라면 선택 창은 비활성화한다.
-
     private static Dictionary<string, bool> playerCharacterStatus = new Dictionary<string, bool>();//플레이어별 캐릭터 생성 여부를 관리하는 딕셔너리
     [SerializeField] private GameObject characterSelectPanel;//캐릭터 선택창
     public string playerID;//현재 플레이어 아이디. 유니크한 값이며, 멀티플레이 환경에서의 사용을 위해 추후 photon의 유니크 플레이어 아이디를 사용한다.

@@ -6564,7 +6564,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1190311430
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6833,6 +6833,7 @@ GameObject:
   - component: {fileID: 1254474933}
   - component: {fileID: 1254474932}
   - component: {fileID: 1254474934}
+  - component: {fileID: 1254474936}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -6879,6 +6880,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c21c3db03dc06647bbf3b211b92d97d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1254474936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254474930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab47577ada25fc478ede252fecdae05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterCheckManager: {fileID: 1755420890}
 --- !u!1 &1283747633
 GameObject:
   m_ObjectHideFlags: 0
@@ -8449,9 +8463,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1755420887}
-  - component: {fileID: 1755420886}
-  - component: {fileID: 1755420885}
+  - component: {fileID: 1755420890}
   - component: {fileID: 1755420888}
+  - component: {fileID: 1755420885}
   - component: {fileID: 1755420889}
   m_Layer: 0
   m_Name: CharacterSelectManagers
@@ -8478,20 +8492,6 @@ MonoBehaviour:
   selectWindowPanel: {fileID: 1878528214}
   badWordFilter: {fileID: 1755420888}
   inputFieldSetting: {fileID: 1755420889}
---- !u!114 &1755420886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1755420884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c418068d826aeba4cb2ce1dddfad6c1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterSelectPanel: {fileID: 1878528214}
-  playerID: 
 --- !u!4 &1755420887
 Transform:
   m_ObjectHideFlags: 0
@@ -8533,6 +8533,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterNameText: {fileID: 1921862232}
   inputNickname: {fileID: 902919872}
+--- !u!114 &1755420890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755420884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c418068d826aeba4cb2ce1dddfad6c1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterSelectPanel: {fileID: 1878528214}
+  playerID: 
 --- !u!1 &1774780276
 GameObject:
   m_ObjectHideFlags: 0
