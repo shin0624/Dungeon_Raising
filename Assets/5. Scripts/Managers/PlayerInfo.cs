@@ -6,15 +6,17 @@ using UnityEngine;
 public class PlayerInfo : MonoBehaviour
 {
    //게임에서 계속 변화될 플레이어의 정보를 저장하는 클래스
+   
     [SerializeField] private CharacterCheckManager characterCheckManager;
-    
+    private PlayerInfoDefine playerInfoDefine;
+    private PlayerStatusDefine playerStatusDefine;
     private string playerID = "";
+    
     void Start()
     {
         PlayerIDCheck(playerID);
     }
 
-    
     void Update()
     {
         
