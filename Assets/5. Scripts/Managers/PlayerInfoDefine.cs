@@ -6,15 +6,15 @@ public class PlayerInfoDefine
 {
     public struct PlayerInformations
     {   
-        string playerNickname;
-        string playerGender;
-        string playerJob;
-        string playerRaise;
-        string towerFloor;
-        float playerExp;
-        int playerLevel;
-        int playerGold;
-        int playerActivity;
+        public string playerNickname { get; set; }
+        public string playerGender { get; set; }
+        public string playerJob { get; set; }
+        public string playerRaise { get; set; }
+        public string towerFloor { get; set; }
+        public float playerExp { get; set; }
+        public int playerLevel { get; set; }
+        public int playerGold { get; set; }
+        public int playerActivity { get; set; }
         
     };
 }

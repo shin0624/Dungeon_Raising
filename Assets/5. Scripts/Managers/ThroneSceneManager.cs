@@ -10,6 +10,7 @@ public class ThroneSceneManager : MonoBehaviour
     [SerializeField] private GameObject dungeonFightPanel;
     [SerializeField] private Button heroButton;
     [SerializeField] private Button dungeonFightButton;
+    [SerializeField] private Image characteristicImage;
     void Start()
     {
         Init();
@@ -17,12 +18,14 @@ public class ThroneSceneManager : MonoBehaviour
 
     private void HeroButtonClicked()//영웅 버튼 클릭 시 영웅 패널 활성화. 던전 결투 패널 비활성화
     {
+         characteristicImage.gameObject.SetActive(true);
         dungeonFightPanel.SetActive(false);
         heroPanel.SetActive(true);
     }
     
     private void DungeonFightButtonClicked()//던전 결투 버튼 클릭 시 던전 결투 패널 활성화. 영웅 패널 비활성화
     {
+        characteristicImage.gameObject.SetActive(false);
         heroPanel.SetActive(false);
         dungeonFightPanel.SetActive(true);
     }
@@ -34,6 +37,7 @@ public class ThroneSceneManager : MonoBehaviour
         dungeonFightButton.onClick.AddListener(DungeonFightButtonClicked);//던전 결투 버튼 이벤트 리스너 등록
         heroPanel.SetActive(true);//처음 씬에 들어오면 영웅 패널이 먼저 활성화되어 있는 상태.
         dungeonFightPanel.SetActive(false);
+        characteristicImage.gameObject.SetActive(true);
     }
 
     private void NullCheck()
@@ -56,6 +60,12 @@ public class ThroneSceneManager : MonoBehaviour
         else
         {
             Debug.Log("DungeonFightPanel Set Active");
+        }
+
+        if(characteristicImage==null)
+        {
+            Debug.Log("CharacteristicImage is NULL");
+            dungeonFightPanel = GameObject.Find("CharacteristicImage");
         }
     }
 }

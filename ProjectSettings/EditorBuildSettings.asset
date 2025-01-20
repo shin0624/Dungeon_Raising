@@ -6,13 +6,22 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/1. Scenes/CharacterSelectScene.unity
-    guid: e63dff188dd96cd418f19d1d84f00f24
-  - enabled: 1
     path: Assets/1. Scenes/TitleScene.unity
     guid: 3fc8acdd13e6c734bafef6554d6fdbcd
   - enabled: 1
+    path: Assets/1. Scenes/CharacterSelectScene.unity
+    guid: e63dff188dd96cd418f19d1d84f00f24
+  - enabled: 1
+    path: Assets/1. Scenes/MainScene.unity
+    guid: 4368f15e69e662a4dac2a1f8fd1a4d6e
+  - enabled: 1
     path: Assets/1. Scenes/ThroneScene.unity
     guid: 1b4953ed9a32c9e47ba8943a92a4230b
-  m_configObjects: {}
+  - enabled: 1
+    path: Assets/1. Scenes/FightScene.unity
+    guid: 68c74388994d97249a68a02843f6fde7
+  m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: b5b76fffa64eb6345a9c4b7120e47025, type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: 2e61f64beb3945f4eaa736f6b8430ff2, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: b106416eeaa2cd349810f338067841ac, type: 2}
   m_UseUCBPForAssetBundles: 0

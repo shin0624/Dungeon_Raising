@@ -6,13 +6,13 @@ public class PlayerStatusDefine
 {
     public struct PlayerStatus
     {
-        int [] pvpReport;
-        int pvpRanking;
-        int playerPower;
-        int attackPower;
-        int healthPoint;
-        int defensePoint;
-        int speedPoint;
-        int manaPoint;
+        public int [] pvpReport { get; set; }
+        public int pvpRanking { get; set; }
+        public int playerPower { get; set; }
+        public int attackPower { get; set; }
+        public int healthPoint { get; set; }
+        public int defensePoint { get; set; }
+        public int speedPoint { get; set; }
+        public int manaPoint { get; set; }
     };
 }

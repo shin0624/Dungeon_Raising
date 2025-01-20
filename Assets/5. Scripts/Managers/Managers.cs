@@ -13,6 +13,7 @@ public class Managers : MonoBehaviour
     private void Awake() 
     {
         Init();
+        Debug.Log("Managers Object Initialized.");
     }
 
     private static void Init()
@@ -22,11 +23,16 @@ public class Managers : MonoBehaviour
             GameObject manager = GameObject.Find("Managers");
             if(manager==null)
             {
-                manager = new GameObject{name = "Manager"};
+                manager = new GameObject{name = "Managers"};
                 manager.AddComponent<Managers>();
             }
             DontDestroyOnLoad(manager);
             s_instance  = manager.GetComponent<Managers>();
+
+            if(manager.GetComponent<PlayerInfo>()==null)
+            {
+                manager.AddComponent<PlayerInfo>();
+            }
         }
     }
 
