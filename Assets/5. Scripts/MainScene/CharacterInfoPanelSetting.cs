@@ -15,12 +15,6 @@ public class CharacterInfoPanelSetting : MonoBehaviour
         MainSceneInit();
     }
 
-    
-    void Update()
-    {
-        
-    }
-
     private void MainSceneInit()
     {
         StartCoroutine(DelaySetCharacterName());

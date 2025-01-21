@@ -39,11 +39,11 @@ public class CharacterCheckManager : MonoBehaviour
     {
         if(string.IsNullOrEmpty(playerID))
         {
-            Debug.LogError("Player ID is NULL");
+            //Debug.LogError("Player ID is NULL");
+            playerID = PlayerInfo.Instance.PlayerIDCheck(playerID);
             return;
         }
         bool isCreated = IsCharacterCreated(playerID);//플레이어 아이디가 없다면 0
         characterSelectPanel.gameObject.SetActive(isCreated);//캐릭터 생성 유무에 따라서 활성화 여부 결정
-        
     }
 }
