@@ -944,6 +944,7 @@ GameObject:
   m_Component:
   - component: {fileID: 292618911}
   - component: {fileID: 292618910}
+  - component: {fileID: 292618912}
   m_Layer: 0
   m_Name: ThroneSceneManager
   m_TagString: Untagged
@@ -983,6 +984,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &292618912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292618909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1720e869bbeb5c46b95393495ac9038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heroImageButton01: {fileID: 1273240353}
+  heroImageButton02: {fileID: 1488958004}
+  heroImageButton03: {fileID: 78183782}
 --- !u!1 &370964616
 GameObject:
   m_ObjectHideFlags: 0
