@@ -27,7 +27,7 @@ public class PlayerInfo : MonoBehaviour
     }
     private PlayerInfoDefine.PlayerInformations playerInformation = new PlayerInfoDefine.PlayerInformations();//플레이어 기본정보가 저장된 구조체 변수를 선언
     private PlayerStatusDefine.PlayerStatus playerStatus = new PlayerStatusDefine.PlayerStatus();//플레이어 pvp정보, 스테이터스 정보가 저장된 구조체 변수를 선언
-    private string playerID = "";
+    private static string playerID = "";
     
     void Start()
     {
