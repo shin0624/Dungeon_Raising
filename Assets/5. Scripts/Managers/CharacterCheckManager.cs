@@ -39,11 +39,14 @@ public class CharacterCheckManager : MonoBehaviour
     {
         if(string.IsNullOrEmpty(playerID))
         {
-            //Debug.LogError("Player ID is NULL");
-            playerID = PlayerInfo.Instance.PlayerIDCheck(playerID);
-            return;
+            Debug.Log("Player ID is NULL. Setting dummy ID.");
+            playerID = PlayerInfo.Instance.PlayerIDCheck(playerID);//플레이어 id가 없다면 playerinfo에 설정된 더미 id를 가져와서 설정
+            
         }
-        bool isCreated = IsCharacterCreated(playerID);//플레이어 아이디가 없다면 0
-        characterSelectPanel.gameObject.SetActive(isCreated);//캐릭터 생성 유무에 따라서 활성화 여부 결정
+        bool isCreated = IsCharacterCreated(playerID);//플레이어 아이디가 없다면 0 → 캐릭터 생성 창을 띄워야 함. 
+
+        characterSelectPanel.gameObject.SetActive(!isCreated);//캐릭터 생성 유무에 따라서 활성화 여부 결정. 캐릭터가 생성되지 않았다면 캐릭터 선택 창을 활성화해서 캐릭터가 생성되도록 해야 함. 이후 캐릭터가 생성되고 플레이어 id가 등록되었다면 다음 접속부터는 MainScene으로 바로 이동하도록 설정.
+        Debug.Log($"playerID bool : {isCreated}");
+
     }
 }

@@ -10,6 +10,10 @@ public class BadWordFilter : MonoBehaviour
     private TheBackend.ToolKit.InvalidFilter.FilterManager filterManager = new TheBackend.ToolKit.InvalidFilter.FilterManager();
     private bool isInitialized = false;//sdk 초기화 상태 확인 플래그
 
+    private void Awake() 
+    {
+        Init();
+    }
     void Start()
     {
         isInitialized = Init();

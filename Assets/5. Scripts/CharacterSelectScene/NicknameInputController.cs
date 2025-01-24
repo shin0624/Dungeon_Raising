@@ -19,8 +19,14 @@ public class NicknameInputController : MonoBehaviour
      
     void Start()
     {
-        Init();
+        StartCoroutine(DelayInitBadWordFilter());
         inputNickname.onSubmit.AddListener(OnNicknameSubmit);//인풋 필드에서 Enter 키 입력 시 비속어 체크 이벤트를 시작
+    }
+
+    private IEnumerator DelayInitBadWordFilter()//비속어 필터링 sdk의 초기화여부 체크를 0.5초 지연시킨다. BadWordFilter에서의 초기화가 먼저 진행된 후 초기화 여부를 체크해야 하기 때문. 두 메서드 사이의 순서를 정하지 않으면 초기화 여부가 먼저 False가 된 후 초기화가 진행될 수 있어 에러가 유발될 수 있으므로.
+    {
+        yield return new WaitForSeconds(0.5f);
+        Init();
     }
 
     private void Init()

@@ -70,6 +70,7 @@ public class SelectWindowController : MonoBehaviour
     public void OnJobButtonClicked()
     {
         ActivateWindow("Job");
+        Debug.Log("Job button clicked");
     }
 
     public void OnRaceButtonClicked()
