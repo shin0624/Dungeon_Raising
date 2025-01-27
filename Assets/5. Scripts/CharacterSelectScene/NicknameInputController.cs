@@ -65,7 +65,7 @@ public class NicknameInputController : MonoBehaviour
     private void UpdateCharacterName(string text)
     {
         inputFieldSetting.UpdateFontSizeAndText(text);//캐릭터 이름을 인풋필드에 작성된 이름으로 업데이트
-        PlayerInfo.Instance.PlayerNicknameCheck(text);//작성한 닉네임을 PlayerInfo로 전송
+        PlayerInfo.Instance.SetPlayerNickname(text);//작성한 닉네임을 PlayerInfo로 전송
     }
 
     private void ShowMessage(string alertMessage)//비속어가 발견여부 메세지 출력

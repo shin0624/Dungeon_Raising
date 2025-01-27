@@ -40,7 +40,7 @@ public class CharacterCheckManager : MonoBehaviour
         if(string.IsNullOrEmpty(playerID))
         {
             Debug.Log("Player ID is NULL. Setting dummy ID.");
-            playerID = PlayerInfo.Instance.PlayerIDCheck(playerID);//플레이어 id가 없다면 playerinfo에 설정된 더미 id를 가져와서 설정
+            playerID = PlayerInfo.Instance.SetPlayerID(playerID);//플레이어 id가 없다면 playerinfo에 설정된 더미 id를 가져와서 설정
             
         }
         bool isCreated = IsCharacterCreated(playerID);//플레이어 아이디가 없다면 0 → 캐릭터 생성 창을 띄워야 함. 

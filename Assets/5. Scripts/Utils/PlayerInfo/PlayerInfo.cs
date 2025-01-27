@@ -28,6 +28,19 @@ public class PlayerInfo : MonoBehaviour
     private PlayerInfoDefine.PlayerInformations playerInformation = new PlayerInfoDefine.PlayerInformations();//플레이어 기본정보가 저장된 구조체 변수를 선언
     private PlayerStatusDefine.PlayerStatus playerStatus = new PlayerStatusDefine.PlayerStatus();//플레이어 pvp정보, 스테이터스 정보가 저장된 구조체 변수를 선언
     private static string playerID = "";
+    void Awake() 
+    {
+        if(_instance==null)
+        {
+            _instance=this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
     
     void Start()
     {
@@ -35,28 +48,40 @@ public class PlayerInfo : MonoBehaviour
         Debug.Log($"[DEBUG] CharacterInfoPanelSetting Start(): {PlayerInfo.Instance.GetPlayerNickname()}");
     }
 
-    void Update()
-    {
-        
-    }
-
-    public string PlayerIDCheck(string id)//플레이어 아이디를 string변수에 저장
+    public string SetPlayerID(string id)//플레이어 아이디를 string변수에 저장
     {   string tempID = "a1b2c3";
         id = tempID;
         Debug.Log($"PlayerID : {id}");
         return id;
     }
 
-    public void PlayerNicknameCheck(string text)
+    public void SetPlayerNickname(string text)
     {
-        Debug.Log($"[DEBUG] Nickname submitted: {text}");
-        playerInformation.playerNickname = text;//플레이어 기본정보 구조체의 닉네임을 설정. 플레이어가 인풋필드에 입력한 text값을 전달.
+        if(!string.IsNullOrEmpty(text))
+        {
+            playerInformation.playerNickname = text;//플레이어 기본정보 구조체의 닉네임을 설정. 플레이어가 인풋필드에 입력한 text값을 전달. 
+        }
+        else
+        {
+            Debug.LogWarning("Invalid nickname input.");
+        }
     }
 
-    public void PlayerGenderCheck(string text)//플레이어 성별을 전달하는 메서드
+    public void SetPlayerGender(string text)//플레이어 성별을 전달하는 메서드
     {
-        Debug.Log($"[DEBUG] Gender submitted: {text}");
-        playerInformation.playerGender = text;//플레이어 기본정보 구조체의 성별을 설정. 플레이어가 SelectWindowController에서 선택한 성별(string변수)을 전달.
+        if(!string.IsNullOrEmpty(text))
+        {
+            playerInformation.playerGender = text;//플레이어 기본정보 구조체의 성별을 설정. 플레이어가 SelectWindowController에서 선택한 성별(string변수)을 전달.
+        }
+        else
+        {
+            Debug.LogWarning("Invalid gender input.");
+        }
+    }
+
+    public string GetPlayerID()
+    {
+        return string.IsNullOrEmpty(playerID) ? "Unknown ID" : playerID;
     }
 
     public string GetPlayerNickname()//외부 클래스에서 플레이어 닉네임을 불러올 때 쓰는 메서드. string nickname =  PlayerInfo.Instance.GetPlayerNickname()으로 호출
@@ -76,7 +101,7 @@ public class PlayerInfo : MonoBehaviour
     {
         if (string.IsNullOrEmpty(playerInformation.playerGender))
         {
-            Debug.LogWarning("Player gender has not been set. return value is Basevalue(Male)");
+            Debug.Log("Player gender has not been set.");
             return null;//플레이어 성별이 설정되지 않았다면 null값을 반환
         }
         else
@@ -84,7 +109,5 @@ public class PlayerInfo : MonoBehaviour
             Debug.Log($"[DEBUG] PlayerGender: {playerInformation.playerGender}");
             return playerInformation.playerGender;
         }
-    }
-
-   
+    } 
 }

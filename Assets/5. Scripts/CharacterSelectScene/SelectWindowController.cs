@@ -53,7 +53,7 @@ public class SelectWindowController : MonoBehaviour
                 break;
             case "Job": // 직업 선택 창
                 jobWindow.SetActive(true);
-                StartCoroutine(LoadPanelMaleOrFemale());
+                StartCoroutine(RestrictionJobButtonByGender());
                 jobButton.color = activeColor;
                 break;
             case "Race"://종족 선택 창
@@ -104,18 +104,18 @@ public class SelectWindowController : MonoBehaviour
     public void OnMaleButtonClicked()//남자 캐릭터 버튼 클릭 시 true
     {
         playerGender = "Male";
-        PlayerInfo.Instance.PlayerGenderCheck(playerGender);
+        PlayerInfo.Instance.SetPlayerGender(playerGender);
         Debug.Log("Male Clicked. PlayerGender : " + playerGender);
     }
 
     public void OnFemaleButtonClicked()//여자 캐릭터 버튼 클릭 시 false
     {
         playerGender = "Female";
-        PlayerInfo.Instance.PlayerGenderCheck(playerGender);
+        PlayerInfo.Instance.SetPlayerGender(playerGender);
         Debug.Log("Female Clicked. PlayerGender : " + playerGender);
     }
 
-    private IEnumerator LoadPanelMaleOrFemale()//[캐릭터 선택 창]에서 선택한 성별에 따라서 [직업 선택 창]에서 선택할 수 있는 직업의 버튼이 달라진다.
+    private IEnumerator RestrictionJobButtonByGender()//[캐릭터 선택 창]에서 선택한 성별에 따라서 [직업 선택 창]에서 선택할 수 있는 직업의 버튼이 달라진다.
     {
         yield return null;
         if(PlayerInfo.Instance.GetPlayerGender()=="Male")

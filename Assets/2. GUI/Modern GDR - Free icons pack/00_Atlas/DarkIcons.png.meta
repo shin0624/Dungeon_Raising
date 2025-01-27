@@ -1,9 +1,16 @@
 fileFormatVersion: 2
-guid: 132358e9bf26b60458b731bf001e31db
+guid: 847f3e08157367e458aec63415b2d664
+AssetOrigin:
+  serializedVersion: 1
+  productId: 264706
+  packageName: Modern GDR - Free icons pack
+  packageVersion: 1.0
+  assetPath: Assets/Modern GDR - Free icons pack/00_Atlas/DarkIcons.png
+  uploadId: 623822
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -20,11 +27,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,17 +71,20 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -86,6 +97,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -98,6 +110,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -110,6 +123,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -122,6 +136,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -134,17 +149,18 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Up_Bright
+      name: Up_Dark
       rect:
         serializedVersion: 2
-        x: 38
-        y: 859
+        x: 32
+        y: 845
         width: 55
         height: 99
       alignment: 0
@@ -154,18 +170,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8362085d384214d499329413f27ff98b
-      internalID: 699413217
+      spriteID: de81f11902056fd4d844cb4d1acceafc
+      internalID: 261713945
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Down_Bright
+      name: Down_Dark
       rect:
         serializedVersion: 2
-        x: 126
-        y: 860
+        x: 119
+        y: 846
         width: 55
         height: 99
       alignment: 0
@@ -175,18 +191,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 239458bea5c62d24ab8651f06beeba5e
-      internalID: -640786540
+      spriteID: ce63e7df8b5f3d84f8d8eabf5aa0b867
+      internalID: 2020029850
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Left_Bright
+      name: Left_Dark
       rect:
         serializedVersion: 2
-        x: 211
-        y: 882
+        x: 203
+        y: 866
         width: 99
         height: 55
       alignment: 0
@@ -196,18 +212,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24975a9c7ee52cc4fb694980de5d93a8
-      internalID: -767216509
+      spriteID: b667420f3daa97840aac3ae019e8fa73
+      internalID: 2089045037
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Right_Bright
+      name: Right_Dark
       rect:
         serializedVersion: 2
-        x: 335
-        y: 881
+        x: 328
+        y: 865
         width: 99
         height: 55
       alignment: 0
@@ -217,20 +233,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb69aa37af7527b43b55751c3b4f5914
-      internalID: 1502802138
+      spriteID: 2c364692c8b01d147887ede0e64daa6c
+      internalID: -1344412181
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cross_Bright
+      name: Cross_Dark
       rect:
         serializedVersion: 2
-        x: 464
-        y: 878
-        width: 67
-        height: 67
+        x: 455
+        y: 861
+        width: 65
+        height: 65
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -238,20 +254,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8559ed1014adf0e4387f998d0f2b2333
-      internalID: -150716834
+      spriteID: 688fb89239139cf408f1597481fe86dc
+      internalID: -1872677635
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ToggleOff_Bright
+      name: ToggleOff_Dark
       rect:
         serializedVersion: 2
-        x: 567
-        y: 871
-        width: 76
-        height: 77
+        x: 553
+        y: 856
+        width: 78
+        height: 78
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -259,20 +275,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a91077924dcd0eb4a9a006862fb62ecf
-      internalID: 191927606
+      spriteID: 6e7a910473c012f48acb2e18b8f83350
+      internalID: -1016715262
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ToggleOn_Bright
+      name: ToggleOn_Dark
       rect:
         serializedVersion: 2
-        x: 673
-        y: 871
-        width: 77
-        height: 77
+        x: 663
+        y: 858
+        width: 78
+        height: 78
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -280,18 +296,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 652b126212de383469e34bda2d66dec7
-      internalID: 37255795
+      spriteID: b61997c1e3fc2c44d90afb4fa8a427b2
+      internalID: -155605750
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Star01_Bright
+      name: Star01_Dark
       rect:
         serializedVersion: 2
-        x: 782
-        y: 874
+        x: 776
+        y: 865
         width: 79
         height: 77
       alignment: 0
@@ -301,19 +317,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2407e0221815f304f8d3398c99fed700
-      internalID: -1107025847
+      spriteID: 1095797232cb1344a95e4012c9dffd92
+      internalID: -841762240
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Star02_Bright
+      name: Star02_Dark
       rect:
         serializedVersion: 2
-        x: 895
-        y: 872
-        width: 82
+        x: 881
+        y: 863
+        width: 81
         height: 79
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -322,20 +338,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3de2ada95d962c445a41126fe1a02e62
-      internalID: -1160430131
+      spriteID: fbdf5d1eebe5f6140a9d9bb4833c2344
+      internalID: 1016017613
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Heart01_Bright
+      name: Aim01_Dark
       rect:
         serializedVersion: 2
-        x: 36
-        y: 724
-        width: 68
-        height: 61
+        x: 125
+        y: 709
+        width: 65
+        height: 65
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -343,20 +359,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d05295a51855f4458d6b58ee75aa073
-      internalID: 381300419
+      spriteID: 76921872c229b5641abbab5226e101bd
+      internalID: -433929376
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Heart02_Bright
+      name: Aim02_Dark
       rect:
         serializedVersion: 2
-        x: 131
-        y: 724
-        width: 68
-        height: 61
+        x: 223
+        y: 709
+        width: 65
+        height: 65
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -364,18 +380,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 677bce3bc20c51f4384a13d689c4feed
-      internalID: 623849741
+      spriteID: 0ad6d338f06cf2244933275ec2ebc761
+      internalID: -983435609
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Key_Bright
+      name: Key_Dark
       rect:
         serializedVersion: 2
-        x: 225
-        y: 722
+        x: 519
+        y: 707
         width: 75
         height: 69
       alignment: 0
@@ -385,19 +401,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: beac6b9432ec1d04f89cc4f242668afd
-      internalID: 1426590355
+      spriteID: 409321dab09fda245bd114b5783359f3
+      internalID: -576006967
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Watch_Bright
+      name: Watch_Dark
       rect:
         serializedVersion: 2
-        x: 342
-        y: 722
-        width: 67
+        x: 631
+        y: 709
+        width: 69
         height: 78
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -406,18 +422,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 051a37b459c23474e8d2578647885251
-      internalID: -1552747657
+      spriteID: 7968b4597a36be7448db001bd3bca5b2
+      internalID: -388978811
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Play_Bright
+      name: Play_Dark
       rect:
         serializedVersion: 2
-        x: 450
-        y: 721
+        x: 746
+        y: 705
         width: 48
         height: 73
       alignment: 0
@@ -427,18 +443,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1176f368ccd3e62469f5a8cee8febedc
-      internalID: -1299279679
+      spriteID: 530fd906808435f4c9c8d72c34a0d6d1
+      internalID: 1915791974
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pause_Bright
+      name: Pause_Dark
       rect:
         serializedVersion: 2
-        x: 538
-        y: 719
+        x: 835
+        y: 708
         width: 42
         height: 74
       alignment: 0
@@ -448,18 +464,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa7904ef26e2d0f4eaf87c9dba805c73
-      internalID: -2145061827
+      spriteID: 40d96aac86babb44c8817578d0e92c27
+      internalID: -1513329235
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Padlock01_Bright
+      name: Padlok01_Dark
       rect:
         serializedVersion: 2
-        x: 623
-        y: 727
+        x: 925
+        y: 712
         width: 52
         height: 68
       alignment: 0
@@ -469,124 +485,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 31417d0de31179b46a3f27a5ff22fb54
-      internalID: 1822879496
+      spriteID: 990aef2b06e22b94b861c3a322141379
+      internalID: -358594112
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Padlock02_Bright
+      name: Compass_Dark
       rect:
         serializedVersion: 2
-        x: 720
-        y: 727
-        width: 52
-        height: 68
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2bc66ab05e454054e8239265b4927c9d
-      internalID: 1087086722
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ShutDown_Bright
-      rect:
-        serializedVersion: 2
-        x: 919
-        y: 724
-        width: 60
-        height: 67
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f2e3625384e63b94faee6199787e5eae
-      internalID: -844700153
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hamburger_Bright
-      rect:
-        serializedVersion: 2
-        x: 817
-        y: 727
-        width: 59
-        height: 55
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9a4a68a0332cad544a1c1f8c626796a5
-      internalID: 560201700
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Potion01_Bright
-      rect:
-        serializedVersion: 2
-        x: 38
-        y: 560
-        width: 62
-        height: 82
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ae1e37ec71f776543be78838f8a17bac
-      internalID: 994223573
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Potion02_Bright
-      rect:
-        serializedVersion: 2
-        x: 139
-        y: 562
-        width: 62
-        height: 82
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 13cf1902cb192b34096dc48c54cabf5d
-      internalID: 690456700
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Quest01_Bright
-      rect:
-        serializedVersion: 2
-        x: 239
-        y: 561
-        width: 76
+        x: 36
+        y: 702
+        width: 63
         height: 77
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -595,376 +506,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 516a9a790cb84a540a70a11a55a169c7
-      internalID: 1314314700
+      spriteID: fdd8622bf37d5234ba12703bbbd41e5c
+      internalID: -240298928
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Quest02_Bright
+      name: Heart01_Dark
       rect:
         serializedVersion: 2
-        x: 346
-        y: 561
-        width: 76
-        height: 77
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f63ed8c788ed4264883d5ff119e7cb11
-      internalID: 642134378
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Circle_Bright
-      rect:
-        serializedVersion: 2
-        x: 576
-        y: 564
-        width: 80
-        height: 74
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0aa8a44520d55d2479420714e8279f1e
-      internalID: -763091385
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MusicNote01_Bright
-      rect:
-        serializedVersion: 2
-        x: 705
-        y: 565
-        width: 54
-        height: 82
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cc1c055fbd2e3d041a00dbaa739cc312
-      internalID: 598968965
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Coin_Bright
-      rect:
-        serializedVersion: 2
-        x: 465
-        y: 564
-        width: 67
-        height: 67
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 083567d402e8ad24f9f7a2e388e0d0e3
-      internalID: 298784443
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MusicNote_Bright
-      rect:
-        serializedVersion: 2
-        x: 811
-        y: 564
-        width: 61
-        height: 82
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0c3ec77135d4d4c4981c66d01958aeef
-      internalID: -639886857
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Reload_Bright
-      rect:
-        serializedVersion: 2
-        x: 911
-        y: 570
-        width: 65
-        height: 70
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dc2dd2b8f943f2848a0951983a5ce0fa
-      internalID: 1510120445
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ThunderStrike_Bright
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 382
-        width: 100
-        height: 111
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8c377cb5163772a42b5fd67f83533182
-      internalID: 798309987
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thunder_Bright
-      rect:
-        serializedVersion: 2
-        x: 155
-        y: 410
-        width: 46
-        height: 73
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 83d645881ac0327429a762aa15a6d79e
-      internalID: -1756047590
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gear01_Bright
-      rect:
-        serializedVersion: 2
-        x: 238
-        y: 409
-        width: 70
-        height: 69
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5a64f96d35cbf7a4ebd7ffe38888bb6b
-      internalID: -530572372
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gear02_Bright
-      rect:
-        serializedVersion: 2
-        x: 334
-        y: 409
-        width: 70
-        height: 69
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8b0bb9deb24c97444b5342b36ffa5050
-      internalID: 808527345
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shop_Bright
-      rect:
-        serializedVersion: 2
-        x: 433
-        y: 409
-        width: 67
-        height: 67
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ee1dc2ae52a40654ca78bdddbf60d8f1
-      internalID: 1790055172
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Point_Bright
-      rect:
-        serializedVersion: 2
-        x: 533
-        y: 412
+        x: 321
+        y: 710
         width: 68
-        height: 68
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ab812eeb86656fc4694f8b3a1fbdf6bb
-      internalID: -897676795
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Medal_Bright
-      rect:
-        serializedVersion: 2
-        x: 631
-        y: 404
-        width: 54
-        height: 86
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7ce5af4b2e403e846aba1341f01ec58c
-      internalID: 258959272
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Camera01_Bright
-      rect:
-        serializedVersion: 2
-        x: 725
-        y: 417
-        width: 56
-        height: 56
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fe7aa70378bd8224b97614812189fe35
-      internalID: -1478034287
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Camera02_Bright
-      rect:
-        serializedVersion: 2
-        x: 826
-        y: 417
-        width: 56
-        height: 56
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 21cc8031f255ebd4d91103e606dcc053
-      internalID: -2126376948
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Exit_Bright
-      rect:
-        serializedVersion: 2
-        x: 936
-        y: 411
-        width: 61
-        height: 66
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d52841a9020802149bafcb60bfbe736d
-      internalID: -607346249
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shield_Bright
-      rect:
-        serializedVersion: 2
-        x: 43
-        y: 228
-        width: 72
-        height: 84
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e2df77bbb0fa85c41ba11214ba131a0c
-      internalID: -2081245629
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Network_Bright
-      rect:
-        serializedVersion: 2
-        x: 148
-        y: 241
-        width: 60
         height: 61
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -973,20 +527,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c6fd20a08d63e945b07332c0e35414e
-      internalID: -248196999
+      spriteID: 1ef3c3424aebba04f90a090c0a33ec96
+      internalID: -690369022
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gears_Bright
+      name: Heart02_Dark
       rect:
         serializedVersion: 2
-        x: 242
-        y: 229
-        width: 88
-        height: 77
+        x: 421
+        y: 710
+        width: 68
+        height: 61
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -994,20 +548,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f669aecf49701f4498d10ba09f68d714
-      internalID: 276966819
+      spriteID: 08330bf6f325b914b9343ea9716c851d
+      internalID: -159757665
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bow_Bright
+      name: Padlock02_Dark
       rect:
         serializedVersion: 2
-        x: 352
-        y: 229
-        width: 78
-        height: 80
+        x: 40
+        y: 551
+        width: 52
+        height: 68
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1015,20 +569,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73560fc8c56115940bf27dd204f8f61d
-      internalID: -1730254177
+      spriteID: 17b2725f601d2a84799a2a367ca59215
+      internalID: 1875666959
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Aim01_Bright
+      name: Skip_Dark
       rect:
         serializedVersion: 2
-        x: 480
-        y: 239
-        width: 67
-        height: 67
+        x: 231
+        y: 550
+        width: 76
+        height: 54
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1036,20 +590,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db613641a5e32fd4690c00e8208b874a
-      internalID: 566335295
+      spriteID: faf45a52413fe7e43a69b57882b39b56
+      internalID: -970002912
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Aim02_Bright
+      name: Rewind_Dark
       rect:
         serializedVersion: 2
-        x: 583
-        y: 238
-        width: 67
-        height: 67
+        x: 331
+        y: 550
+        width: 76
+        height: 54
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1057,81 +611,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0bc9ab849f911441975107da420a063
-      internalID: 151241378
+      spriteID: ba0a671ba7c05bd499cbbebb3ca24a8a
+      internalID: 33869163
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Down02_Bright
+      name: Text_Dark
       rect:
         serializedVersion: 2
-        x: 690
-        y: 240
-        width: 79
-        height: 62
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 32da25358ab13d74d83035114ca98082
-      internalID: -1544809838
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Up02_Bright
-      rect:
-        serializedVersion: 2
-        x: 800
-        y: 246
-        width: 79
-        height: 62
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: da2f5534c6e67d241809002b06cc189d
-      internalID: 1870898176
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamond_Bright
-      rect:
-        serializedVersion: 2
-        x: 909
-        y: 242
-        width: 72
-        height: 56
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f550e3cb2b14ab649ab1204a5ed4c6f8
-      internalID: -1005278575
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Text_Bright
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 83
+        x: 444
+        y: 550
         width: 62
         height: 58
       alignment: 0
@@ -1141,20 +632,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f64769360d7eec4ca749c70308525cf
-      internalID: 394714750
+      spriteID: 560281b7e8dbae84fb3d0d90617f00b8
+      internalID: 1703455674
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Compass_Bright
+      name: Potion01_Dark
       rect:
         serializedVersion: 2
-        x: 157
-        y: 76
-        width: 63
-        height: 76
+        x: 538
+        y: 547
+        width: 62
+        height: 82
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1162,20 +653,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f64123dc35297ad4aa724b142995321b
-      internalID: 362099136
+      spriteID: 551e66f698045ee4f8a81dcd0897a3f6
+      internalID: -241880949
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rewind_Bright
+      name: Potion02_Dark
       rect:
         serializedVersion: 2
-        x: 262
-        y: 86
-        width: 76
-        height: 54
+        x: 634
+        y: 547
+        width: 62
+        height: 82
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1183,20 +674,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e7b73fbbcc17174e9072b786d7bb2e4
-      internalID: 285396403
+      spriteID: a3b61cdb5f16ae749be322e49a423379
+      internalID: 752574547
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skip_Bright
+      name: Quest01_Dark
       rect:
         serializedVersion: 2
-        x: 386
-        y: 87
-        width: 76
-        height: 54
+        x: 724
+        y: 546
+        width: 78
+        height: 78
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1204,19 +695,229 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a51d486baa707343b06391079c524e7
-      internalID: 1386808307
+      spriteID: 668b35108d53e2741bea4c4ca88e20f9
+      internalID: -1915229303
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sword_Bright
+      name: Question02_Dark
       rect:
         serializedVersion: 2
-        x: 502
-        y: 73
-        width: 66
+        x: 822
+        y: 547
+        width: 78
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36fd44bbbc5248840aa7a240cbab28e2
+      internalID: 1384835824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Coin_Dark
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 552
+        width: 67
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33833e9aff8eee94ca398127f1a63da5
+      internalID: -461919733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hamburger_Dark
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 551
+        width: 59
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2982e70c4bd15bc47a05b8eb1494e451
+      internalID: -1327482196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Circles_Dark
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 398
+        width: 80
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf91a7ae36024e54382cb1b84feac784
+      internalID: -650786412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MusicNote01_Dark
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 392
+        width: 54
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7d65765625aab84f8f0f649a5a48d0e
+      internalID: -1681209767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MusicNote02_Dark
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 392
+        width: 61
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffd62b6f38ce3e8469074deeeb06baf4
+      internalID: 1929031120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shield_Dark
+      rect:
+        serializedVersion: 2
+        x: 662
+        y: 393
+        width: 72
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7264a950898d1e44826a49bb3709974
+      internalID: -604943165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ThunderStrike_Dark
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 380
+        width: 99
+        height: 111
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f58a02dfa1b582459e9a09221cc4109
+      internalID: -1861133318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder_Dark
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 402
+        width: 46
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe86b24bf34c9bf498b3252af54dfe41
+      internalID: 369216766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shutdown_Dark
+      rect:
+        serializedVersion: 2
+        x: 459
+        y: 399
+        width: 60
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27c1bb22e6095b644b525d7e624c0801
+      internalID: -501953978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sword_Dark
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 389
+        width: 64
         height: 88
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1225,8 +926,323 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d5df3c65831af443909a3ed8e57d0b7
-      internalID: 1744151977
+      spriteID: 2f95a358709402341b7730afa37a0472
+      internalID: -1190951230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reload_Dark
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 395
+        width: 65
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64ba61333144e054f8f93ba37fde5754
+      internalID: -1052610679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gear01_Dark
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 244
+        width: 70
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4eccfa5addcd2e489c98d5c6a9be50c
+      internalID: 950931698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gear02_Dark
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 244
+        width: 70
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 688a558f59a7d4f4f9dd3bf89c43c784
+      internalID: 1653236041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Dark
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 243
+        width: 67
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edd901e95c008744eaf23e6aacf723bb
+      internalID: -897707841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Point_Dark
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 250
+        width: 68
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 280116668389b714b88d1d6a279e549b
+      internalID: 1077594895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medal_Dark
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 239
+        width: 54
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31167469fc043254baa594e2fbb48f04
+      internalID: 1835692648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camera_Dark
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 256
+        width: 56
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e35dfdb0aa6ae144792b1b262f47c2fb
+      internalID: 715841917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camera02_Dark
+      rect:
+        serializedVersion: 2
+        x: 669
+        y: 256
+        width: 56
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f3145f809d78b44c902d8fe9efe753c
+      internalID: -294549838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Exit_Dark
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 251
+        width: 62
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8e1a90c9f7d5224aa11eee56515c22e
+      internalID: 525780498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Network_Dark
+      rect:
+        serializedVersion: 2
+        x: 885
+        y: 256
+        width: 60
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 854a293111e4f254c9e6ca7bbfac4b7c
+      internalID: -92888626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gears_Dark
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 83
+        width: 88
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efe7333698815c345a5ba45670825b25
+      internalID: 473153993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bow_Dark
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 80
+        width: 78
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c5e93d34279fd84c8b975908fcb4fe5
+      internalID: 1538650408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Up02_Dark
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 99
+        width: 79
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00eb3dbd42cac154287b3dbbb21d40f3
+      internalID: 1197337205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Down02_Dark
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 94
+        width: 79
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 118a672cda22a5f4b9453d327466b395
+      internalID: -2100408472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Diamond_Dark
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 95
+        width: 76
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dc83d9878abd8e48a7a15d3e6bc5985
+      internalID: -1756713103
       vertices: []
       indices: 
       edges: []
@@ -1234,7 +1250,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 2a7f941bc7925894682b7a4405e55ab1
+    spriteID: 0ddb43529388e2e419b00e19e360d1cd
     internalID: 0
     vertices: []
     indices: 
@@ -1242,97 +1258,89 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Star01_Bright: -1107025847
-      BrightIcons_42: 163445720
-      ToggleOff_Bright: 191927606
-      MusicNote_Bright: -639886857
-      Cross_Bright: -150716834
-      BrightIcons_47: 249350219
-      Diamond_Bright: -1005278575
-      ToggleOn_Bright: 37255795
-      BrightIcons_33: 553008039
-      BrightIcons_79: 959232527
-      Skip_Bright: 1386808307
-      Bow_Bright: -1730254177
-      Padlock01_Bright: 1822879496
-      Quest02_Bright: 642134378
-      Gear02_Bright: 808527345
-      Shop_Bright: 1790055172
-      BrightIcons_34: 1768195073
-      BrightIcons_74: 652979374
-      Circle_Bright: -763091385
-      BrightIcons_38: 270636521
-      BrightIcons_30: -33277191
-      Gear01_Bright: -530572372
-      Hamburger_Bright: 560201700
-      BrightIcons_63: -521598190
-      Exit_Bright: -607346249
-      Play_Bright: -1299279679
-      BrightIcons_57: -1676406672
-      Camera02_Bright: -2126376948
-      BrightIcons_43: -1470852806
-      Pause_Bright: -2145061827
-      Aim02_Bright: 151241378
-      Network_Bright: -248196999
-      Thunder_Bright: -1756047590
-      Heart01_Bright: 381300419
-      BrightIcons_19: 1548326471
-      Down02_Bright: -1544809838
-      Text_Bright: 394714750
-      Potion02_Bright: 690456700
-      Heart02_Bright: 623849741
-      Quest01_Bright: 1314314700
-      Gears_Bright: 276966819
-      Down_Bright: -640786540
-      BrightIcons_13: 1877998811
-      BrightIcons_72: -2109686354
-      BrightIcons_46: 596022833
-      Reload_Bright: 1510120445
-      Medal_Bright: 258959272
-      BrightIcons_32: 712147980
-      Padlock02_Bright: 1087086722
-      Rewind_Bright: 285396403
-      BrightIcons_40: 1239815005
-      Camera01_Bright: -1478034287
-      BrightIcons_22: -72578716
-      BrightIcons_60: 1840213344
-      Shield_Bright: -2081245629
-      BrightIcons_44: 1213722800
-      Up_Bright: 699413217
-      BrightIcons_58: -896542829
-      BrightIcons_76: 1271195117
-      ShutDown_Bright: -844700153
-      Compass_Bright: 362099136
-      Watch_Bright: -1552747657
-      Aim01_Bright: 566335295
-      BrightIcons_21: 230620656
-      Left_Bright: -767216509
-      BrightIcons_59: -1276492289
-      Star02_Bright: -1160430131
-      Sword_Bright: 1744151977
-      Coin_Bright: 298784443
-      BrightIcons_31: 472613203
-      ThunderStrike_Bright: 798309987
-      BrightIcons_39: 811595573
-      Point_Bright: -897676795
-      Key_Bright: 1426590355
-      Up02_Bright: 1870898176
-      BrightIcons_37: -1106742639
-      BrightIcons_71: -158501773
-      MusicNote01_Bright: 598968965
-      BrightIcons_15: 1499002977
-      Right_Bright: 1502802138
-      Potion01_Bright: 994223573
-  spritePackingTag: 
+      Aim01_Dark: -433929376
+      Aim02_Dark: -983435609
+      Bow_Dark: 1538650408
+      Camera02_Dark: -294549838
+      Camera_Dark: 715841917
+      Circles_Dark: -650786412
+      Coin_Dark: -461919733
+      Compass_Dark: -240298928
+      Cross_Dark: -1872677635
+      DarkIcons_14: -483540695
+      DarkIcons_16: 2025600238
+      DarkIcons_19: 1348368345
+      DarkIcons_24: 2120648784
+      DarkIcons_26: 1200243267
+      DarkIcons_27: -1757224752
+      DarkIcons_35: 164460120
+      DarkIcons_40: 1858793173
+      DarkIcons_41: -1155893151
+      DarkIcons_42: -1185165823
+      DarkIcons_43: 1942912445
+      DarkIcons_44: -641033413
+      DarkIcons_45: 1634763759
+      DarkIcons_46: 1498589512
+      DarkIcons_50: -1014846411
+      DarkIcons_51: -803333649
+      DarkIcons_54: -1914861447
+      DarkIcons_55: 854539409
+      DarkIcons_57: 1567735026
+      DarkIcons_58: -150566085
+      DarkIcons_59: -818151558
+      DarkIcons_60: 909795203
+      DarkIcons_61: 755412621
+      DarkIcons_62: -2144632988
+      DarkIcons_63: -2120126226
+      DarkIcons_64: 46651281
+      DarkIcons_73: -1535254496
+      DarkIcons_76: 853619579
+      DarkIcons_9: 1471670505
+      Diamond_Dark: -1756713103
+      Down02_Dark: -2100408472
+      Down_Dark: 2020029850
+      Exit_Dark: 525780498
+      Gear01_Dark: 950931698
+      Gear02_Dark: 1653236041
+      Gears_Dark: 473153993
+      Hamburger_Dark: -1327482196
+      Heart01_Dark: -690369022
+      Heart02_Dark: -159757665
+      Key_Dark: -576006967
+      Left_Dark: 2089045037
+      Medal_Dark: 1835692648
+      MusicNote01_Dark: -1681209767
+      MusicNote02_Dark: 1929031120
+      Network_Dark: -92888626
+      Padlock02_Dark: 1875666959
+      Padlok01_Dark: -358594112
+      Pause_Dark: -1513329235
+      Play_Dark: 1915791974
+      Point_Dark: 1077594895
+      Potion01_Dark: -241880949
+      Potion02_Dark: 752574547
+      Quest01_Dark: -1915229303
+      Question02_Dark: 1384835824
+      Reload_Dark: -1052610679
+      Rewind_Dark: 33869163
+      Right_Dark: -1344412181
+      Shield_Dark: -604943165
+      Shop_Dark: -897707841
+      Shutdown_Dark: -501953978
+      Skip_Dark: -970002912
+      Star01_Dark: -841762240
+      Star02_Dark: 1016017613
+      Sword_Dark: -1190951230
+      Text_Dark: 1703455674
+      ThunderStrike_Dark: -1861133318
+      Thunder_Dark: 369216766
+      ToggleOff_Dark: -1016715262
+      ToggleOn_Dark: -155605750
+      Up02_Dark: 1197337205
+      Up_Dark: 261713945
+      Watch_Dark: -388978811
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 264706
-  packageName: Modern GDR - Free icons pack
-  packageVersion: 1.0
-  assetPath: Assets/Modern GDR - Free icons pack/00_Atlas/BrightIcons.png
-  uploadId: 623822
