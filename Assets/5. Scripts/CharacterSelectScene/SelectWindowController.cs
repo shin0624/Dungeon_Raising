@@ -25,6 +25,7 @@ public class SelectWindowController : MonoBehaviour
     [SerializeField] private Button femaleCharacterButton;//여성 캐릭터 버튼
     [SerializeField] private GameObject failureText;//성별 선택하지 않은 채 "다음"버튼을 눌렀을 때 출력되는 경고팝업
     private string playerGender = "";//플레이어 성별
+    [SerializeField] private JobSelectManager jobSelectManager;
     //-------------------------------------------------------------------
     private Color activeColor = new Color(0.6862745f, 0.5686275f, 0.1176471f, 1f );//활성화 시 컬러
     private Color inActiveColor = Color.white;//기본 색
@@ -53,7 +54,7 @@ public class SelectWindowController : MonoBehaviour
                 break;
             case "Job": // 직업 선택 창
                 jobWindow.SetActive(true);
-                StartCoroutine(RestrictionJobButtonByGender());
+                RestrictionJobButtonByGender();
                 jobButton.color = activeColor;
                 break;
             case "Race"://종족 선택 창
@@ -102,22 +103,29 @@ public class SelectWindowController : MonoBehaviour
     }
 
     public void OnMaleButtonClicked()//남자 캐릭터 버튼 클릭 시 true
-    {
-        playerGender = "Male";
+    {  
+        if(playerGender=="Female" || string.IsNullOrEmpty(playerGender))
+        {
+            playerGender = "Male";
+        }
         PlayerInfo.Instance.SetPlayerGender(playerGender);
         Debug.Log("Male Clicked. PlayerGender : " + playerGender);
+        jobSelectManager.SetJobPanel(playerGender);
     }
 
     public void OnFemaleButtonClicked()//여자 캐릭터 버튼 클릭 시 false
     {
-        playerGender = "Female";
+        if(playerGender=="Male" || string.IsNullOrEmpty(playerGender))
+        {
+            playerGender = "Female";
+        }
         PlayerInfo.Instance.SetPlayerGender(playerGender);
         Debug.Log("Female Clicked. PlayerGender : " + playerGender);
+        jobSelectManager.SetJobPanel(playerGender);
     }
 
-    private IEnumerator RestrictionJobButtonByGender()//[캐릭터 선택 창]에서 선택한 성별에 따라서 [직업 선택 창]에서 선택할 수 있는 직업의 버튼이 달라진다.
+    private void RestrictionJobButtonByGender()//[캐릭터 선택 창]에서 선택한 성별에 따라서 [직업 선택 창]에서 선택할 수 있는 직업의 버튼이 달라진다. 
     {
-        yield return null;
         if(PlayerInfo.Instance.GetPlayerGender()=="Male")
         {
             knightButton.interactable = true;

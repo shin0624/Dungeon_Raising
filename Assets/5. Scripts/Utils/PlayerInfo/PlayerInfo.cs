@@ -101,7 +101,7 @@ public class PlayerInfo : MonoBehaviour
     {
         if (string.IsNullOrEmpty(playerInformation.playerGender))
         {
-            Debug.Log("Player gender has not been set.");
+            //Debug.Log("Player gender has not been set.");
             return null;//플레이어 성별이 설정되지 않았다면 null값을 반환
         }
         else
