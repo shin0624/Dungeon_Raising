@@ -110,4 +110,28 @@ public class PlayerInfo : MonoBehaviour
             return playerInformation.playerGender;
         }
     } 
+
+    public void SetPlayerJob(string text)//플레이어 직업 설정. jobselectmanager에서 사용 
+    {
+        if(!string.IsNullOrEmpty(playerInformation.playerJob))//먼저 저장된 값이 있다면 일단 지운다.
+        {
+            playerInformation.playerJob = "";
+        }
+        playerInformation.playerJob = text;//지정한 string 값으로 저장.
+        Debug.Log($"playerJob is {playerInformation.playerJob}");
+    }
+
+    public string GetPlayerJob()//외부 클래스에서 플레이어 직업을 불러올 때 쓰는 메서드
+    {
+        if (string.IsNullOrEmpty(playerInformation.playerJob))
+        {
+            return null;//플레이어 직업이 설정되지 않았다면 null값을 반환
+        }
+        else
+        {
+            Debug.Log($"[DEBUG] Player Job: {playerInformation.playerJob}");
+            return playerInformation.playerJob;
+        }
+    }
+
 }

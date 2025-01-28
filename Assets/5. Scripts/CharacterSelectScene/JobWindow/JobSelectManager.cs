@@ -30,11 +30,13 @@ public class JobSelectManager : MonoBehaviour
     private void OnKnightButtonClicked()
     {
         ActiveSpecificPanel(maleJobPanels, 0);
+        PlayerInfo.Instance.SetPlayerJob("Knight");
     }
 
     private void OnMaleArcherButtonClicked()
     {
         ActiveSpecificPanel(maleJobPanels, 1);
+        PlayerInfo.Instance.SetPlayerJob("Archer");
     }
 
     private void OnFemaleButtonClicked()
@@ -45,6 +47,7 @@ public class JobSelectManager : MonoBehaviour
     private void OnMagicianButtonClicked()
     {
         ActiveSpecificPanel(femaleJobPanels, 1);
+        PlayerInfo.Instance.SetPlayerJob("Magician");
     }
 
     private IEnumerator WaitForGenderSelection()// 성별 선택이 완료될 때 까지 대기한다. 업데이트문에서 성별 선택 완료 감지 로직을 작성하면 성별 선택이 완료된 후에도 조건문 확인이 계속 발생하므로 코루틴으로 처리.

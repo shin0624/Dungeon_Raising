@@ -19,7 +19,7 @@ public class CharacterInfoPanelSetting : MonoBehaviour
     {
         StartCoroutine(DelaySetCharacterName());
     }
-
+    
     private void SetCharacterName()//플레이어 명 = 플레이어 입력 값으로 설정하는 메서드
     {
         if(PlayerInfo.Instance==null)//만약 PlayerInfo의 닉네임이 정상적으로 설정되지 않았을 때는 임시값을 저장
@@ -36,6 +36,9 @@ public class CharacterInfoPanelSetting : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         SetCharacterName();
     }
+
+
+
 
 
 }
