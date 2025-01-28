@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterInfoPanelSetting : MonoBehaviour
 {
-    // MainScene의 CharacterInfoPanel 세팅을 위한 클래스. 플레이어창의 닉네임, 레벨, 클리어 층 수, 전투력, 경험치를 현재 플레이어에 맞게 세팅한다.
+    // MainScene의 CharacterInfoPanel 세팅을 위한 클래스. 플레이어창의 닉네임, 레벨, 클리어 층 수, 전투력, 경험치, 이미지를 현재 플레이어에 맞게 세팅한다.
     [SerializeField] private TextMeshProUGUI characterName; 
+    [SerializeField] private Image characterImage;//캐릭터인포패널에서 캐릭터 이미지가 들어갈 빈 스프라이트 객체를 할당.
+    [SerializeField] private CharacterInfoProfile characterInfoProfile;
     private const int MaxCharacterLimit = 10;
     private const float FontSizeLarge = 34.7f;
     private const float FontSizeSmall = 30.0f;
+
     void Awake()
     {
         MainSceneInit();
@@ -18,6 +22,7 @@ public class CharacterInfoPanelSetting : MonoBehaviour
     private void MainSceneInit()
     {
         StartCoroutine(DelaySetCharacterName());
+        characterImage.sprite = characterInfoProfile.SetCharacterProfile();//CharacterInfoProfile의 참조변수로 스프라이트 설정 메서드에 접근한다. 싱글톤으로 접근 시 인스펙터에서 스프라이트 배열 할당이 불가함.
     }
     
     private void SetCharacterName()//플레이어 명 = 플레이어 입력 값으로 설정하는 메서드

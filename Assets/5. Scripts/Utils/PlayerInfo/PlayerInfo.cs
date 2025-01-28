@@ -107,17 +107,17 @@ public class PlayerInfo : MonoBehaviour
         else
         {
             Debug.Log($"[DEBUG] PlayerGender: {playerInformation.playerGender}");
-            return playerInformation.playerGender;
+            return playerInformation.playerGender;//성별이 설정된 상태이면 반환
         }
     } 
 
-    public void SetPlayerJob(string text)//플레이어 직업 설정. jobselectmanager에서 사용 
+    public void SetPlayerJob(string text)//플레이어 직업 설정. jobselectmanager에서 사용. 매개변수 text는 Knight, Archer, Magician 중 하나 
     {
         if(!string.IsNullOrEmpty(playerInformation.playerJob))//먼저 저장된 값이 있다면 일단 지운다.
         {
             playerInformation.playerJob = "";
         }
-        playerInformation.playerJob = text;//지정한 string 값으로 저장.
+        playerInformation.playerJob = text;//넘겨받은 직업 명 매개변수값으로 playerJob을 설정.
         Debug.Log($"playerJob is {playerInformation.playerJob}");
     }
 
@@ -130,7 +130,7 @@ public class PlayerInfo : MonoBehaviour
         else
         {
             Debug.Log($"[DEBUG] Player Job: {playerInformation.playerJob}");
-            return playerInformation.playerJob;
+            return playerInformation.playerJob;//직업이 설정된 상태이며 반환
         }
     }
 
