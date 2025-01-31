@@ -7,6 +7,9 @@ public class PlayerInfo : MonoBehaviour
 {
    //게임에서 계속 변화될 플레이어의 정보를 저장하는 클래스
     [SerializeField] private CharacterCheckManager characterCheckManager;
+    private PlayerInfoDefine.PlayerInformations playerInformation = new PlayerInfoDefine.PlayerInformations();//플레이어 기본정보가 저장된 구조체 변수를 선언
+    private PlayerStatusDefine.PlayerStatus playerStatus = new PlayerStatusDefine.PlayerStatus();//플레이어 pvp정보, 스테이터스 정보가 저장된 구조체 변수를 선언
+    private static string playerID = "";
     private static PlayerInfo _instance = null;
     public static PlayerInfo Instance
     {
@@ -25,9 +28,7 @@ public class PlayerInfo : MonoBehaviour
             return _instance;
         }
     }
-    private PlayerInfoDefine.PlayerInformations playerInformation = new PlayerInfoDefine.PlayerInformations();//플레이어 기본정보가 저장된 구조체 변수를 선언
-    private PlayerStatusDefine.PlayerStatus playerStatus = new PlayerStatusDefine.PlayerStatus();//플레이어 pvp정보, 스테이터스 정보가 저장된 구조체 변수를 선언
-    private static string playerID = "";
+
     void Awake() 
     {
         if(_instance==null)
@@ -47,7 +48,7 @@ public class PlayerInfo : MonoBehaviour
         //PlayerIDCheck(playerID);
         Debug.Log($"[DEBUG] CharacterInfoPanelSetting Start(): {PlayerInfo.Instance.GetPlayerNickname()}");
     }
-
+//------------------Setter---------------------------------------------------------------------------------------
     public string SetPlayerID(string id)//플레이어 아이디를 string변수에 저장
     {   string tempID = "a1b2c3";
         id = tempID;
@@ -79,6 +80,27 @@ public class PlayerInfo : MonoBehaviour
         }
     }
 
+    public void SetPlayerJob(string text)//플레이어 직업 설정. jobselectmanager에서 사용. 매개변수 text는 Knight, Archer, Magician 중 하나 
+    {
+        if(!string.IsNullOrEmpty(playerInformation.playerJob))//먼저 저장된 값이 있다면 일단 지운다.
+        {
+            playerInformation.playerJob = "";
+        }
+        playerInformation.playerJob = text;//넘겨받은 직업 명 매개변수값으로 playerJob을 설정.
+        Debug.Log($"playerJob is {playerInformation.playerJob}");
+    }
+
+    public void SetPlayerRace(string text)//플레이어 종족 설정. RaceSelectManager에서 호출하여 PlayerInfoDefine의 playerRace값을 설정한다.
+    {
+        if(!string.IsNullOrEmpty(playerInformation.playerRace))// 먼저 설정된 값이 있을 경우 초기화
+        {
+            playerInformation.playerRace = "";
+        }
+        playerInformation.playerRace = text;//넘겨받은 종족 명 매개변수 값으로 playerRace를 설정
+        Debug.Log($"playerRace is {playerInformation.playerRace}");
+    }
+
+//--------------Getter------------------------------------------------------------------------------------
     public string GetPlayerID()
     {
         return string.IsNullOrEmpty(playerID) ? "Unknown ID" : playerID;
@@ -111,16 +133,6 @@ public class PlayerInfo : MonoBehaviour
         }
     } 
 
-    public void SetPlayerJob(string text)//플레이어 직업 설정. jobselectmanager에서 사용. 매개변수 text는 Knight, Archer, Magician 중 하나 
-    {
-        if(!string.IsNullOrEmpty(playerInformation.playerJob))//먼저 저장된 값이 있다면 일단 지운다.
-        {
-            playerInformation.playerJob = "";
-        }
-        playerInformation.playerJob = text;//넘겨받은 직업 명 매개변수값으로 playerJob을 설정.
-        Debug.Log($"playerJob is {playerInformation.playerJob}");
-    }
-
     public string GetPlayerJob()//외부 클래스에서 플레이어 직업을 불러올 때 쓰는 메서드
     {
         if (string.IsNullOrEmpty(playerInformation.playerJob))
@@ -130,7 +142,20 @@ public class PlayerInfo : MonoBehaviour
         else
         {
             Debug.Log($"[DEBUG] Player Job: {playerInformation.playerJob}");
-            return playerInformation.playerJob;//직업이 설정된 상태이며 반환
+            return playerInformation.playerJob;//직업이 설정된 상태이면 반환
+        }
+    }
+
+    public string GetPlayerRace()//외부 클래스에서 플레이어 종족을 불러올 때 쓰는 메서드
+    {
+        if(string.IsNullOrEmpty(playerInformation.playerRace))
+        {
+            return null;//플레이어 종족이 설정되지 않았다면 null을 반환
+        }
+        else
+        {
+            Debug.Log($"[DEBUG]  Player Race : {playerInformation.playerRace}");
+            return playerInformation.playerRace;//종족이 설정된 상태이면 반환
         }
     }
 

@@ -9,7 +9,7 @@ public class PlayerInfoDefine
         public string playerNickname { get; set; }
         public string playerGender { get; set; }
         public string playerJob { get; set; }
-        public string playerRaise { get; set; }
+        public string playerRace { get; set; }
         public string towerFloor { get; set; }
         public float playerExp { get; set; }
         public int playerLevel { get; set; }
