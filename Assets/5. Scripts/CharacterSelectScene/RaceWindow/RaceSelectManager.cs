@@ -22,6 +22,12 @@ public class RaceSelectManager : MonoBehaviour
             int index = i;//클로저 캡처 방지
             raceButtons[i].onClick.AddListener(() => OnRaceButtonClicked(index));
         }
+        InitActivePanel();
+    }
+
+    private void InitActivePanel()//처음 [종족 선택 창]이 열리면 racePanels[0]에 해당하는 패널이 홀드다운 된 상태.
+    {
+        ActiveSpecificPanel(0);
     }
 
     private void OnRaceButtonClicked(int index)//버튼에 공통으로 들어갈 이벤트 메서드. 버튼 클릭 시 기존에 열린 패널을 닫고 racePanel[n]을 활성화한 후 raceNameHash값을 playerInfo.Playerrace에 저장한다.

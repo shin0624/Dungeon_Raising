@@ -1391,7 +1391,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 359110444}
-  - component: {fileID: 359110447}
   - component: {fileID: 359110446}
   - component: {fileID: 359110445}
   m_Layer: 5
@@ -1414,10 +1413,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1534338315}
-  - {fileID: 381552595}
   - {fileID: 419604769}
   - {fileID: 8276065}
   - {fileID: 221283398}
+  - {fileID: 381552595}
   m_Father: {fileID: 1131542936}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1463,21 +1462,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 359110443}
   m_CullTransparentMesh: 1
---- !u!114 &359110447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 359110443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c133fa63bd2c1e84ba2a503b0c690f55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterName: {fileID: 198416705}
-  characterImage: {fileID: 0}
-  characterInfoProfile: {fileID: 0}
 --- !u!224 &381552595 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8580248447430525418, guid: 6d19345eff119ea4bb2f8e9927acc6dd, type: 3}
@@ -1883,8 +1867,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4081,7 +4065,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 319, y: -255}
+  m_AnchoredPosition: {x: 253, y: -255}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1238401088
@@ -5816,6 +5800,7 @@ GameObject:
   - component: {fileID: 1755420888}
   - component: {fileID: 1755420889}
   - component: {fileID: 1755420890}
+  - component: {fileID: 1755420891}
   m_Layer: 0
   m_Name: MainSceneManager
   m_TagString: Untagged
@@ -5885,6 +5870,21 @@ MonoBehaviour:
   femaleCharacterImage:
   - {fileID: 21300000, guid: 2ef377958f8549f4d81a911361492cd3, type: 3}
   - {fileID: 21300000, guid: f553592dbd2eb294a8a8222a5b0e3c06, type: 3}
+--- !u!114 &1755420891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755420884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88ed9b44b898ab64b8922c82e315cdb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNickname: {fileID: 198416705}
+  playerSpriteImage: {fileID: 418067703}
+  characterInfoProfile: {fileID: 1755420890}
 --- !u!1 &1812717348
 GameObject:
   m_ObjectHideFlags: 0
