@@ -38,6 +38,29 @@ public class QuestStatusManager : MonoBehaviour
             return;
         
         quest.objectives[objectiveIndex].currentCount +=amount;//퀘스트 달성에 필요한 최소 횟수, 수량 등을 amout값을 더해 업데이트.
-        QuestValidator.CheckCompletion(quest);//퀘스트 상태 검증.
+        QuestValidator.CheckCompletion(quest);//퀘스트 진행도와 currentCount값이 requiredCount값을 만족 하는지 검증한다. 검증 완료 시 보상을 지급한다.
+    }
+
+    public string GetQuestStatus(Quest quest)//외부에서 퀘스트 현재 진행도를 반환할 메서드. QuestManager를 통해 접근한다.
+    {
+        string currentStatus = "";
+        switch(quest.status)
+        {
+            case QuestStatus.Available :
+                currentStatus = "Available";
+                break;
+            
+            case QuestStatus.InProgress :
+                currentStatus = "InProgress";
+                break;
+            
+            case QuestStatus.Completed :
+                currentStatus = "Completed";
+                break;
+            
+            default : currentStatus = "Unknown Status";
+                break;
+        }
+        return currentStatus;
     }
 }

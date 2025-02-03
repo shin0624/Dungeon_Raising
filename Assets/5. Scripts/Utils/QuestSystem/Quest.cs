@@ -16,5 +16,5 @@ public class Quest : ScriptableObject
     public QuestObjective[] objectives;//퀘스트 성공 조건(목표)
 
     [Header("Reward")]
-    public QuestReward reward;
+    public QuestReward reward;//퀘스트 보상
 }

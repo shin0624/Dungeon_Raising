@@ -8887,6 +8887,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1070331501}
   - component: {fileID: 1070331503}
+  - component: {fileID: 1070331504}
   - component: {fileID: 1070331502}
   m_Layer: 5
   m_Name: QuestPanel
@@ -8894,7 +8895,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1070331501
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8958,6 +8959,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1070331500}
   m_CullTransparentMesh: 1
+--- !u!114 &1070331504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070331500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1388039a95e27904e9bb9871fd54ceee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questGoal: {fileID: 1975773946}
+  progressText: {fileID: 1222995244}
+  completeText: {fileID: 929671155}
+  completeButton: {fileID: 1202029584}
 --- !u!1 &1085647489
 GameObject:
   m_ObjectHideFlags: 0
