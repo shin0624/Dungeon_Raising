@@ -12,8 +12,8 @@ public class QuestManager : MonoBehaviour
     public static void AcceptQuest(Quest quest) => QuestStatusManager.Instance.AcceptQuest(quest);//퀘스트 수락 메서드 --> 퀘스트 진행도 상태가 Available일 경우 수락. 중복 수락x
     public static void UpdateQuestProgress(Quest quest, int objectiveIndex, int amount) => QuestStatusManager.Instance.UpdateObjectiveProgress(quest, objectiveIndex, amount);//퀘스트 진행도 업데이트 메서드
     //quest : 대상 퀘스트, objectiveIndex : 업데이트할 목표 인덱스, amount : 증가 수량 또는 횟수
-
-    public static void GetQuestStatus(Quest quest) => QuestStatusManager.Instance.GetQuestStatus(quest);//외부에서 현재 퀘스트 상태에 접근할 때 사용하는 메서드.
+    public static void CompleteQuest(Quest quest) => QuestStatusManager.Instance.CompleteQuest(quest);
+    public static string GetQuestStatus(Quest quest) => QuestStatusManager.Instance.GetQuestStatus(quest);//외부에서 현재 퀘스트 상태에 접근할 때 사용하는 메서드.
     /*
        @퀘스트 시스템 설계 목적
 

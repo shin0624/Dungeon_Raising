@@ -16,6 +16,6 @@ public static class QuestValidator
                 return;
         }
         QuestStatusManager.Instance.CompleteQuest(quest);//퀘스트 진행 중 여부 검증 -> 진행 중이 아니면 퀘스트를 완료 상태로 변경
-        RewardHandler.GiveReward(quest.reward);//보상 지급 함수를 호출.
+        //RewardHandler.GiveReward(quest.reward);//보상 지급 함수를 호출.
     }
 }

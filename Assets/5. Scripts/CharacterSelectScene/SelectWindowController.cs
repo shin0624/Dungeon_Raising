@@ -23,7 +23,8 @@ public class SelectWindowController : MonoBehaviour
     [SerializeField] private Button magicianButton;//마법사 버튼
     [SerializeField] private Button maleCharacterButton;//남성 캐릭터 버튼
     [SerializeField] private Button femaleCharacterButton;//여성 캐릭터 버튼
-    [SerializeField] private GameObject failureText;//성별 선택하지 않은 채 "다음"버튼을 눌렀을 때 출력되는 경고팝업
+    [SerializeField] private GameObject[] failurePanels;//각 항목 미선택 시 나타나는 경고 패널.
+
     private string playerGender = "";//플레이어 성별
     [SerializeField] private JobSelectManager jobSelectManager;
     //-------------------------------------------------------------------
@@ -32,7 +33,15 @@ public class SelectWindowController : MonoBehaviour
     void Start()
     {
         ActivateWindow("Character");
-        failureText.SetActive(false);
+        Init();
+    }
+
+    private void Init()//초기 경고 패널 모두 비활성화. 
+    {
+        foreach(GameObject panel in failurePanels)
+        {
+            panel.SetActive(false);
+        }
     }
 
     public void ActivateWindow(string windowName)
@@ -84,17 +93,17 @@ public class SelectWindowController : MonoBehaviour
 
     public void OnJobButtonClicked()
     {
-        ChoiceCheck();//성별 선택 여부 검사 후 창 변경 로직 수행
+        GenderChoiceCheck();//성별 선택 여부 검사 후 창 변경 로직 수행
     }
 
     public void OnRaceButtonClicked()
     {
-        ActivateWindow("Race");
+        JobChoiceCheck();//직업 선택 여부 검사 후 창 변경 로직 수행
     }
 
     public void OnNicknameButtonClicked()
     {
-        ActivateWindow("Nickname");
+        RaceChoiceCheck();//종족 선택 여부 검사 후 창 변경 로직 수행
     }
     
     public void OnOkayButtonClicked()
@@ -144,7 +153,14 @@ public class SelectWindowController : MonoBehaviour
         }
     }
 
-    private void ChoiceCheck()//성별 버튼이 눌린 상태에서 "다음"버튼을 클릭했다면 동작. 성별 버튼을 누르지 않았다면 "다음" 버튼 비활성화. 비활성화 상태에서 버튼 클릭 시 FailureText 출력
+    private IEnumerator ActiveFailureText(int index)//경고 팝업 출력 코루틴
+    {
+        failurePanels[index].SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        failurePanels[index].SetActive(false);
+    }
+
+    private void GenderChoiceCheck()//성별 버튼이 눌린 상태에서 "다음"버튼을 클릭했다면 동작. 성별 버튼을 누르지 않았다면 "다음" 버튼 비활성화. 비활성화 상태에서 버튼 클릭 시 FailureText 출력
     {
         if(PlayerInfo.Instance.GetPlayerGender()!=null)
         {
@@ -153,14 +169,33 @@ public class SelectWindowController : MonoBehaviour
         else
         {
             Debug.Log("PlayerGender is not set.");
-            StartCoroutine(ActiveFailureText());
+            StartCoroutine(ActiveFailureText(0));
         }
     }
 
-    private IEnumerator ActiveFailureText()//경고 팝업 출력 코루틴
+    private void JobChoiceCheck()
     {
-        failureText.SetActive(true);
-        yield return new WaitForSeconds(1.0f);
-        failureText.SetActive(false);
+        if(PlayerInfo.Instance.GetPlayerJob()!=null)
+        {
+            ActivateWindow("Race");
+        }
+        else
+        {
+            Debug.Log("PlayerJob is not set.");
+            StartCoroutine(ActiveFailureText(1));
+        }
+    }
+
+    private void RaceChoiceCheck()
+    {
+        if(PlayerInfo.Instance.GetPlayerRace()!=null)
+        {
+            ActivateWindow("Nickname");
+        }
+        else
+        {
+            Debug.Log("PlayerRace is not set.");
+            StartCoroutine(ActiveFailureText(2));
+        }
     }
 }
