@@ -52,7 +52,7 @@ public class QuestStatusManager : MonoBehaviour
             return;
         
         quest.objectives[objectiveIndex].currentCount +=amount;//퀘스트 달성에 필요한 최소 횟수, 수량 등을 amout값을 더해 업데이트.
-        
+
         OnQuestUpdated?.Invoke(quest);//진행도 업데이트 시 이벤트 발행
 
         QuestValidator.CheckCompletion(quest);//퀘스트 진행도와 currentCount값이 requiredCount값을 만족 하는지 검증한다. 검증 완료 시 보상을 지급한다.

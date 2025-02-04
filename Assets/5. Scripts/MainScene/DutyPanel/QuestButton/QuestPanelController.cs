@@ -56,7 +56,6 @@ public class QuestPanelController : MonoBehaviour
         {
             QuestManager.UpdateQuestProgress(currentQuest, 0, 1);
         }
-
     }
 
     private void SetQuest(Quest quest)
