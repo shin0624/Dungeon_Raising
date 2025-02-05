@@ -17,6 +17,8 @@ public class InventoryTypeSelectButton : MonoBehaviour
         //인벤토리 창을 열었을 때 항상 ItemList가 홀드다운 되어있다.
         panels[0].SetActive(true);
         panels[1].SetActive(false);
+        //InventoryCategoryManager.Instance.SwitchConsumableCategory();//처음 인벤토리가 로드되면 아이템 카테고리가 선택됨.
+
         itemButton.image.sprite = defaultSprite;
         armorButton.image.sprite = defaultSprite;
     }
@@ -31,7 +33,6 @@ public class InventoryTypeSelectButton : MonoBehaviour
         {
             panels[0].SetActive(true);
             panels[1].SetActive(false);
-            
             itemButton.image.sprite = buttonClckedSprite;//클릭된 상태의 스프라이트로 유지
             armorButton.image.sprite = defaultSprite;
         }
@@ -43,7 +44,6 @@ public class InventoryTypeSelectButton : MonoBehaviour
         {
             panels[0].SetActive(false);
             panels[1].SetActive(true);
-           
             armorButton.image.sprite = buttonClckedSprite;//클릭된 상태의 스프라이트로 유지
             itemButton.image.sprite = defaultSprite;
         }
