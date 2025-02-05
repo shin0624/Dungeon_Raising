@@ -1191,10 +1191,10 @@ GameObject:
   m_Component:
   - component: {fileID: 144851571}
   - component: {fileID: 144851574}
-  - component: {fileID: 144851573}
   - component: {fileID: 144851572}
+  - component: {fileID: 144851573}
   m_Layer: 5
-  m_Name: ItemListPanel
+  m_Name: ArmorListPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4006,7 +4006,7 @@ GameObject:
   - component: {fileID: 419701720}
   - component: {fileID: 419701719}
   m_Layer: 5
-  m_Name: ItemImage
+  m_Name: ArmorImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9941,8 +9941,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1059488503}
   - component: {fileID: 1059488505}
-  - component: {fileID: 1059488504}
   - component: {fileID: 1059488506}
+  - component: {fileID: 1059488504}
   m_Layer: 5
   m_Name: ItemListPanel
   m_TagString: Untagged
@@ -10555,7 +10555,7 @@ GameObject:
   - component: {fileID: 1091652659}
   - component: {fileID: 1091652658}
   m_Layer: 5
-  m_Name: ItemInformationText
+  m_Name: ArmorInformationText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13268,6 +13268,7 @@ GameObject:
   - component: {fileID: 1298365344}
   - component: {fileID: 1298365343}
   - component: {fileID: 1298365345}
+  - component: {fileID: 1298365346}
   m_Layer: 0
   m_Name: InventorySystemManager
   m_TagString: Untagged
@@ -13315,6 +13316,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b845792fa6948a49b2ac1499f4b76af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1298365346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298365342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88c6dfa9cacf85146b947f662de3af4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemListParent: {fileID: 1059488503}
+  armorListParent: {fileID: 144851571}
+  slotPrefab: {fileID: 3899126060079650170, guid: 75531115516b01d43b053b23cda96d13, type: 3}
+  itemNameText: {fileID: 1372903363}
+  itemInfoText: {fileID: 660666558}
+  armorNameText: {fileID: 2084129282}
+  armorInfoText: {fileID: 1091652658}
 --- !u!1 &1316226628
 GameObject:
   m_ObjectHideFlags: 0
@@ -14991,7 +15011,7 @@ GameObject:
   - component: {fileID: 1494743349}
   - component: {fileID: 1494743348}
   m_Layer: 5
-  m_Name: ItemInformationBack
+  m_Name: ArmorInformationBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17455,7 +17475,6 @@ GameObject:
   - component: {fileID: 1710326336}
   - component: {fileID: 1710326338}
   - component: {fileID: 1710326339}
-  - component: {fileID: 1710326340}
   - component: {fileID: 1710326337}
   m_Layer: 5
   m_Name: InvetoryPanel
@@ -17546,23 +17565,6 @@ MonoBehaviour:
   panels:
   - {fileID: 1222450950}
   - {fileID: 1711521581}
---- !u!114 &1710326340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1710326335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88c6dfa9cacf85146b947f662de3af4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemListParent: {fileID: 1059488503}
-  armorListParent: {fileID: 144851571}
-  slotPrefab: {fileID: 3899126060079650170, guid: 75531115516b01d43b053b23cda96d13, type: 3}
-  itemNameText: {fileID: 1372903363}
-  itemInfoText: {fileID: 660666558}
 --- !u!1 &1711521581
 GameObject:
   m_ObjectHideFlags: 0
@@ -17580,7 +17582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1711521582
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20286,7 +20288,7 @@ GameObject:
   - component: {fileID: 2084129283}
   - component: {fileID: 2084129282}
   m_Layer: 5
-  m_Name: ItemName
+  m_Name: ArmorName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

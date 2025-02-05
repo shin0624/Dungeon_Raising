@@ -10,17 +10,24 @@ public class InventoryTypeSelectButton : MonoBehaviour
     [SerializeField] private Button armorButton;
     [SerializeField] private Sprite buttonClckedSprite;
     [SerializeField] private Sprite defaultSprite;
-    [SerializeField] private GameObject[] panels;
+    [SerializeField] private GameObject[] panels;//0 : itmeList, 1 : ArmorList
 
     private void OnEnable()
     {
         //인벤토리 창을 열었을 때 항상 ItemList가 홀드다운 되어있다.
-        panels[0].SetActive(true);
-        panels[1].SetActive(false);
+        StartCoroutine(DelayActive());
         //InventoryCategoryManager.Instance.SwitchConsumableCategory();//처음 인벤토리가 로드되면 아이템 카테고리가 선택됨.
 
         itemButton.image.sprite = defaultSprite;
         armorButton.image.sprite = defaultSprite;
+    }
+
+    private IEnumerator DelayActive()
+    {
+        panels[0].SetActive(true);
+        panels[1].SetActive(true);
+        yield return null;
+        panels[1].SetActive(false);
     }
     private void Start() 
     {
@@ -29,8 +36,14 @@ public class InventoryTypeSelectButton : MonoBehaviour
     }
     private void OnItemButtonClicked()
     {
-        if(!panels[0].activeSelf)
+        if (InventoryCategoryManager.Instance == null)
         {
+            Debug.LogError("InventoryCategoryManager 인스턴스 없음!");
+            return;
+        }
+        if(!panels[0].activeSelf)
+        {   
+            InventoryCategoryManager.Instance.SwitchConsumableCategory();
             panels[0].SetActive(true);
             panels[1].SetActive(false);
             itemButton.image.sprite = buttonClckedSprite;//클릭된 상태의 스프라이트로 유지
@@ -40,8 +53,14 @@ public class InventoryTypeSelectButton : MonoBehaviour
 
     private void OnArmorButtonClicked()
     {
+        if (InventoryCategoryManager.Instance == null)
+        {
+            Debug.LogError("InventoryCategoryManager 인스턴스 없음!");
+            return;
+        }
         if(!panels[1].activeSelf)
         {
+            InventoryCategoryManager.Instance.SwitchArmorCategory();
             panels[0].SetActive(false);
             panels[1].SetActive(true);
             armorButton.image.sprite = buttonClckedSprite;//클릭된 상태의 스프라이트로 유지

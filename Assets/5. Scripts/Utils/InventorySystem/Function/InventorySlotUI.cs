@@ -32,10 +32,9 @@ public class InventorySlotUI : MonoBehaviour
 
     public void Clear()//인벤토리 리스트 클리어.
     {
-        currentItem = null;
-        itemIcon.gameObject.SetActive(false);
-        amountText.gameObject.SetActive(false);
-        slotButton.onClick.RemoveAllListeners();//버튼의 리스너를 제거
+        if (itemIcon != null) itemIcon.gameObject.SetActive(false);
+        if (amountText != null) amountText.gameObject.SetActive(false);
+        if (slotButton != null) slotButton.onClick.RemoveAllListeners();
     }
 
     private void OnSlotClicked() => InventoryUIManager.Instance.ShowItemInfo(currentItem);//아이템슬롯 프리팹의 버튼 클릭 시 클릭된 아이템의 정보를 출력.
