@@ -9,10 +9,11 @@ public class ItemAddRemoveExecute : MonoBehaviour
     [SerializeField] private GameObject itemAlertPanel;
     [SerializeField] private ConsumableItem itemObject;
     [SerializeField] private ArmorItem itemObject2;
-    private bool isOpenedOnce = false;
+    private bool isOpenedOnce;
 
     void Start()
     {
+        isOpenedOnce = false;
         itemAlertPanel.SetActive(false);
         StartCoroutine(ItemEvent());
     }

@@ -28,7 +28,6 @@ public class InventoryTypeSelectButton : MonoBehaviour
         armorButton.image.sprite = defaultSprite;
         panels[1].SetActive(false);
         InventoryCategoryManager.Instance.SwitchConsumableCategory();//처음 인벤토리가 로드되면 아이템 카테고리가 선택되도록 초기화
-
     }
     private void Start() 
     {

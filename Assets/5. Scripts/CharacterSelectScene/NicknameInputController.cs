@@ -16,7 +16,7 @@ public class NicknameInputController : MonoBehaviour
     
     [SerializeField] private BadWordFilter badWordFilter;
     [SerializeField] private InputFieldSetting inputFieldSetting;
-    [SerializeField] private AsyncSceneLoader asyncSceneLoader;
+    //[SerializeField] private AsyncSceneLoader asyncSceneLoader;
      
     void Start()
     {
@@ -76,8 +76,8 @@ public class NicknameInputController : MonoBehaviour
     private void GoToInGame()
     {
         selectWindowPanel.SetActive(false);
-        //SceneManager.LoadScene("MainScene");
-        asyncSceneLoader.LoadMainSceneAsync();//비동기 로드 시도도
+        SceneManager.LoadScene("MainScene");
+        //asyncSceneLoader.LoadMainSceneAsync();//비동기 로드 시도
     }
 
     private void ReActiveInputField()
