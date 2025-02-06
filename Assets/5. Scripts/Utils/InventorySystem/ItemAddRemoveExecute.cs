@@ -9,18 +9,25 @@ public class ItemAddRemoveExecute : MonoBehaviour
     [SerializeField] private GameObject itemAlertPanel;
     [SerializeField] private ConsumableItem itemObject;
     [SerializeField] private ArmorItem itemObject2;
+    private bool isOpenedOnce = false;
 
     void Start()
     {
-        InventoryManager.Instance.AddItem(itemObject);
-        InventoryManager.Instance.AddItem(itemObject2);
+        itemAlertPanel.SetActive(false);
         StartCoroutine(ItemEvent());
     }
 
     private IEnumerator ItemEvent()
     {
-        itemAlertPanel.SetActive(true);
-        yield return new WaitForSeconds(2.0f);
-        itemAlertPanel.SetActive(false);
+        if(!isOpenedOnce)
+        {
+            itemAlertPanel.SetActive(true);
+            InventoryManager.Instance.AddItem(itemObject);
+            InventoryManager.Instance.AddItem(itemObject2);
+            yield return new WaitForSeconds(2.0f);
+            itemAlertPanel.SetActive(false);
+        }
+        isOpenedOnce = true;
+
     }
 }

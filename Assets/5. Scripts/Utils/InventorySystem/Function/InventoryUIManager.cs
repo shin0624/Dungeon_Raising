@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 
 public class InventoryUIManager : MonoBehaviour
@@ -19,6 +20,8 @@ public class InventoryUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemInfoText;//ItemInfoPanel에 표시될 아이템 정보.
     [SerializeField] private TextMeshProUGUI armorNameText;//ArmorInfoPanel에 표시될 아이템 이름.
     [SerializeField] private TextMeshProUGUI armorInfoText;//ArmorInfoPanel에 표시될 아이템 정보.
+    [SerializeField] private Image itemImageSprite;//ItemInfoPanel에 표시될 아이콘 이미지.
+    [SerializeField] private Image armorImageSprite;//ArmorInfoPanel에 표시될 아이콘 이미지.
     [SerializeField] private ItemDatabase itemDatabase; // 추가
     
     private List<InventorySlotUI> consumableSlots = new List<InventorySlotUI>();//소비 아이템 인벤토리 슬롯 리스트 생성
@@ -29,18 +32,69 @@ public class InventoryUIManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;//씬 변경 감지 추가.
         } 
         else
         {
             Destroy(gameObject); // 중복 방지
+            return;
         } 
 
         Debug.Log("InventoryUIManager 초기화 완료");
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MainScene")
+        {
+            Debug.Log("MainScene 로드됨 - UI 참조 재설정");
+             StartCoroutine(InitReferences());
+        }
+        else
+        {
+            Debug.Log("InventoryUIManager가 불필요한 씬으로 이동 - 삭제됨.");
+            Destroy(gameObject);
+        }
+    }
+
+    private IEnumerator InitReferences()
+    {
+        //비동기 로드 후 ui 오브젝트 초기화
+        yield return null;
+        //AssignUIReferences();
+        if(InventoryManager.Instance!=null)
+        {
+            UpdateInventoryUI();
+        }
+    }
+
+    // private void AssignUIReferences()
+    // {
+    //     if (SceneManager.GetActiveScene().name== "MainScene")
+    //     {
+    //         itemListParent = transform.Find("ItemListPanel");
+    //         armorListParent = transform.Find("ArmorListPanel");
+    //         itemNameText = GameObject.FindWithTag("MainScene_ItemNameText").GetComponent<TextMeshProUGUI>();
+    //         armorNameText = GameObject.FindWithTag("MainScene_ArmorNameText").GetComponent<TextMeshProUGUI>();
+    //         itemInfoText = GameObject.FindWithTag("MainScene_ItemInfoText").GetComponent<TextMeshProUGUI>();
+    //         armorInfoText = GameObject.FindWithTag("MainScene_ArmorInfoText").GetComponent<TextMeshProUGUI>();
+    //         itemImageSprite = GameObject.FindWithTag("MainScene_ItemImageSprite").GetComponent<Image>();
+    //         armorImageSprite = GameObject.FindWithTag("MainScene_ArmorImageSprite").GetComponent<Image>();
+    //     }
+    //     // null 체크
+    //     if (itemListParent == null || armorListParent == null || itemNameText == null || armorNameText == null ||
+    //         itemInfoText == null || armorInfoText == null || itemImageSprite == null || armorImageSprite == null)
+    //     {
+    //         Debug.LogError("UI 참조 중 일부가 null입니다. 태그가 올바르게 설정되었는지 확인하세요.");
+    //     }
+    // }
+
     private void Start()
     {
-        InventoryManager.Instance.OnInventoryUpdated+=UpdateInventoryUI;//실시간 인벤토리 업데이트에 인벤토리 UI 업데이트 함수를 등록
+        //InventoryManager.Instance.OnInventoryUpdated+=UpdateInventoryUI;//실시간 인벤토리 업데이트에 인벤토리 UI 업데이트 함수를 등록
+        
+        if (InventoryManager.Instance != null)
+            InventoryManager.Instance.OnInventoryUpdated += UpdateInventoryUI;
 
         if (InventoryCategoryManager.Instance == null)
             Debug.LogError("InventoryCategoryManager.Instance is NULL!");
@@ -48,8 +102,8 @@ public class InventoryUIManager : MonoBehaviour
         if (InventoryUIManager.Instance == null)
             Debug.LogError("InventoryUIManager.Instance is NULL!");
 
+        //AssignUIReferences();//씬 시작 시 참조 확인
         InitSlots();
-        //StartCoroutine(DelayInit());
     }
 
     public void InitSlots()// 기존 슬롯 삭제 후 초기화
@@ -125,6 +179,12 @@ public class InventoryUIManager : MonoBehaviour
 
     public void ShowItemInfo(IInventoryItem item)
     {
+        //널체크 추가
+        if (item == null)
+        {
+            Debug.LogError("아이템 데이터가 null입니다!");
+            return;
+        }
         switch(InventoryCategoryManager.Instance.currentCategory)
         {
             case ItemType.Consumable:
@@ -139,25 +199,51 @@ public class InventoryUIManager : MonoBehaviour
             Debug.Log("ShowItemInfo Method Error");
             break;
         }
+        Debug.Log($"아이템 정보 표시: {item.ItemName}, 타입: {item.Type}");
     }
 
     private void ShowConsumableItem(IInventoryItem item)
     {
-        itemNameText.text = item.ItemName;
+        itemNameText.text = item.ItemName ?? "Unknown Item";
+        itemImageSprite.sprite = item.ItemSprite;
+
+        //널체크 추가
+        if (itemNameText == null || itemInfoText == null)
+        {
+            Debug.LogError("ItemInfoPanel의 Text 컴포넌트가 연결되지 않았습니다!");
+            return;
+        }
+
         if(item is ConsumableItem consumable)
         {
             itemInfoText.text = $"수량 : {consumable.itemAmount}";
+        }
+        else
+        {
+            Debug.LogError("ConsumableItem 타입이 아닙니다!");
         }
     }
 
     private void ShowArmorItem(IInventoryItem item)
     {
-        armorNameText.text = item.ItemName;
+        armorNameText.text = item.ItemName ?? "Unknown Item";
+        armorImageSprite.sprite = item.ItemSprite;
+        //널체크 추가
+        if (armorNameText == null || armorInfoText == null)
+        {
+            Debug.LogError("ArmorInfoPanel의 Text 컴포넌트가 연결되지 않았습니다!");
+            return;
+        }
+
         if(item is ArmorItem armor)
         {
             armorInfoText.text = $"등급 : {armor.itemGrade}\n" +
                 $"부위 : {armor.itemParts}\n" +
                 $"레벨 : {armor.itemLevel}";
+        }
+        else
+        {
+            Debug.LogError("ArmorItem 타입이 아닙니다!");
         }
     }
 

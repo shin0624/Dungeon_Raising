@@ -21,12 +21,12 @@ public class InventoryTypeSelectButton : MonoBehaviour
     private IEnumerator DelayActive()
     {
         yield return new WaitUntil(() => InventoryCategoryManager.Instance!=null);//매니저 초기화 대기
-
         panels[0].SetActive(true);       
-        panels[1].SetActive(false);
+        panels[1].SetActive(true);
+        
         itemButton.image.sprite = defaultSprite;
         armorButton.image.sprite = defaultSprite;
-
+        panels[1].SetActive(false);
         InventoryCategoryManager.Instance.SwitchConsumableCategory();//처음 인벤토리가 로드되면 아이템 카테고리가 선택되도록 초기화
 
     }

@@ -6,7 +6,7 @@ using TMPro;
 
 public class InventorySlotUI : MonoBehaviour
 {
-    //인벤토리의 ItemSlot UI를 관리하는 스크립트.
+    //아이템 슬롯 프리팹에 적용될 스크립트. 아이템 데이터(스크립터블 오브젝트)와 동기화를 담당.
     //--슬롯 프리팹에서 할당할 값--
     [SerializeField] private Image itemIcon;
     [SerializeField] private TextMeshProUGUI amountText;
@@ -54,6 +54,8 @@ public class InventorySlotUI : MonoBehaviour
 
     private void CommonDataSetiing(IInventoryItem item)//공통 데이터 세팅
     {
+        currentItem = item;
+
         itemName = item.ItemName;
         itemIcon.sprite = item.ItemSprite;//slotPrefab의 스프라이트를 item의 스프라이트로 설정
         type = item.Type;
@@ -89,5 +91,14 @@ public class InventorySlotUI : MonoBehaviour
         if (slotButton != null) slotButton.onClick.RemoveAllListeners();
     }
 
-    private void OnSlotClicked() => InventoryUIManager.Instance.ShowItemInfo(currentItem);//아이템슬롯 프리팹의 버튼 클릭 시 클릭된 아이템의 정보를 출력.
+    private void OnSlotClicked()
+    {
+        if (currentItem == null)
+            {
+                Debug.LogError("현재 아이템이 null입니다!");
+                return;
+            }
+            Debug.Log($"아이템 클릭: {currentItem.ItemName}");
+        InventoryUIManager.Instance.ShowItemInfo(currentItem);//아이템슬롯 프리팹의 버튼 클릭 시 클릭된 아이템의 정보를 출력.
+    } 
 }

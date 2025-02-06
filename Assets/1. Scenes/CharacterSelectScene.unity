@@ -9593,6 +9593,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1755420887}
+  - component: {fileID: 1755420894}
   - component: {fileID: 1755420890}
   - component: {fileID: 1755420888}
   - component: {fileID: 1755420885}
@@ -9624,6 +9625,7 @@ MonoBehaviour:
   selectWindowPanel: {fileID: 1878528214}
   badWordFilter: {fileID: 1755420888}
   inputFieldSetting: {fileID: 1755420889}
+  asyncSceneLoader: {fileID: 1755420894}
 --- !u!4 &1755420887
 Transform:
   m_ObjectHideFlags: 0
@@ -9725,6 +9727,18 @@ MonoBehaviour:
   - {fileID: 1033412506}
   - {fileID: 15074804}
   - {fileID: 1118530485}
+--- !u!114 &1755420894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755420884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28a5805c1916ed34f829f8d701f7ac2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1756685006
 GameObject:
   m_ObjectHideFlags: 0
