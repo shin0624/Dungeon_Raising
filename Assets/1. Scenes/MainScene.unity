@@ -4051,7 +4051,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10813,7 +10813,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13330,11 +13330,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemListParent: {fileID: 1059488503}
   armorListParent: {fileID: 144851571}
-  slotPrefab: {fileID: 3899126060079650170, guid: 75531115516b01d43b053b23cda96d13, type: 3}
+  slotPrefab: {fileID: 7175344795803018623, guid: c4906718ce1670f4c942d5d2a259bf19, type: 3}
   itemNameText: {fileID: 1372903363}
   itemInfoText: {fileID: 660666558}
   armorNameText: {fileID: 2084129282}
   armorInfoText: {fileID: 1091652658}
+  itemDatabase: {fileID: 11400000, guid: 57569f0911572d94ca047006e0248515, type: 2}
 --- !u!1 &1316226628
 GameObject:
   m_ObjectHideFlags: 0
@@ -17482,7 +17483,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1710326336
 RectTransform:
   m_ObjectHideFlags: 0

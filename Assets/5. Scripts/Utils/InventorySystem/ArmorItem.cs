@@ -22,7 +22,7 @@ public class ArmorItem : ScriptableObject, IInventoryItem
     [Header("Stats")]
     public int itemLevel;//아이템의 레벨. 장비 레벨은 1부터 10까지 존재하며, 레벨 업을 통해 10레벨의 장비를 완성했을 경우 다음 등급으로 승급이 가능.
     public int levelUpCost;//레벨업에 사용되는 재화의 수
-    public int gradeUpCost;//장비레벨 조건 충족 후 등급 업그레이드를 위해 필요한 재화의 수수
+    public int gradeUpCost;//장비레벨 조건 충족 후 등급 업그레이드를 위해 필요한 재화의 수
     public float offensivePower;//무기 아이템의 공격력. 만약 무기 아이템이 아닐 경우 null 또는 0으로 저장.
     public float defensivePower;//무기를 제외한 아이템의 방어력. 만약 무기 아이템일 경우 null 또는 0으로 저장.
 

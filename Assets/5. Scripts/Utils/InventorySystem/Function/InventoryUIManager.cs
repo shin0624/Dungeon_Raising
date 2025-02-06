@@ -19,6 +19,7 @@ public class InventoryUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemInfoText;//ItemInfoPanel에 표시될 아이템 정보.
     [SerializeField] private TextMeshProUGUI armorNameText;//ArmorInfoPanel에 표시될 아이템 이름.
     [SerializeField] private TextMeshProUGUI armorInfoText;//ArmorInfoPanel에 표시될 아이템 정보.
+    [SerializeField] private ItemDatabase itemDatabase; // 추가
     
     private List<InventorySlotUI> consumableSlots = new List<InventorySlotUI>();//소비 아이템 인벤토리 슬롯 리스트 생성
     private List<InventorySlotUI> armorSlots = new List<InventorySlotUI>();// 장비 인벤토리 슬롯 리스트 생성
@@ -51,45 +52,41 @@ public class InventoryUIManager : MonoBehaviour
         //StartCoroutine(DelayInit());
     }
 
-    private IEnumerator DelayInit()
-    {
-        yield return null;
-        InitSlots();
-    }
     public void InitSlots()// 기존 슬롯 삭제 후 초기화
     {
        Debug.Log("Slot Init!");
+        ClearAllSlot();
 
-       foreach(var slot in armorSlots)
-        {
-            if(slot!=null && slot.gameObject!=null)
+               // 활성화된 카테고리 타입 확인
+            var currentCategory = InventoryCategoryManager.Instance.currentCategory;
+
+            // 해당 타입의 아이템 개수 가져오기
+            int itemCount = currentCategory == ItemType.Consumable ? 
+                itemDatabase.consumableItems.Count : 
+                itemDatabase.armorItems.Count;
+
+            // 해당 타입의 부모 트랜스폼 설정
+            Transform parent = currentCategory == ItemType.Consumable ? 
+                itemListParent : 
+                armorListParent;
+
+            // 실제 아이템 개수만큼 슬롯 생성
+            for(int i = 0; i < itemCount; i++)
             {
-                Destroy(slot.gameObject);
-            } 
-        }
-       armorSlots.Clear();
+                var slot = Instantiate(slotPrefab, parent).GetComponent<InventorySlotUI>();
+                
+                // 아이템 데이터 할당
+                IInventoryItem itemData = currentCategory == ItemType.Consumable ?
+                    (IInventoryItem)itemDatabase.consumableItems[i] :
+                    (IInventoryItem)itemDatabase.armorItems[i];
+                
+                slot.SetUp(itemData);
 
-       foreach(var slot in consumableSlots)
-        {
-            if(slot!=null && slot.gameObject !=null)
-            {
-                Destroy(slot.gameObject);
-            }
-        }
-       consumableSlots.Clear();
-
-       //새 슬롯을 생성
-       int maxSlotSize = 12;
-       for(int i=0; i<maxSlotSize; i++)
-        {
-            var slot = Instantiate(slotPrefab, itemListParent).GetComponent<InventorySlotUI>();
-            if(slot!=null) consumableSlots.Add(slot);//슬롯이 존재할 때에만 리스트에 추가
-        }
-
-       for(int i = 0; i<maxSlotSize; i++)
-        {
-            var slot02 = Instantiate(slotPrefab, armorListParent).GetComponent<InventorySlotUI>();
-            if(slot02!=null) armorSlots.Add(slot02);//슬롯이 존재할 때에만 리스트에 추가
+                // 리스트에 추가
+                if(currentCategory == ItemType.Consumable)
+                    consumableSlots.Add(slot);
+                else
+                    armorSlots.Add(slot);
         }
        
        Debug.Log($"슬롯 초기화 완료! 소비 슬롯: {consumableSlots.Count}, 장비 슬롯: {armorSlots.Count}");
@@ -105,22 +102,6 @@ public class InventoryUIManager : MonoBehaviour
         List<IInventoryItem> currentItems = InventoryManager.Instance.GetItemsByType(InventoryCategoryManager.Instance.currentCategory);//현재 카테고리 타입에 맞는 아이템을 찾아 IInventoryItem타입 리스트에 저장
         List<InventorySlotUI> activeSlots = InventoryCategoryManager.Instance.currentCategory == ItemType.Consumable ? consumableSlots : armorSlots;//현재 카테고리에 따라 활성화될 슬롯을 결정.
         List<InventorySlotUI> inactiveSlots = InventoryCategoryManager.Instance.currentCategory == ItemType.Consumable ? armorSlots : consumableSlots;//슬롯 활성, 비활성 전환 방식으로 변경하기 위해, 비활성화 슬롯 생성을 추가.
-        // for(int i=0; i<activeSlots.Count; i++)
-        // {
-        //     if(activeSlots[i] == null)//활성화된 슬롯 리스트가 비어있다면
-        //     {
-        //         Debug.LogWarning($"슬롯 {i}번이 비어있습니다. 재생성 시도 중...");
-        //         activeSlots[i] = CreateNewSlot(i);
-        //     }
-        //     if(i < currentItems.Count)//현재 카테고리 타입의 아이템 리스트 수량까지
-        //     {
-        //         activeSlots[i].SetUp(currentItems[i]);//아이템 동기화
-        //     }
-        //     else
-        //     {
-        //         activeSlots[i].Clear();
-        //     }
-        // }
 
             for (int i = 0; i < activeSlots.Count; i++)//활성 슬롯만 업데이트.
             {
@@ -140,23 +121,6 @@ public class InventoryUIManager : MonoBehaviour
             {
                 slot.gameObject.SetActive(false);
             }
-
-
-    }
-
-    private InventorySlotUI CreateNewSlot(int index)//슬롯이 비어있을 때 새로운 슬롯객체를 생성한다.
-    {
-        var newSlot = Instantiate(slotPrefab, InventoryCategoryManager.Instance.currentCategory == ItemType.Consumable ? itemListParent : armorListParent).GetComponent<InventorySlotUI>();
-        if(newSlot != null)
-        {
-            newSlot.transform.SetSiblingIndex(index);//생성한 newSlot객체의 하이어라키 순서를 index로 바꾼다.
-            return newSlot;
-        }
-        else
-        {
-            Debug.LogError("새 슬롯 생성 실패!");
-            return null;
-        }
     }
 
     public void ShowItemInfo(IInventoryItem item)
@@ -197,4 +161,18 @@ public class InventoryUIManager : MonoBehaviour
         }
     }
 
+    private void ClearAllSlot()
+    {
+       foreach (var slot in consumableSlots)
+        {
+            if (slot != null && slot.gameObject != null) Destroy(slot.gameObject);
+        }
+        consumableSlots.Clear();
+
+        foreach (var slot in armorSlots)
+        {
+            if (slot != null && slot.gameObject != null) Destroy(slot.gameObject);
+        }
+        armorSlots.Clear();
+    }
 }

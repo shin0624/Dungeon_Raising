@@ -19,13 +19,14 @@ public class InventoryManager : MonoBehaviour
             //인벤토리 포화 메세지 추후 출력
             return;
         }
+
         if(newItem.Type == ItemType.Consumable)//소모성 아이템을 추가하는 경우
         {
             var consumable = newItem as ConsumableItem;
             var existing = items.Find(i=>i.ItemID == newItem.ItemID) as ConsumableItem;//아이템아이디가 존재하면 ConsumableItem타입으로 리턴. 존재하지 않으면 null.
             if(existing!=null)
             {
-                existing.itemAmount+=consumable.itemAmount;//아이템이 존재할 경우 기존 아이템에에 수량을 증가시킴.
+                existing.itemAmount+=consumable.itemAmount;//아이템이 존재할 경우 기존 아이템에 수량을 증가시킴.
             }
             else
             {
@@ -36,7 +37,11 @@ public class InventoryManager : MonoBehaviour
         {
             items.Add(newItem);
         }
+
+        Debug.Log($"{newItem.ItemName}아이템이 추가되었습니다! 인벤토리를 확인해주세요.");
         OnInventoryUpdated?.Invoke();//실시간 인벤토리 업데이트.
+        
+        InventoryUIManager.Instance.InitSlots();// 추가 후 UI 강제 갱신
     }
 
     public List<IInventoryItem> GetItemsByType(ItemType type)
@@ -45,13 +50,13 @@ public class InventoryManager : MonoBehaviour
     public void RemoveItem(int itemID)//아이템 제거 메소드
     {
         var item = items.Find(i => i.ItemID == itemID);//제거하려는 아이템의 id가 현재 리스트에 존재하는지 확인.
+        
         if(item!=null)//제거 대상 아이템이 존재하면
         {
+            Debug.Log($"{item.ItemName}아이템이 삭제되었습니다. 아이템 ID : {itemID}");
             items.Remove(item);//제거
             OnInventoryUpdated?.Invoke();//실시간 인벤토리 업데이트.
+            InventoryUIManager.Instance.InitSlots();// 추가 후 UI 강제 갱신
         }
     }
-
-    
-
 }
