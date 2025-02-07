@@ -10,7 +10,18 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] public int maxSlots = 12;//아이템 리스트 패널의 크기가 4*3이므로 최대 슬롯 수를 12로 지정.
     private List<IInventoryItem> items = new List<IInventoryItem>();//인벤토리 시스템 인터페이스 타입의 리스트를 선언.
     public event System.Action OnInventoryUpdated;//인벤토리 업데이트 이벤트
-    private void Awake() => Instance = this;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public void AddItem(IInventoryItem newItem)//아이템 추가 메소드
     {
         if(items.Count >=maxSlots)//아이템 리스트의 원소 수가 맥스슬롯 이상이 되면 인벤토리 포화
@@ -59,4 +70,5 @@ public class InventoryManager : MonoBehaviour
             InventoryUIManager.Instance.InitSlots();// 추가 후 UI 강제 갱신
         }
     }
+
 }

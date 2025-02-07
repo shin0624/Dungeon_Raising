@@ -20,7 +20,11 @@ public class InventoryTypeSelectButton : MonoBehaviour
 
     private IEnumerator DelayActive()
     {
-        yield return new WaitUntil(() => InventoryCategoryManager.Instance!=null);//매니저 초기화 대기
+         yield return new WaitUntil(() => //인스턴스 초기화 순서 제어
+        InventoryCategoryManager.Instance != null &&
+        InventoryUIManager.Instance != null &&
+        InventoryManager.Instance != null
+            );
         panels[0].SetActive(true);       
         panels[1].SetActive(true);
         

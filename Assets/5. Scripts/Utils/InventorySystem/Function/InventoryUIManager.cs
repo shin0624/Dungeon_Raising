@@ -55,13 +55,14 @@ public class InventoryUIManager : MonoBehaviour
 
     private void InitThisInstance()//싱글톤 안정성을 강화한 인스턴스 초기화 메서드.
     {
-        if (Instance != null && Instance != this)
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
         {
             Destroy(gameObject);
-            return;
         }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
 
         Debug.Log("InventoryUIManager 초기화 완료");

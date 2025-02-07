@@ -15,17 +15,18 @@ public class ItemAddRemoveExecute : MonoBehaviour
     {
         isOpenedOnce = false;
         itemAlertPanel.SetActive(false);
-        StartCoroutine(ItemEvent());
+        ItemEvent();
     }
 
-    private IEnumerator ItemEvent()
+    private void ItemEvent()
     {
+        itemAlertPanel.SetActive(true);
         if(!isOpenedOnce)
         {
-            itemAlertPanel.SetActive(true);
+            
             InventoryManager.Instance.AddItem(itemObject);
             InventoryManager.Instance.AddItem(itemObject2);
-            yield return new WaitForSeconds(2.0f);
+           
             itemAlertPanel.SetActive(false);
         }
         isOpenedOnce = true;
