@@ -22,8 +22,8 @@ public class InventorySlotUI : MonoBehaviour
     //--Consumable °ª--
     private int itemAmount;
     //--Armor °ª--
-    private ItemGrade[] itemGrade;
-    private ItemPart[] itemPart;
+    private ItemGrade itemGrade;
+    private ItemPart itemPart;
     private int itemLevel;
     private int levelUpCost;
     private int gradeUpCost;
