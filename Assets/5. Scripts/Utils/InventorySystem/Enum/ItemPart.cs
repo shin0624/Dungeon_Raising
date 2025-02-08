@@ -5,9 +5,9 @@ using UnityEngine;
 public enum ItemPart
 {
     Head,
-    Shoulder,
     Chest,
     Arm,
+    Waist,
     Leg,
     Weapon
 }
