@@ -8,8 +8,11 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager Instance {get;private set;}//인스턴스 선언
     
     [SerializeField] public int maxSlots = 12;//아이템 리스트 패널의 크기가 4*3이므로 최대 슬롯 수를 12로 지정.
+    [SerializeField] private ItemDatabase itemDatabase;
     private List<IInventoryItem> items = new List<IInventoryItem>();//인벤토리 시스템 인터페이스 타입의 리스트를 선언.
     public event System.Action OnInventoryUpdated;//인벤토리 업데이트 이벤트
+    
+
     private void Awake()
     {
         if (Instance == null)
@@ -42,11 +45,13 @@ public class InventoryManager : MonoBehaviour
             else
             {
                 items.Add(newItem);//인벤토리에 해당 id의 아이템이 없으면 새로운 아이템으로 추가.
+                itemDatabase.consumableItems.Add((ConsumableItem)newItem);//아이템 데이터베이스에 실제로 추가.
             }
         }
         else//소모성 아이템이 아닐 경우(장비 아이템일 경우)-> 장비 아이템은 수량을 체크하지 않는 단일객체.
         {
             items.Add(newItem);
+            itemDatabase.armorItems.Add((ArmorItem)newItem);//아이템 데이터베이스에 실제로 추가.
         }
 
         Debug.Log($"{newItem.ItemName}아이템이 추가되었습니다! 인벤토리를 확인해주세요.");
@@ -60,14 +65,32 @@ public class InventoryManager : MonoBehaviour
 
     public void RemoveItem(int itemID)//아이템 제거 메소드
     {
-        var item = items.Find(i => i.ItemID == itemID);//제거하려는 아이템의 id가 현재 리스트에 존재하는지 확인.
+        var item = items.Find(i => i.ItemID == itemID);//제거하려는 아이템의 id가 현재 리스트에 존재하는지 확인
         
         if(item!=null)//제거 대상 아이템이 존재하면
         {
+            switch(item.Type)
+            {
+                case ItemType.Consumable : 
+                itemDatabase.consumableItems.Remove((ConsumableItem)item);
+                break;
+
+                case ItemType.Armor :
+                itemDatabase.armorItems.Remove((ArmorItem)item);
+                break;
+
+                default : 
+                Debug.Log("제거 대상 아이템의 타입이 잘못되었습니다. ItemDatabase에서 삭제할 수 없습니다.");
+                break;
+            }
             Debug.Log($"{item.ItemName}아이템이 삭제되었습니다. 아이템 ID : {itemID}");
             items.Remove(item);//제거
             OnInventoryUpdated?.Invoke();//실시간 인벤토리 업데이트.
             InventoryUIManager.Instance.InitSlots();// 추가 후 UI 강제 갱신
+        }
+        else
+        {
+            Debug.LogError($"제거 대상 아이템 [{item.ItemName}, {itemID}]이 존재하지 않습니다. 아이템 제거 요청이 거부되었습니다.");
         }
     }
 
