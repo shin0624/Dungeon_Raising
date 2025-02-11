@@ -100,6 +100,11 @@ public class PlayerInfo : MonoBehaviour
         Debug.Log($"playerRace is {playerInformation.playerRace}");
     }
 
+    public void SetPlayerGold(int gold)//플레이어 재화량 설정.
+    {
+        playerInformation.playerGold = gold;
+    }
+
 //--------------Getter------------------------------------------------------------------------------------
     public string GetPlayerID()
     {
@@ -157,6 +162,11 @@ public class PlayerInfo : MonoBehaviour
             Debug.Log($"[DEBUG]  Player Race : {playerInformation.playerRace}");
             return playerInformation.playerRace;//종족이 설정된 상태이면 반환
         }
+    }
+
+    public int GetplayerGold()//외부 클래스에서 플레이어의 재화량을 불러올 때 쓰는 메서드.
+    {
+            return playerInformation.playerGold;//재화가 존재하면 반환
     }
 
 }

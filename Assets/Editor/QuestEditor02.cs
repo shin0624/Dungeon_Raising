@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(Quest))]//Quest 타겟 지정
-public class QuestEditor : Editor
+public class QuestEditor02 : Editor
 //퀘스트 진행상황 시각화를 위한 간단한 커스텀 인스펙터
 {
     private bool showProgress = true;
@@ -24,7 +24,6 @@ public class QuestEditor : Editor
 
             EditorGUI.indentLevel--;
         }
-
     }
 
     private void DrawObjectiveProgress(QuestObjective objective)//프로그레스바 + 텍스트를 표시하고, 완료 시 체크 아이콘 표시, 박스 스타일로 구분선을 만들어 시각적으로 보기 쉽게 함.

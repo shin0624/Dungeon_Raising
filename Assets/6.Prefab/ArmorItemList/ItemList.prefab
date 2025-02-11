@@ -199,7 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -257,6 +257,7 @@ GameObject:
   - component: {fileID: 4047430444992011377}
   - component: {fileID: 4660901775237059505}
   - component: {fileID: 3986761548206176782}
+  - component: {fileID: 1587705200428946070}
   m_Layer: 5
   m_Name: Viewport
   m_TagString: Untagged
@@ -306,14 +307,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: c241e847af767d148b898393a975bb22, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -329,12 +330,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1913375950816807764}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!114 &1587705200428946070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913375950816807764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 0, y: 0}
 --- !u!1 &2882574195277233487
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,7 +484,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 341736138736182265}
   m_HandleRect: {fileID: 1213019992773419778}
   m_Direction: 3
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -564,6 +579,7 @@ GameObject:
   - component: {fileID: 6610505390490107118}
   - component: {fileID: 1539856176538806024}
   - component: {fileID: 4810874422128131316}
+  - component: {fileID: 7248817919639441726}
   - component: {fileID: 403963229720012539}
   m_Layer: 5
   m_Name: ItemList
@@ -638,6 +654,28 @@ MonoBehaviour:
   itemDatabase: {fileID: 11400000, guid: 57569f0911572d94ca047006e0248515, type: 2}
   itemListElementPrefab: {fileID: 2603129358903563784, guid: d673f1d81fbb92a4dad0df8eda6f8725, type: 3}
   content: {fileID: 7455845551107029357}
+  blackSmithItemElementClicker: {fileID: 7248817919639441726}
+--- !u!114 &7248817919639441726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8803160640484463813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cde33d291546344ab259c96fc0acb23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemListElementButton: {fileID: 7358068650049805203, guid: d673f1d81fbb92a4dad0df8eda6f8725, type: 3}
+  beforeImage: {fileID: 0}
+  afterImage: {fileID: 0}
+  beforeLevel: {fileID: 0}
+  beforeStatus: {fileID: 0}
+  afterLevel: {fileID: 0}
+  afterStatus: {fileID: 0}
+  levelUpCost: {fileID: 0}
+  gradeUpCost: {fileID: 0}
 --- !u!114 &403963229720012539
 MonoBehaviour:
   m_ObjectHideFlags: 0

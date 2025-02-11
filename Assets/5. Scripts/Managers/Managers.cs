@@ -13,6 +13,7 @@ public class Managers : MonoBehaviour
     private void Awake() 
     {
         Init();
+        InitPlayerInfo();
         Debug.Log("Managers Object Initialized.");
     }
 
@@ -34,6 +35,13 @@ public class Managers : MonoBehaviour
                 manager.AddComponent<PlayerInfo>();
             }
         }
+        
+    }
+
+    private void InitPlayerInfo()
+    {
+        PlayerInfo.Instance.SetPlayerGold(1000);
+        Debug.Log($"현재 플레이어 소지 재화 : {PlayerInfo.Instance.GetplayerGold()}");
     }
 
 
