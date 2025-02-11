@@ -65,10 +65,10 @@ public class BlackSmithPlayerItemInfo : MonoBehaviour
             {
                 for(int i=0; i<armorItemInfoPanels.Length; i++)
                 {
-                    armorItemInfoPanels[i].SetActive(false);
+                    armorItemInfoPanels[i].SetActive(false);//열려있는 패널은 닫고
                 }
-                armorItemInfoPanels[num].SetActive(true);
-                blackSmithItemList[num].DelayPopulateItemList(part);
+                armorItemInfoPanels[num].SetActive(true);//클릭한 버튼에 해당하는 패널만 연다.
+                blackSmithItemList[num].DelayPopulateItemList(part);//클릭한 버튼의 부위에 해당하는 아이템을 리스트 패널에 출력시킨다.
 
                 Debug.Log($"아이템 버튼 클릭 : {part}");
             }
