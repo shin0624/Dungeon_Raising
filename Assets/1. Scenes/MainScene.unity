@@ -20588,6 +20588,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1297701305}
   - component: {fileID: 1297701308}
+  - component: {fileID: 1297701309}
   - component: {fileID: 1297701307}
   - component: {fileID: 1297701306}
   m_Layer: 5
@@ -20698,6 +20699,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1297701304}
   m_CullTransparentMesh: 1
+--- !u!114 &1297701309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297701304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a5aaec7c6032764e8082c8b7633bb0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextSceneName: DungeonScene
+  button: {fileID: 1297701306}
 --- !u!1 &1298365342
 GameObject:
   m_ObjectHideFlags: 0
