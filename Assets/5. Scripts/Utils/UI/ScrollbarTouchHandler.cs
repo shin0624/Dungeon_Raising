@@ -22,8 +22,8 @@ public class ScrollbarTouchHandler : MonoBehaviour, IDragHandler
     {
         if(isDragging)
         {
-            float scrollValue = Mathf.Clamp01(scrollBar.value + eventData.delta.y * 0.005f);//스크롤바의 Value 범위인 0~1사이의 값을 y방향 터치(이벤트데이터)값에 0.005를 곱한 값과 더하여 자연스러운 스크롤바 value변화를 만든다.
-            scrollBar.value = scrollValue;
+            //float scrollValue = Mathf.Clamp01(scrollBar.value + eventData.delta.y * 0.005f);//스크롤바의 Value 범위인 0~1사이의 값을 y방향 터치(이벤트데이터)값에 0.005를 곱한 값과 더하여 자연스러운 스크롤바 value변화를 만든다.
+            //scrollBar.value = scrollValue;
         }
     }
 

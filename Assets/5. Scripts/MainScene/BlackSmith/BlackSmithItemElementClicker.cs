@@ -21,9 +21,13 @@ public class BlackSmithItemElementClicker : MonoBehaviour
 
     public void AddListenerToElementButton(GameObject newItem, ArmorItem armorItem)//리스너 등록을 캡슐화하여 BlackSmithItemList.cs의 코루틴에 넣는다.
     {
-        itemListElementButton.onClick.AddListener(() => ElementLink(newItem, armorItem));
+        Button itemElementbutton = newItem.GetComponent<Button>();
+        itemElementbutton.onClick.AddListener(() => ElementLink(newItem, armorItem));
 
         Debug.Log("리스트 각 버튼에 리스너 등록됨.");
+        Debug.Log($"리스너가 등록된 엘리먼트 : {newItem.name}");
+        Debug.Log($"리스너가 등록된 장비 아이템 : {armorItem.itemName}");
+
     }
 
     private void ElementLink(GameObject newItem, ArmorItem armorItem)//BlackSmithItemList.cs의 PopulateItemList()에서 리스트에 출력된 아이템 버튼 클릭 시 해당 아이템 정보를 RightPivot에 표시하는 메서드
