@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class BlackSmithItemElementClicker : MonoBehaviour
 {
-    [SerializeField] private Button itemListElementButton;//아이템 리스트 엘리먼트의 버튼 컴포넌트
     [SerializeField] private Image beforeImage;//레벨업 버튼 아래에 표시될 아이템 이미지
     [SerializeField] private Image afterImage;//승급 버튼 아래에 표시될 아이템 이미지
     [SerializeField] private TextMeshProUGUI beforeLevel;// [ 현재레벨(itemLevel) / 최대레벨(10)]
@@ -24,15 +23,14 @@ public class BlackSmithItemElementClicker : MonoBehaviour
         Button itemElementbutton = newItem.GetComponent<Button>();
         itemElementbutton.onClick.AddListener(() => ElementLink(newItem, armorItem));
 
-        Debug.Log("리스트 각 버튼에 리스너 등록됨.");
-        Debug.Log($"리스너가 등록된 엘리먼트 : {newItem.name}");
-        Debug.Log($"리스너가 등록된 장비 아이템 : {armorItem.itemName}");
-
+        // Debug.Log("리스트 각 버튼에 리스너 등록됨.");
+        // Debug.Log($"리스너가 등록된 엘리먼트 : {newItem.name}");
+        // Debug.Log($"리스너가 등록된 장비 아이템 : {armorItem.itemName}");
     }
 
     private void ElementLink(GameObject newItem, ArmorItem armorItem)//BlackSmithItemList.cs의 PopulateItemList()에서 리스트에 출력된 아이템 버튼 클릭 시 해당 아이템 정보를 RightPivot에 표시하는 메서드
     {   
-       Debug.Log($"{armorItem.itemParts} 부위 아이템 리스트에서 {armorItem.itemName}클릭함. ");
+       //Debug.Log($"{armorItem.itemParts} 부위 아이템 리스트에서 {armorItem.itemName}클릭함. ");
 
        beforeImage.sprite = newItem.transform.Find("ArmorIcon").GetComponent<Image>().sprite;
        afterImage.sprite = newItem.transform.Find("ArmorIcon").GetComponent<Image>().sprite;

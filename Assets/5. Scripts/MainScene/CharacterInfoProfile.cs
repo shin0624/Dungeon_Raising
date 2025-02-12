@@ -10,6 +10,10 @@ public class CharacterInfoProfile : MonoBehaviour
     [SerializeField] private Sprite[] maleCharacterImage;//남자 캐릭터 [0] : 검사, [1] : 궁수
     [SerializeField] private Sprite[] femaleCharacterImage;//여자 캐릭터 [0] : 궁수, [1] : 마법사
 
+    //아래 배열은 전신 이미지
+    [SerializeField] private Sprite[] maleCharacterFullAspectImage;// [0] : 검사, [1] ; 궁수 
+    [SerializeField] private Sprite[] femaleCharacterFullAspectImage;// [0] : 궁수, [1] : 마법사 
+
     private string genderCheck()// 플레이어 성별 체크
     {
         string gender="";
@@ -98,9 +102,75 @@ public class CharacterInfoProfile : MonoBehaviour
         }
     }
 
-    // public IEnumerator DelaySetCharacterProfile()//값의 업데이트보다 화면의 업데이트가 우선되는 것을 방지하기 위해 코루틴으로 지연 실행
-    // {
-    //     yield return new WaitForSeconds(0.5f);
-    //     SetCharacterProfile();
-    // }
+    public Sprite SetPlayerImageInBlackSmith()//대장간 ui의 캐릭터 이미지를 플레이어 캐릭터로 보이기 위한 메서드. 
+    {
+         if(PlayerInfo.Instance==null)
+        {
+            Debug.LogError("PlayerInfo is not Initialized.");
+            return null;
+        }
+
+        string gender = genderCheck();//위에서 만들어두었던 체크 메서드들의 리턴값을 변수에 각각 저장
+        string job = jobCheck();
+        
+
+        if(string.IsNullOrEmpty(gender) || string.IsNullOrEmpty(job))//각 값들의 유효성 체크 먼저 수행
+        {
+            Debug.Log($"Gender or Job is invalid. Gender : {gender}, Job : {job}");
+        }
+
+        Sprite [] selectedImageArray = null;//성별에 따른 캐릭터 프리팹 배열을 선택한다.
+        if(gender == "Male")
+        {
+            selectedImageArray = maleCharacterFullAspectImage;//남성 캐릭터 배열
+        }
+        else if(gender == "Female")
+        {
+            selectedImageArray = femaleCharacterFullAspectImage;//여성 캐릭터 배열
+        }
+        else//예외처리
+        {
+            Debug.LogError($"Unknown Gender. Gender : {gender}");
+        }
+
+        int jobIndex = -1;
+        switch(job)
+        {
+            case "Knight" :
+                jobIndex = 0;//knight는 남성 캐릭터 배열의 인덱스 0번이므로 겹칠 수 없는 문자열임.
+                break;
+
+            case "Archer" :
+                if(selectedImageArray==maleCharacterFullAspectImage) 
+                {
+                    jobIndex = 1;//선택된 배열이 남성 배열일 경우 인덱스는 1번
+                }
+                else 
+                {
+                    jobIndex = 0;//선택된 배열이 여성 배열일 경우 인덱스는 0번
+                }
+                break;
+
+            case "Magician" :
+                jobIndex = 1;//Magician은 여성 캐릭터 배열의 인덱스 1번이므로, 겹칠 수 없는 문자열임. 
+                break;
+                
+            default :
+                Debug.LogError($"Unknown Job. Job is {job}");
+                return null;
+        }
+
+        if(selectedImageArray!=null && jobIndex >=0 && jobIndex < selectedImageArray.Length)
+        {
+            return selectedImageArray[jobIndex];//선택한 성별과 직업에 맞는 프리팹를 가져온다.
+        }
+        else
+        {
+            Debug.LogError($"Invalid Image index or array. JobIndex is {jobIndex}");
+            return null;
+        }
+    }
+
+
+
 }

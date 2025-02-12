@@ -17,6 +17,11 @@ public class Managers : MonoBehaviour
         Debug.Log("Managers Object Initialized.");
     }
 
+    private void Update()
+    {
+        Debug.Log($"¿Á»≠ : {PlayerInfo.Instance.GetplayerGold()}");
+    }
+
     private static void Init()
     {
         if(s_instance==null)
