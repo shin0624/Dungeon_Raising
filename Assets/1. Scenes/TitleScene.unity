@@ -1056,6 +1056,7 @@ GameObject:
   - component: {fileID: 1087471223}
   - component: {fileID: 1087471226}
   - component: {fileID: 1087471227}
+  - component: {fileID: 1087471228}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1127,6 +1128,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985dffcce4e443641b201190b1e7125f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1087471228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087471222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a99dab7d1a9e96f4aabf0bcbeb811ac2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maleCharacterPrefabs:
+  - {fileID: 271434283675347063, guid: e397a693ad8e3be40bdb4f6240f1dfb8, type: 3}
+  - {fileID: 4574473342774506424, guid: b4b3d1564a7f1474383ccb971a07c400, type: 3}
+  femaleCharacterPrefabs:
+  - {fileID: 4425855209378572349, guid: 8f020777c1fa27e4e937860dc50a76e2, type: 3}
+  - {fileID: 3760493997055053520, guid: 4f3a59b11ad7c734b8f442bffa438854, type: 3}
 --- !u!1 &1269813946
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,6 +1664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSlots: 12
+  itemDatabase: {fileID: 0}
 --- !u!114 &1985056960
 MonoBehaviour:
   m_ObjectHideFlags: 0

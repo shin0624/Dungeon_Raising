@@ -13,13 +13,8 @@ public class Managers : MonoBehaviour
     private void Awake() 
     {
         Init();
-        InitPlayerInfo();
+        //InitPlayerInfo();
         Debug.Log("Managers Object Initialized.");
-    }
-
-    private void Update()
-    {
-        Debug.Log($"¿Á»≠ : {PlayerInfo.Instance.GetplayerGold()}");
     }
 
     private static void Init()
@@ -38,6 +33,10 @@ public class Managers : MonoBehaviour
             if(manager.GetComponent<PlayerInfo>()==null)
             {
                 manager.AddComponent<PlayerInfo>();
+            }
+            if(manager.GetComponent<PlayerCharacterManager>()==null)
+            {
+                manager.AddComponent<PlayerCharacterManager>();
             }
         }
         

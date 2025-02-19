@@ -46,7 +46,7 @@ public class AutoSpawnerSoldier : MonoBehaviour
         }
         if(soldierSpawnPositions.Count == 0)
         {
-            Debug.LogWarning("병사를 소환할 수 있는 타일이 없음");
+            Debug.LogWarning("There is no tile to spawn soldier.");
         }
         
     }
@@ -55,7 +55,7 @@ public class AutoSpawnerSoldier : MonoBehaviour
     {
         if(spawnedSoldiers.Count >=maxAmount)
         {
-            Debug.Log("병사 소환 수 최대");
+            Debug.Log("maxAmount of soldier is spawned.");
             return;
         }
 
@@ -69,7 +69,7 @@ public class AutoSpawnerSoldier : MonoBehaviour
         }
         else
         {
-            Debug.Log("병사를 소환할 수 있는 타일이 존재하지 않음.");
+            Debug.Log("There is no tile to spawn soldier.");
         }
     }
 }
