@@ -23,6 +23,7 @@ public class DungeonEntranceTrigger : MonoBehaviour
     {
         if (popupCanvas != null && gameObject.scene.isLoaded) // 씬이 변경된 경우에도 canvas 참조 오류가 발생하는 것을 확인하여, 이를 방지하기 위해 제한을 추가.
         {
+            Time.timeScale = 1;
             popupCanvas.gameObject.SetActive(false);
             dungeonInfoPrintToPanel.ClearDungeonInfo();//팝업 캔버스 비활성화 시 출력되었던 던전 정보 초기화.
         }
