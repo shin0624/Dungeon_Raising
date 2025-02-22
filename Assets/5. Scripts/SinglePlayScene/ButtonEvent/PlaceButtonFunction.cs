@@ -9,6 +9,7 @@ public class PlaceButtonFunction : MonoBehaviour
     //클릭한 위치의 타일맵 좌표(Vector3Int)를 받아와서 캐릭터 선택. -> 드래그 -> 터치 종료(최종 목적지 타일이 해당 레이어에 존재하는지 확인하고, 가능하면 해당 레이어로 이동, 불가능하면 원래 위치로 복귀. 동 레이어에서의 이동은 해당 없음.)
     // 유닛의 배치 시 목표 타일맵의 중심 위치로 이동하기 위해, 드래그 중 위치 보정도 필요하다.
     [SerializeField] private Tilemap[] tileLayers;// 유닛 프리팹들이 소환될 3개의 타일맵 레이어. [0] : 캐릭터 레이어 / [1] : 영웅 레이어 / [2] : 병사 레이어
+    [SerializeField] private TilemapOutlineShader outlineShader;//타일맵 테두리 효과를 적용하는 스크립트
     private Vector3Int startTile;//드래그 시작 위치
     private Tilemap currentLayer;// 현재 유닛 프리팹이 존재하는 타일맵 레이어.
     private bool isDragging = false;//드래그 중인지 여부를 판단하는 플래그.
@@ -31,6 +32,8 @@ public class PlaceButtonFunction : MonoBehaviour
        if(hit.collider!=null && hit.collider.CompareTag("UNIT"))
        {
             selectedUnit = hit.collider.transform;//선택된 유닛을 저장한다.
+
+             outlineShader.DrawTilemapOutlines();//드래그 중일 때 타일맵 테두리 색상을 변경한다.
 
             currentLayer = GetCurrentLayer(selectedUnit.position);//선택된 유닛이 존재하는 타일맵 레이어를 찾는다. --> 드래그 시작 시 현재 유닛이 속한 레이어를 정확히 찾아야 함. 이전에는 GetCurrentLayer()에서 startTile을 이용했으나, startTile이 설정되기 전에 호출되어 null 오류가 발생하였음. 이를 해결하기 위해 selectedUnit.position을 이용해 currentLayer를 즉시 설정.
             if(currentLayer == null) 
@@ -60,6 +63,8 @@ public class PlaceButtonFunction : MonoBehaviour
     {
         if (selectedUnit == null)
             return; // 선택된 유닛이 없으면 실행 중지
+        
+        outlineShader.ResetOutlineColor();//드래그 종료 시 타일맵 테두리 색상을 원래 색상으로 변경한다.
 
         isDragging = false;//드래그 종료
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);//마우스 클릭 위치를 월드 좌표로 변환

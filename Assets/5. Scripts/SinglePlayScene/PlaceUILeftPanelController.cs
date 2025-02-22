@@ -35,7 +35,7 @@ public class PlaceUILeftPanelController : MonoBehaviour
 
     private void OnPlaceButtonClicked()// 유저가 직접 터치를 통해 유닛을 배치할 수 있는 기능. 서로 다른 레이어 간 이동이 가능하며, 드래그를 통해 캐릭터를 목적지 타일로 위치시킨다. 이 떄 목적지 타일에 다른 유닛이 존재한다면 원래 위치로 복귀한다. 
     {
-        placeButtonFunction.enabled = true;//배치 버튼 기능을 활성화한다. 인풋 처리는 PlaceButtonFunction.cs에서 담당한다.
+        placeButtonFunction.enabled = true;//배치 버튼 기능을 활성화한다. 인풋 처리는 PlaceButtonFunction.cs에서 담당한다. 배치 버튼 기능이 비활성화되어 있으면 TilemapOutlineShader.cs도 적용되지 않음.
     }
 
     private void OnAutoPlaceButtonClicked()// 자동 배치 버튼 : 유저 입력 없이 자동으로 유닛이 배치되는 버튼. 클릭 시 유닛의 전투력 순서대로 필드에 자동배치된다.
