@@ -14,6 +14,8 @@ public class AutoPlaceButtonFunction : MonoBehaviour
      // 자동배치에서의 유닛 배치는 AutoPlaceLayer 상에서 수행되며, 현재 적 유닛이 배치된 타일에서 선두에 있는 유닛의 유형에 강한 유닛이 플레이어 타일에 있을 경우 그 유닛을 선두에 배치. 상성 우위인 유닛이 플레이어에게 없다면, 동일한 상성을 가진 유닛을 선두에 배치. 
 
     [SerializeField] private Tilemap baseTilemap;
+    [SerializeField] private UnitManager unitManager;
+    
    
 
 }

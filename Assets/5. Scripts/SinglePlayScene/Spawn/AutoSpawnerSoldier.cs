@@ -34,7 +34,6 @@ public class AutoSpawnerSoldier : MonoBehaviour
         {
             SpawnSoldier();//병사 프리팹을 타일맵 위에 보유 숫자만큼 스폰한다.
         }
-        
     }
 
     private void FindSpawnPosition()//병사 프리팹을 타일맵 위 랜덤 위치에 보유 숫자만큼 스폰한다.
@@ -51,7 +50,6 @@ public class AutoSpawnerSoldier : MonoBehaviour
         {
             Debug.LogWarning("There is no tile to spawn soldier.");
         }
-        
     }
 
     private void SpawnSoldier()//병사의 소환 가능 여부를 체크하고 소환 가능한 타일에 병사 프리팹을 Instantiate()하는 함수
