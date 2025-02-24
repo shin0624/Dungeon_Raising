@@ -32,10 +32,19 @@ public class AutoSpawnerSoldier : MonoBehaviour
 
     private void Start()
     {
-        //while(spawnedCount != maxAmount)
-        //{
-        //    SpawnSoldier();//병사 프리팹을 타일맵 위에 보유 숫자만큼 스폰한다.
-        //}
+        if(spawnedSoldiers == null || spawnedSoldiers.Count==0)
+        {
+            Debug.LogError("No Soldiers prefab found in UnitManager");
+            return;
+        }
+        if(soldierSpawnPositions.Count < maxAmount)
+        {
+            Debug.LogWarning("Not enough spawn Positions available");
+        }
+        while(spawnedCount < maxAmount && soldierSpawnPositions.Count > 0)
+        {
+            SpawnSoldier();//병사 프리팹을 타일맵 위에 보유 숫자만큼 스폰한다.
+        }
     }
 
     private void FindSpawnPosition()//병사 프리팹을 타일맵 위 랜덤 위치에 보유 숫자만큼 스폰한다.

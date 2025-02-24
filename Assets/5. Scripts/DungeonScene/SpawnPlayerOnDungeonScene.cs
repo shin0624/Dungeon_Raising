@@ -9,6 +9,7 @@ public class SpawnPlayerOnDungeonScene : MonoBehaviour
     [SerializeField] Transform playerSpawnPoint;
     private GameObject playerPrefab;
     private PlayerCharacterManager playerCharacterManager;//Manager 객체에 할당된 PlayerCharacterManager.cs 스크립트
+    private GameObject newCharacter;
 
     private void OnEnable()//씬이 로드되면 플레이어 정보에 맞는 캐릭터를 체크한다.
     {
@@ -39,7 +40,7 @@ public class SpawnPlayerOnDungeonScene : MonoBehaviour
 
     private void SpawnPlayerCharacter()//플레이어 캐릭터를 스폰 포인트에 스폰하는 메서드.
     {
-         GameObject newCharacter = Instantiate(playerPrefab, playerSpawnPoint);//플레이어 정보와 일치하는 플레이어 캐릭터 프리팹을 소환한다.
+         newCharacter = Instantiate(playerPrefab, playerSpawnPoint);//플레이어 정보와 일치하는 플레이어 캐릭터 프리팹을 소환한다.
          newCharacter.transform.position = playerSpawnPoint.position;//플레이어 캐릭터의 위치를 스폰 포인트로 이동시킨다.
          newCharacter.AddComponent<PlayerMovementTemp>();//플레이어 캐릭터에 플레이어 이동 스크립트를 추가한다.
 
@@ -48,6 +49,6 @@ public class SpawnPlayerOnDungeonScene : MonoBehaviour
 
     private void ResetPlayerCharacter()//플레이어 캐릭터를 리셋하는 메서드.
     {
-        Destroy(playerPrefab);
+        Destroy(newCharacter);
     }
 }

@@ -14,7 +14,7 @@ public class UnitManager : MonoBehaviour
 
     private GameObject playerCharacterPrefab;//현재 플레이어의 성별과 직업에 맞는 캐릭터 프리팹. Managers의 컴포넌트인 PlayerCharacterManager.cs에서 가져온다.
     private List<GameObject> heroPrefabList = new List<GameObject>();//플레이어가 보유 중인 영웅들의 리스트. 최초에 스폰되는 영웅은 리스트[0]. UI의 SelectButton으로 영웅을 골라 바꿀 수 있다.
-    private List<GameObject> soldiersPrefabList;
+    private List<GameObject> soldiersPrefabList = new List<GameObject>();//플레이어가 보유 중인 병사 리스트.
     private PlayerCharacterManager playerCharacterManager;//플레이어 캐릭터들의 리스트가 들어있는 클래스 인스턴스.
 
     public GameObject GetPlayerCharacter()//플레이어의 성별과 직업에 맞는 캐릭터 프리팹을 가져오는 메서드.
