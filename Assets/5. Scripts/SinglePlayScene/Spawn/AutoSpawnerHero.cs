@@ -15,6 +15,7 @@ public class AutoSpawnerHero : MonoBehaviour
     [SerializeField] private Transform prefabParent;//스폰될 프리팹을 자식으로 둘 부모 오브젝트
     [SerializeField] private UnitManager unitManager;
     private List<GameObject> heroList;//플레이어가 보유 중인 영웅들의 리스트. 최초에 스폰되는 영웅은 리스트[0]. UI의 SelectButton으로 영웅을 골라 바꿀 수 있다.
+    private GameObject newHero;
     private Vector3Int heroSpawnPosition = new Vector3Int(0,0,0);//영웅 유닛이 최초에 스폰될 타일의 그리드 좌표.
     private int nowSpawnedHeroCount = 0;//현재 스폰된 영웅의 수. 최대 1개.
     private Quaternion rotation = Quaternion.Euler(0,-180,0);//플레이어측의 프리팹은 기본적으로 왼쪽을 보고 있으므로, 180도 회전시켜서 상대 측을 바라보게 한다.
@@ -62,7 +63,12 @@ public class AutoSpawnerHero : MonoBehaviour
         Vector3Int spawnTile = heroSpawnPosition;//FindSpawnPosition()에서 찾은 타일 위치를 불러온다.
         Vector3 worldPositon = heroTilemapLayer.GetCellCenterWorld(spawnTile);//타일의 그리드 좌표를 월드 좌표로 변환한다.
 
-        GameObject newHero = Instantiate(heroList[0], worldPositon, rotation, prefabParent);//영웅 리스트의 첫번째 영웅을 스폰한다.
+        newHero = Instantiate(heroList[0], worldPositon, rotation, prefabParent);//영웅 리스트의 첫번째 영웅을 스폰한다.
         nowSpawnedHeroCount++;
+    }
+
+    public void ClearSpawnedHero()//배치 방식이 바뀔 때, 기존에 스폰되었던 영웅 유닛 인스턴스들을  모두 제거한다.
+    {
+        Destroy(newHero);
     }
 }
