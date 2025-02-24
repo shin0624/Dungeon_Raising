@@ -1180,9 +1180,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soldierTilemapLayer: {fileID: 252550215}
-  soldierPrefab: {fileID: 7162745923825899475, guid: d33a12dfb513d4f4a9e5aa61e564e09e, type: 3}
   maxAmount: 10
   prefabParent: {fileID: 1414690764}
+  unitManager: {fileID: 292618919}
 --- !u!114 &292618913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1290,7 +1290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heroDatabase: {fileID: 11400000, guid: 6f002553bc4eca04397dca050ca4d038, type: 2}
-  soldierPrefab: {fileID: 7162745923825899475, guid: d33a12dfb513d4f4a9e5aa61e564e09e, type: 3}
+  soldierDatabase: {fileID: 11400000, guid: c93fcdc288bf9af4a9f6ffea7664ffef, type: 2}
 --- !u!1 &313842666
 GameObject:
   m_ObjectHideFlags: 0
