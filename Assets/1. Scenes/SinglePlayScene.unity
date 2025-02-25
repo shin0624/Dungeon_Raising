@@ -1147,6 +1147,7 @@ GameObject:
   - component: {fileID: 292618917}
   - component: {fileID: 292618918}
   - component: {fileID: 292618919}
+  - component: {fileID: 292618920}
   m_Layer: 0
   m_Name: SinglePlaySceneManager
   m_TagString: Untagged
@@ -1202,6 +1203,7 @@ MonoBehaviour:
   maxAmount: 1
   prefabParent: {fileID: 380491862}
   unitManager: {fileID: 292618919}
+  newHero: {fileID: 0}
 --- !u!114 &292618914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1218,6 +1220,7 @@ MonoBehaviour:
   maxAmount: 1
   prefabParent: {fileID: 715035066}
   unitManager: {fileID: 292618919}
+  newCharacter: {fileID: 0}
 --- !u!114 &292618915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1234,6 +1237,7 @@ MonoBehaviour:
   autoPlaceButton: {fileID: 793728513}
   resetPlaceButton: {fileID: 318258358}
   placeButtonFunction: {fileID: 292618917}
+  autoPlaceButtonFunction: {fileID: 292618920}
 --- !u!114 &292618916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1294,6 +1298,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroDatabase: {fileID: 11400000, guid: 6f002553bc4eca04397dca050ca4d038, type: 2}
   soldierDatabase: {fileID: 11400000, guid: c93fcdc288bf9af4a9f6ffea7664ffef, type: 2}
+--- !u!114 &292618920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292618909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60c22416c72596488002f57a30cbc5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soldierPlaceLayer: {fileID: 1131792002}
+  heroPlaceLayer: {fileID: 2101497722}
+  characterPlaceLayer: {fileID: 400289748}
+  unitManager: {fileID: 292618919}
+  autoSpawnerSoldier: {fileID: 292618912}
+  autoSpawnCharacter: {fileID: 292618914}
+  autoSpawnerHero: {fileID: 292618913}
 --- !u!1 &313842666
 GameObject:
   m_ObjectHideFlags: 0

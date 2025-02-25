@@ -20,16 +20,47 @@ public class AutoPlaceButtonFunction : MonoBehaviour
     [SerializeField] private Tilemap characterPlaceLayer;
     [SerializeField] private UnitManager unitManager;
     [SerializeField] private AutoSpawnerSoldier autoSpawnerSoldier;
-
+    [SerializeField] private AutoSpawnCharacter autoSpawnCharacter;
+    [SerializeField] private AutoSpawnerHero autoSpawnerHero;
+    private Vector3Int characterSpawnPosition = new Vector3Int(0,0,0);//캐릭터 유닛이 자동배치용 레이어 타일에 스폰될 그리드 좌표.
+    private Vector3Int heroSpawnPosition = new Vector3Int(0,0,0);//영웅 유닛이 자동배치용 레이어 타일에 스폰될 그리드 좌표.
     //----------------Queues
     private Queue<Vector3Int> availableTilesForSoldiers = new Queue<Vector3Int>();//병사 유닛들을 이동 배치할 수 있는 타일목록 큐.
     
-
-
-    private void Start()
+    private void Start()//AutoPlaceButtonFunction은 PlaceUILeftPanelController.cs에서 OnAutoPlaceButtonClicked()가 호출되기 전까지 컴포넌트 비활성화 상태이며, OnAutoPlaceButtonClicked()가 호출되었을 때 실행된다.
     {
-       
+        StartAutoPlace();
     }
+    public void StartAutoPlace()//자동배치 버튼을 2회 이상 클릭 시 유닛들이 다시한번 자동배치된다.
+    {
+        StartCoroutine(AutoPlaceFunction());
+    }
+
+    private IEnumerator AutoPlaceFunction()
+    {
+        FindUnitsPosition();
+        yield return null;
+        MoveAllUnits();
+    }
+
+    private void FindUnitsPosition()
+    {
+        FindCharacterPosition();
+        FindHeroPosition();
+        FindSoldiersPosition();
+        Debug.Log("Find Position for AutoPlace Completed.");
+    }
+
+    private void MoveAllUnits()
+    {
+        MoveCharacter();
+        MoveHero();
+        MoveSoldiers();
+        Debug.Log("AutoPlace Completed.");
+    }
+
+
+
 //--------------병사 유닛 이동 함수----------------------------
     private void FindSoldiersPosition()//병사 유닛들의 스폰 장소를 찾는다.
     {
@@ -43,7 +74,7 @@ public class AutoPlaceButtonFunction : MonoBehaviour
         }
         if(availableTilesForSoldiers.Count == 0 )
         {
-            Debug.LogWarning("No Available Tilse found in soldierPlaceLayer");
+            Debug.LogWarning("No Available Tiles found in soldierPlaceLayer");
         }
     }
 
@@ -51,10 +82,10 @@ public class AutoPlaceButtonFunction : MonoBehaviour
     {   
         foreach(GameObject unit in autoSpawnerSoldier.spawnedSoldiers)//기존 레이어 위의 병사들을 새로운 타일 위로 옮긴다.
         {
-            if(availableTilesForSoldiers.Count == 0)
+            if(availableTilesForSoldiers.Count == 0)//타일 큐가 비어있을 경우를 방지.
             {
                 Debug.LogWarning("Not Enough available tiles for soldiers.");
-                break;
+                return;//break를 사용하면 루프 종료 후 코드가 계속 실행될 테니, 타일 큐가 비어있을 때는 return으로 함수를 종료시킨다.
             }
 
             Vector3Int newTilePos = availableTilesForSoldiers.Dequeue();//자동배치용 병사 타일을 선택하여 빼낸다.
@@ -66,12 +97,74 @@ public class AutoPlaceButtonFunction : MonoBehaviour
 
 //-----------------캐릭터 유닛 이동 함수-------------------------
 
+    private void FindCharacterPosition()//캐릭터 유닛의 스폰 장소를 찾는다.
+    {
+        bool founded = false;//타일이 없을 경우를 알리는 플래그. 
+        BoundsInt bounds = characterPlaceLayer.cellBounds;
+        foreach(Vector3Int position in bounds.allPositionsWithin)
+        {
+            if(characterPlaceLayer.HasTile(position))
+            {
+                characterSpawnPosition = position;
+                founded = true;
+                break;
+            }
+        }
+        if(!founded)//타일이 없다면 경고출력. 조건을 characterSpawnPosition = Vector3 (0,0,0)일 때로 해버리면 실행되지 않기에, 타일이 전혀 없을 경우를 감지해야 함.
+        {
+            Debug.LogWarning("There is no tile to spawn Playercharacter.");
+        }
+    }
 
+    private void MoveCharacter()//기존 레이어의 캐릭터 유닛을 자동배치용 레이어 타일로 이동시키는 함수.
+    {
+        Vector3Int newTilePos = characterSpawnPosition;//FindCharacterPosition()에서 찾은 자동배치용 타일 좌표를 새로운 좌표로 등록.
+        Vector3 newWorldPos = characterPlaceLayer.GetCellCenterWorld(newTilePos);//Vector3Int형 그리드좌표를 실제 타일맵 월드좌표로 변환.
 
+        if(autoSpawnCharacter.newCharacter!=null)
+        {
+            autoSpawnCharacter.newCharacter.transform.position = newWorldPos;//캐릭터 유닛을 이동.
+        }
+        else
+        {
+            Debug.LogWarning("autoSpawnCharacter.newCharacter is NULL");
+        }
+    }
 
+    //--------------영웅 유닛 이동 함수-------------------------
 
+    private void FindHeroPosition()//영웅 유닛의 스폰 장소를 찾는다.
+    {
+        bool founded = false;
+        BoundsInt bounds = heroPlaceLayer.cellBounds;//영웅 유닛이 위치할 자동배치용 레이어 상의 위치를 찾는다.
+        foreach(Vector3Int position in bounds.allPositionsWithin)
+        {
+            if(heroPlaceLayer.HasTile(position))
+            {
+                heroSpawnPosition = position;
+                founded = true;
+                break;
+            }
+        }
+        if(!founded)//타일이 없다면 경고출력.
+        {
+            Debug.LogWarning("There is no tile to spawn Hero.");
+        }
+    }
 
-
-
+    private void MoveHero()//기존 레이어의 영웅 유닛을 자동배치용 레이어 타일로 이동시키는 함수.
+    {
+        Vector3Int newTilePos = heroSpawnPosition;
+        Vector3 newWorldPos = heroPlaceLayer.GetCellCenterWorld(newTilePos);
+     
+        if(autoSpawnerHero.newHero!=null)
+        {
+            autoSpawnerHero.newHero.transform.position = newWorldPos;
+        }
+        else
+        {
+            Debug.LogWarning("autoSpawnerHero.newHero is NULL");
+        }
+    }
 
 }

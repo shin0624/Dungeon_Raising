@@ -15,8 +15,8 @@ public class AutoSpawnCharacter : MonoBehaviour
     [SerializeField] private Transform prefabParent;//스폰될 프리팹을 자식으로 둘 부모 오브젝트
     [SerializeField] private UnitManager unitManager;
     private GameObject playerCharacter;//현재 플레이어의 성별과 직업에 맞는 캐릭터 프리팹. Managers의 컴포넌트인 PlayerCharacterManager.cs에서 가져온다.
-    private GameObject newCharacter;
-    private Vector3Int characterSpawnPosition = new Vector3Int(0,0,0);//캐릭터터 유닛이 최초에 스폰될 타일의 그리드 좌표.
+    public GameObject newCharacter;
+    private Vector3Int characterSpawnPosition = new Vector3Int(0,0,0);//캐릭터 유닛이 최초에 스폰될 타일의 그리드 좌표.
     private int nowSpawnedCharacterCount = 0;//현재 스폰된 캐릭터의 수. 최대 1개.
     private Quaternion rotation = Quaternion.Euler(0,-180,0);//플레이어측의 프리팹은 기본적으로 왼쪽을 보고 있으므로, 180도 회전시켜서 상대 측을 바라보게 한다.
 
@@ -49,7 +49,7 @@ public class AutoSpawnCharacter : MonoBehaviour
         }
     }
 
-    private void SpawnPlayerCharacter()//캐릭터터의 소환 가능 여부를 체크하고 전용 타일에 소환한다. 최초 스폰용 메서드.
+    private void SpawnPlayerCharacter()//캐릭터의 소환 가능 여부를 체크하고 전용 타일에 소환한다. 최초 스폰용 메서드.
     {
         if(nowSpawnedCharacterCount >= maxAmount)
         {
