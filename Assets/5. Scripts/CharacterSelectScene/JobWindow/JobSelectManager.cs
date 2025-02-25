@@ -39,9 +39,10 @@ public class JobSelectManager : MonoBehaviour
         PlayerInfo.Instance.SetPlayerJob("Archer");
     }
 
-    private void OnFemaleButtonClicked()
+    private void OnFemaleArcherButtonClicked()
     {
         ActiveSpecificPanel(femaleJobPanels, 0);
+        PlayerInfo.Instance.SetPlayerJob("Archer");
     }
 
     private void OnMagicianButtonClicked()
@@ -79,7 +80,7 @@ public class JobSelectManager : MonoBehaviour
         archerButton.onClick.RemoveAllListeners();
         magicianButton.onClick.RemoveAllListeners();
 
-        archerButton.onClick.AddListener(OnFemaleButtonClicked);
+        archerButton.onClick.AddListener(OnFemaleArcherButtonClicked);
         magicianButton.onClick.AddListener(OnMagicianButtonClicked);
     }
 

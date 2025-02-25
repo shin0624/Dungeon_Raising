@@ -57,6 +57,7 @@ public class AutoSpawnerSoldier : MonoBehaviour
             if(soldierTilemapLayer.HasTile(position))
             {
                 soldierSpawnPositions.Enqueue(position);//병사 소환용 레이어에서 타일이 존재하는 위치만 좌표저장 큐에 삽입.
+                Debug.Log($"soldierSpawnPositions.Count = {soldierSpawnPositions.Count}");
             }
         }
         if(soldierSpawnPositions.Count == 0)
@@ -80,6 +81,7 @@ public class AutoSpawnerSoldier : MonoBehaviour
 
             newSoldier = Instantiate(mySoldiers[0], worldPosition, rotation, prefabParent);//병사 유닛 리스트의 첫번째 요소를 스폰. 
             spawnedSoldiers.Add(newSoldier);
+            Debug.Log($"soldierSpawnPositions.Count = {soldierSpawnPositions.Count}");
             spawnedCount++;
         }
         else
@@ -94,6 +96,5 @@ public class AutoSpawnerSoldier : MonoBehaviour
         {
             Destroy(newSoldier);
         }
-        
     }
 }
