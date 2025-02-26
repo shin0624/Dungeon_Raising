@@ -1057,6 +1057,7 @@ GameObject:
   - component: {fileID: 1087471226}
   - component: {fileID: 1087471227}
   - component: {fileID: 1087471228}
+  - component: {fileID: 1087471229}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1146,6 +1147,20 @@ MonoBehaviour:
   femaleCharacterPrefabs:
   - {fileID: 4425855209378572349, guid: 8f020777c1fa27e4e937860dc50a76e2, type: 3}
   - {fileID: 3760493997055053520, guid: 4f3a59b11ad7c734b8f442bffa438854, type: 3}
+--- !u!114 &1087471229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087471222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e69e5ee9b9bbe747aeca16c9a451adf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyType: 0
+  bossType: 0
 --- !u!1 &1269813946
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,4 +13,8 @@ public class DungeonInformation : ScriptableObject
     public Sprite secondRewardSprite;//두 번째 보상 스프라이트.
     public int firstRewardAmount;//첫 번째 보상량.
     public int secondRewardAmount;//두 번째 보상량.
+
+    [Header("Dungeon Unit Info")]
+    public EnemyType enemyType;
+    public BossType bossType;
 }

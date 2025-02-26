@@ -16,6 +16,7 @@ public class DungeonInfoPrintToPanel : MonoBehaviour
     [SerializeField] private Image rewardSprite01;
     [SerializeField] private Image rewardSprite02;
     [SerializeField] private DungeonInformation dungeonInformation;//던전 정보 스크립터블 오브젝트
+    [SerializeField] private DungeonInfoDeliver dungeonInfoDeliver;
 
     public void SynchronizeDungeonInfo()//던전 정보를 팝업창에 출력하는 메서드.
     {
@@ -24,6 +25,9 @@ public class DungeonInfoPrintToPanel : MonoBehaviour
         rewardAmountText02.text = dungeonInformation.secondRewardAmount.ToString();
         rewardSprite01.sprite = dungeonInformation.firstRewardSprite;
         rewardSprite02.sprite = dungeonInformation.secondRewardSprite;
+
+        dungeonInfoDeliver.SetEnemyInfo(dungeonInformation);
+        dungeonInfoDeliver.SetBossInfo(dungeonInformation);
     }
 
     public void ClearDungeonInfo()//던전 정보를 초기화하는 메서드. PopupCanvas가 비활성화될 때(전투 시작 버튼을 누르지 않고 팝업을 끄거나, SinglePlayScene으로 진입하여 씬이 전환될 때 호출.)
@@ -33,5 +37,10 @@ public class DungeonInfoPrintToPanel : MonoBehaviour
         rewardAmountText02.text = "";
         rewardSprite01.sprite = null;
         rewardSprite02.sprite = null;
+
+        dungeonInfoDeliver.ClearEnemyInfo();
+        dungeonInfoDeliver.ClearBossInfo();
+
+        
     }
 }

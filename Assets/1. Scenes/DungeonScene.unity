@@ -252,6 +252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 292618911}
   - component: {fileID: 292618912}
+  - component: {fileID: 292618913}
   m_Layer: 0
   m_Name: DungeonSceneManager
   m_TagString: Untagged
@@ -287,6 +288,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpawnPoint: {fileID: 1406673384}
+--- !u!114 &292618913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292618909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b427d5dd823244ba5baefdac27de3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &347493619
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,6 +873,7 @@ MonoBehaviour:
   rewardSprite01: {fileID: 1602162990}
   rewardSprite02: {fileID: 1369029533}
   dungeonInformation: {fileID: 11400000, guid: dc439f5f2ee6d7c46ad2235e24d9d69d, type: 2}
+  dungeonInfoDeliver: {fileID: 292618913}
 --- !u!1001 &829804591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1257,6 +1271,7 @@ MonoBehaviour:
   rewardSprite01: {fileID: 1602162990}
   rewardSprite02: {fileID: 1369029533}
   dungeonInformation: {fileID: 11400000, guid: 77013751ac76ed844a8a2106bb0cf114, type: 2}
+  dungeonInfoDeliver: {fileID: 292618913}
 --- !u!1 &1096905314
 GameObject:
   m_ObjectHideFlags: 0
