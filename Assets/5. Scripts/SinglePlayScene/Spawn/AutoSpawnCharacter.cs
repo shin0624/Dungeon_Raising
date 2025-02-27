@@ -34,16 +34,18 @@ public class AutoSpawnCharacter : MonoBehaviour
 
     private void FindSpawnPosition()//캐릭터 프리팹을 스폰할 타일맵 위치를 탐색하는 메서드
     {
+        bool founded = false;
         BoundsInt bounds = characterTilemapLayer.cellBounds;
         foreach(Vector3Int position in bounds.allPositionsWithin)
         {
             if(characterTilemapLayer.HasTile(position))
             {
                 characterSpawnPosition = position;
+                founded = true;
                 break;
             }
         }
-        if(characterSpawnPosition == new Vector3Int(0,0,0))//타일이 없다면 경고출력.
+        if(!founded)//타일이 없다면 경고출력.
         {
             Debug.LogWarning("There is no tile to spawn Playercharacter.");
         }

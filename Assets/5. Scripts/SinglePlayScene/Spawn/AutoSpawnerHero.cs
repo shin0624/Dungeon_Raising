@@ -33,16 +33,18 @@ public class AutoSpawnerHero : MonoBehaviour
 
     private void FindSpawnPosition()//영웅 프리팹을 타일맵 위 영웅 위치에 스폰하는 메서드.
     {
+        bool founded = false;
         BoundsInt bounds = heroTilemapLayer.cellBounds;
         foreach(Vector3Int position in bounds.allPositionsWithin)
         {
             if(heroTilemapLayer.HasTile(position))
             {
                 heroSpawnPosition = position;
+                founded = true;
                 break;
             }
         }
-        if(heroSpawnPosition == new Vector3Int(0,0,0))//타일이 없다면 경고출력.
+        if(!founded)//타일이 없다면 경고출력.
         {
             Debug.LogWarning("There is no tile to spawn hero.");
         }
