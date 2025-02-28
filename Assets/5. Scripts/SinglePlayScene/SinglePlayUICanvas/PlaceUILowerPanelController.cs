@@ -19,14 +19,10 @@ public class PlaceUILowerPanelController : MonoBehaviour
     private List<GameObject> heroSlots = new List<GameObject>();//영웅 슬롯 리스트.
     private List<GameObject> soldierSlots = new List<GameObject>();//병사 슬롯 리스트.
     private UnitManager unitManager;
-    private UnitSlot unitSlot;
-    
 
     private void Start()
     {
         unitManager = gameObject.GetComponent<UnitManager>();
-        unitSlot = slotPrefab.GetComponent<UnitSlot>();
-
         heroButton.onClick.AddListener(OnHeroButtonClicked);
         soliderButton.onClick.AddListener(OnSoldierButtonClicked);
     }
@@ -38,35 +34,54 @@ public class PlaceUILowerPanelController : MonoBehaviour
 
     private void OnSoldierButtonClicked()//병사 버튼 클릭 시
     {
-        InitSlots(1);
+        InitSlots(2);
     }
 
     private void InitSlots(int flag)//클릭한 버튼에 따라 (영웅 / 병사) 의 목록이 출력된다.
-    {
+    {   
+        ClearSlot(flag);
+
         int slotAmount = flag == 1 ? unitManager.GetHeroUnitList().Count : unitManager.GetSoliderList().Count;//이미 DB에서 영웅 정보를 뽑아내어 리스트로 리턴되도록 한 메서드가 있으니, 이 리스트의 Count 만큼 LowerPanel에 생성할 슬롯 개수를 설정.
         //버튼 클릭 시 flag값이 전달되고, 1이면 영웅, 2이면 병사 리스트가 출력될 것.
         
         for(int i=0; i< slotAmount; i++)
         {
             GameObject slotButton = Instantiate(slotPrefab, slotPivot);//슬롯 프리팹의 인스턴스화가 끝나면, UnitSlot.cs의 셋업 메서드를 호출하여 __Information 객체의 Sprite, Level <-> 슬롯의 Sprite, Level을 동기화 한다.
-            switch(flag)
+            UnitSlot unitSlot = slotButton.GetComponent<UnitSlot>();//인스턴스에서 UnitSlot 컴포넌트를 가져온다.
+            if(unitSlot!=null)
             {
-                case 1://영웅 버튼 클릭 시
-                    unitSlot.SetUpHero(slotButton);
-                    heroSlots.Add(slotButton);
-                    break;
+                switch(flag)
+                {
+                    case 1://영웅 버튼 클릭 시
+                        unitSlot.SetUpHero(slotButton, i);
+                        heroSlots.Add(slotButton);
+                        break;
 
-                case 2://병사 버튼 클릭 시
-                    unitSlot.SetUpSoldier(slotButton);
-                    soldierSlots.Add(slotButton);
-                    break;
+                    case 2://병사 버튼 클릭 시
+                        unitSlot.SetUpSoldier(slotButton, i);
+                        soldierSlots.Add(slotButton);
+                        break;
 
-                default:
-                    Debug.LogWarning("Unknown Button Clicked !");
-                    break;
+                    default:
+                        Debug.LogWarning("Unknown Button Clicked !");
+                        break;
+                }
             }
-
+            else//만약 UnitSlot이 null이라면
+            {
+                Debug.LogError("slotPrefab not connected to UnitSlot Component.");
+            }
         }
+    }
+
+    private void ClearSlot(int flag)//기존 슬롯 제거 후 리스트를 비우는 메서드.
+    {
+        List<GameObject> slotToClear = (flag==1) ? heroSlots : soldierSlots;
+        foreach(GameObject slot in slotToClear)
+        {
+            Destroy(slot);
+        }
+        slotToClear.Clear();
     }
 
 

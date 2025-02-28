@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8900789387782539728}
   - component: {fileID: 2226663870684000360}
   - component: {fileID: 7108775658072617601}
+  - component: {fileID: 6012349370648274036}
   m_Layer: 5
   m_Name: UnitElementSlot
   m_TagString: Untagged
@@ -28,7 +29,7 @@ RectTransform:
   m_GameObject: {fileID: 682616230906405825}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.116133064, y: 10.344, z: 1}
+  m_LocalScale: {x: 0.1, y: 9.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5518261941333046870}
@@ -122,6 +123,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6012349370648274036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682616230906405825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd4cca27e6451e4999cd2ea0b2910ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitHalfImage: {fileID: 2226663870684000360}
+  level: {fileID: 59725927799579262}
+  heroDatabase: {fileID: 11400000, guid: 6f002553bc4eca04397dca050ca4d038, type: 2}
+  soldierDatabase: {fileID: 11400000, guid: c93fcdc288bf9af4a9f6ffea7664ffef, type: 2}
 --- !u!1 &1277488274741115698
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,8 +213,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278233855
+  m_fontColor: {r: 1, g: 0.66513133, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

@@ -13,9 +13,11 @@ public class HeroInformation : ScriptableObject
     public HeroType heroType;
     public HeroRaise heroRaise;
     public GameObject heroPrefab;
-    public Image heroHalfImage;
+    public Sprite heroHalfImage;
+    
     
     [Header("Hero Status")]
+    public int heroLevel;
     public ItemGrade heroGrade;
     public float attackPoint;
     public float deffensePoint;
