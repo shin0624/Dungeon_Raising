@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName ="HeroInformation", menuName ="Hero/HeroInformation")]
 public class HeroInformation : ScriptableObject
@@ -12,6 +13,7 @@ public class HeroInformation : ScriptableObject
     public HeroType heroType;
     public HeroRaise heroRaise;
     public GameObject heroPrefab;
+    public Image heroHalfImage;
     
     [Header("Hero Status")]
     public ItemGrade heroGrade;

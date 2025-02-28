@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 [CreateAssetMenu(fileName = "SoldierInformation", menuName ="Soldier/SoldierInformation")]
 public class SoldierInformation : ScriptableObject
 {
@@ -11,6 +11,7 @@ public class SoldierInformation : ScriptableObject
 
     [Header("Soldier Info")]
     public GameObject soldierPrefab;//병사 프리팹
+    public Image soldierHalfImage;
     public string soldierType;//병사 종류 : 검사(SwordMan), 궁수(Archer)
 
 

@@ -11,7 +11,7 @@ public class AutoSpawnerSoldier : MonoBehaviour
     // 3개의 레이어는 총 25칸(5*5)으로 구성되어 있고, 영웅과 캐릭터가 각각 1칸씩, 병사는 23칸에 배치된다.
     
     [SerializeField] private Tilemap soldierTilemapLayer;
-    [SerializeField] private int maxAmount = 10;//한 번의 SinglePlay에 사용되는 최대 병사 수는 10개. 10개의 병사를 28칸 중 랜덤으로 배치.
+    [SerializeField] public int maxAmount = 10;//한 번의 SinglePlay에 사용되는 최대 병사 수는 10개. 10개의 병사를 28칸 중 랜덤으로 배치.
     [SerializeField] private Transform prefabParent;//스폰될 프리팹을 자식으로 둘 부모 오브젝트
     [SerializeField] private UnitManager unitManager;
     
@@ -96,5 +96,15 @@ public class AutoSpawnerSoldier : MonoBehaviour
         {
             Destroy(newSoldier);
         }
+    }
+
+    public int GetSpawnedCount()
+    {
+        return spawnedCount;
+    }
+
+    public int GetMaxAmount()
+    {
+        return maxAmount;
     }
 }

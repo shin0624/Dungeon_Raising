@@ -74,4 +74,14 @@ public class AutoSpawnCharacter : MonoBehaviour
     {
         Destroy(newCharacter);
     }
+
+    public int GetSpawnedCount()
+    {
+        return nowSpawnedCharacterCount;
+    }
+
+    public int GetMaxAmount()
+    {
+        return maxAmount;
+    }
 }

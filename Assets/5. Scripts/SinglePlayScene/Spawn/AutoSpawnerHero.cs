@@ -11,7 +11,7 @@ public class AutoSpawnerHero : MonoBehaviour
     // 3개의 레이어는 총 25칸(5*5)으로 구성되어 있고, 영웅과 캐릭터가 각각 1칸씩, 병사는 23칸에 배치된다.
     
     [SerializeField] private Tilemap heroTilemapLayer;
-    [SerializeField] private int maxAmount = 1;//한 번의 singlePlay에 사용되는 영웅 수는 1개. 정해진 칸에 스폰되고, UI의 SelectButton으로 교체할 수 있다.
+    [SerializeField] public int maxAmount = 1;//한 번의 singlePlay에 사용되는 영웅 수는 1개. 정해진 칸에 스폰되고, UI의 SelectButton으로 교체할 수 있다.
     [SerializeField] private Transform prefabParent;//스폰될 프리팹을 자식으로 둘 부모 오브젝트
     [SerializeField] private UnitManager unitManager;
     private List<GameObject> heroList;//플레이어가 보유 중인 영웅들의 리스트. 최초에 스폰되는 영웅은 리스트[0]. UI의 SelectButton으로 영웅을 골라 바꿀 수 있다.
@@ -72,5 +72,15 @@ public class AutoSpawnerHero : MonoBehaviour
     public void ClearSpawnedHero()//배치 방식이 바뀔 때, 기존에 스폰되었던 영웅 유닛 인스턴스들을  모두 제거한다.
     {
         Destroy(newHero);
+    }
+
+    public int GetSpawnedCount()
+    {
+        return nowSpawnedHeroCount;
+    }
+
+    public int GetMaxAmount()
+    {
+        return maxAmount;
     }
 }
