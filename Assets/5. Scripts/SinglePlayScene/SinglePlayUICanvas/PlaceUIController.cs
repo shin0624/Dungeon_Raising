@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +25,6 @@ public class PlaceUIController : MonoBehaviour
 
     private void OnPlaceCompeteButtonClicked()//배치 완료 버튼 클릭 시 캔버스가 비활성화되고 게임이 시작된다.
     {
-
         if(singleplayUICanvas.gameObject.activeSelf)
         {
             singleplayUICanvas.gameObject.SetActive(false);
@@ -33,7 +33,35 @@ public class PlaceUIController : MonoBehaviour
         if(!isComleteButtonClicked)
         {
             isComleteButtonClicked = true;//플래그를 true로 바꾸어 다른 스크립트에서 게임 시작 여부를 판단할 수 있게 한다.
+            Debug.Log("Game Start!");
+
+            StartUnitFight();
         }
     }
+
+    private void StartUnitFight()
+    {
+        GameObject[]playerUnits = GameObject.FindGameObjectsWithTag("UNIT");
+        GameObject[]enemyUnits = GameObject.FindGameObjectsWithTag("ENEMYUNIT");
+
+        foreach(GameObject unit in playerUnits)
+        {
+            UnitMoveController unitMoveController = unit.GetComponent<UnitMoveController>();
+            if(unitMoveController!=null)
+            {
+                unitMoveController.StartFight();
+            }
+        }
+
+        foreach(GameObject unit in enemyUnits)
+        {
+            UnitMoveController unitMoveController = unit. GetComponent<UnitMoveController>();
+            if(unitMoveController!=null)
+            {
+                unitMoveController.StartFight();
+            }
+        }
+    }
+
 
 }

@@ -626,6 +626,7 @@ GameObject:
   - component: {fileID: 5833368332596947033}
   - component: {fileID: -6566778762782063644}
   - component: {fileID: -3485150807485089335}
+  - component: {fileID: 4464307420243832700}
   m_Layer: 5
   m_Name: Soldier_Archer
   m_TagString: UNIT
@@ -3723,7 +3724,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -3766,6 +3767,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4464307420243832700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247723142590701431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d2db17bd0dd1c4a9dd3f2afe0d62b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fightTilemap: {fileID: 0}
 --- !u!1 &1526576471810984055
 GameObject:
   m_ObjectHideFlags: 0

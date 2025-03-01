@@ -2379,6 +2379,7 @@ GameObject:
   - component: {fileID: 7985404674468849967}
   - component: {fileID: 6573096609800771996}
   - component: {fileID: -5578813435472324758}
+  - component: {fileID: 3608403584021675113}
   m_Layer: 5
   m_Name: LizardRaise03
   m_TagString: UNIT
@@ -5436,7 +5437,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -5479,6 +5480,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &3608403584021675113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5364296570191604959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d2db17bd0dd1c4a9dd3f2afe0d62b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fightTilemap: {fileID: 0}
 --- !u!1 &5387371424405902267
 GameObject:
   m_ObjectHideFlags: 0

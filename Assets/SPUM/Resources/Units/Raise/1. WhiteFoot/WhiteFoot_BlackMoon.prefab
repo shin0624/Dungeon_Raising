@@ -3987,6 +3987,7 @@ GameObject:
   - component: {fileID: 6590867589958883349}
   - component: {fileID: 3635004447899510717}
   - component: {fileID: 8582756144417785805}
+  - component: {fileID: -3085001754537974314}
   m_Layer: 5
   m_Name: WhiteFoot_BlackMoon
   m_TagString: UNIT
@@ -7084,7 +7085,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -7127,6 +7128,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-3085001754537974314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7162745923825899475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d2db17bd0dd1c4a9dd3f2afe0d62b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fightTilemap: {fileID: 0}
 --- !u!1 &7296809942929823632
 GameObject:
   m_ObjectHideFlags: 0
