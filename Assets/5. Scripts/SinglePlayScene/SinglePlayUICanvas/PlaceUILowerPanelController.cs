@@ -29,11 +29,19 @@ public class PlaceUILowerPanelController : MonoBehaviour
 
     private void OnHeroButtonClicked()//영웅 버튼 클릭 시
     {
+       if(soldierSlots.Count!=0)
+        {
+            ClearSlot(2);
+        }
         InitSlots(1);
     }
 
     private void OnSoldierButtonClicked()//병사 버튼 클릭 시
     {
+        if(heroSlots.Count!=0)
+        {
+            ClearSlot(1);
+        }
         InitSlots(2);
     }
 
