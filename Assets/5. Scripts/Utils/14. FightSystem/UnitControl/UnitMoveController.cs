@@ -104,9 +104,13 @@ public class UnitMoveController : MonoBehaviour
         {
             targetTag = "ENEMYUNIT";
         }
-        else//본 클래스의 gameObject가 적 유닛이면, 상대 태그는 UNIT.
+        else if(gameObject.tag == "ENEMYUNIT")//본 클래스의 gameObject가 적 유닛이면, 상대 태그는 UNIT.
         {
             targetTag = "UNIT";
+        }
+        else
+        {
+            targetTag = "Dungeon";
         }
         Debug.Log("FindTargetTag() called.");;
         return targetTag;
@@ -114,10 +118,19 @@ public class UnitMoveController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)// 본 클래스가 적용될 객체 간 컬라이더 충돌 시 전투 시작.
     {
-        if(collision.CompareTag(unitTag))
+        if(SceneManager.GetActiveScene().name == "DungeonScene")
         {
-            StopAllCoroutines();//이동 중지
-            Debug.Log("Fight !");
+            gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
         }
+        else
+        {
+            if(collision.CompareTag(unitTag))
+            {
+                StopAllCoroutines();//이동 중지
+                Debug.Log("Fight !");
+            }
+        }
+
+
     }
 }
