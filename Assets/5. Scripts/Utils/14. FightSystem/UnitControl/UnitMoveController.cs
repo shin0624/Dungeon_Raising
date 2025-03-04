@@ -18,6 +18,7 @@ public class UnitMoveController : MonoBehaviour
     private float moveSpeed = 2.0f;//각 유닛의 스피드. 영웅 / 캐릭터 / 병사 마다 __Information에 설정된 __Speed가 존재하므로, 이를 가져온다.
     private Transform targetUnit;//가장 가까운 유닛
     private string unitTag = "";
+    private CombatAnimatorController combatAnimatorController;
     
     private void Start()
     {
@@ -25,6 +26,7 @@ public class UnitMoveController : MonoBehaviour
         {
             fightTilemap = GameObject.Find("Layer12_FightTilemap").GetComponent<Tilemap>();
         }
+        combatAnimatorController ??= gameObject.GetComponent<CombatAnimatorController>();//각 유닛의 상태 변화 메서드가 선언된 클래스.
        
         unitTag = FindTargetTag();//상대 유닛의 태그를 설정.     
     }
@@ -42,9 +44,11 @@ public class UnitMoveController : MonoBehaviour
             if(targetUnit!=null)
             {
                 yield return StartCoroutine(MoveTowardTarget(targetUnit.position));//그 유닛을 목표 지점으로 하여 이동.
+                combatAnimatorController.SetState("isMoving");//상태 변경 : MOVE
             }
             yield return new WaitForSeconds(0.5f);//이동 간격 조절.
         }
+        
     }
 
     private IEnumerator MoveTowardTarget(Vector3 targetPositon)//유닛을 목표 지점으로 이동시키는 메서드.
@@ -127,6 +131,7 @@ public class UnitMoveController : MonoBehaviour
             if(collision.CompareTag(unitTag))
             {
                 StopAllCoroutines();//이동 중지
+                combatAnimatorController.SetState("isAttacking");
                 Debug.Log("Fight !");
             }
         }
