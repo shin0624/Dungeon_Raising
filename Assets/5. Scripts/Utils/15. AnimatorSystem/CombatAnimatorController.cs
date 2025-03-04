@@ -54,51 +54,51 @@ public class CombatAnimatorController : MonoBehaviour
         }
     }
 
-    private void UnitAttack()
+    private IEnumerator UnitAttack()
     {
-
+        if(animParameter != "isAttacking")
+        {
+            Debug.Log("Parameter Error");
+        }
+        anim.SetBool("isAttacking", true);
+        yield return new WaitForEndOfFrame();
+        anim.SetBool("isAttacking", false);
     }
+
+    
 
     public void SetState(string param)//상태 변경 메서드. 호출 시 이전 상태 파라미터를 false로 초기화하여 파라미터 중복을 제거 후 해당 상태 파라미터를 true로 한다.
     {
-        if(animParameter ==param)
+        if(animParameter ==param)return;// 현재 상태에서 동일 상태가 호출될 시 함수 종료.
+        
+        //"현재 상태" <-> "다음 상태" 간 자연스러운 전환을 위해, 상태 변경 시 현재 상태를 유지할 필요가 없을 경우(ex : MOVE상태에서 ATTACK상태로 변경 시 MOVE상태를 유지할 필요가 없음.) false로 설정.
+        
+        if(param == "isMoving")
         {
-            return;// 현재 상태에서 동일 상태가 호출될 시 함수 종료.
+            anim.SetBool("isAttacking", false);
+            anim.SetBool("useSkill01", false);
+            anim.SetBool("useSkill02", false);
+            anim.SetBool("useSkill03", false);
         }
-        anim.SetBool("isAttacking", false);
-        anim.SetBool("isMoving", false);
-        anim.SetBool("useSkill01", false);
-        anim.SetBool("useSkill02", false);
-        anim.SetBool("useSkill03", false);
-        anim.SetBool("isDead", false);
-
-        switch(param)
+        else if(param == "isAttacking")//공격과 이동은 동시에 이루어지지 않음. 
         {
-            case "isMoving" :
-                anim.SetBool("isMoving", true);
-                break;
-
-            case "isAttacking" :
-                anim.SetBool("isAttacking", true);
-                break;
-
-            case "useSkill01" :
-                anim.SetBool("useSkill01", true);
-                break;
-
-            case "useSkill02" :
-                anim.SetBool("useSkill02", true);
-                break;
-
-            case "useSkill03" :
-                anim.SetBool("useSkill03", true);
-                break;
-
-            case "isDead" :
-                anim.SetBool("isDead", true);
-                break;
+            anim.SetBool("isMoving", false);
+            StartCoroutine(UnitAttack());
+        }
+        else if(param.StartsWith("useSkill"))//useSkill로 시작되는 파라미터로 제어되는 상태는 일반 공격과 동시에 이루어지지 않음.
+        {
+            anim.SetBool("isAttacking", false);
+        }
+        else if(param == "isDead")
+        {
+            anim.SetBool("isAttacking", false);
+            anim.SetBool("isMoving", false);
+            anim.SetBool("useSkill01", false);
+            anim.SetBool("useSkill02", false);
+            anim.SetBool("useSkill03", false);
         }
         
+        anim.SetBool(param, true);
         animParameter = param;
         Debug.Log($"now State = {param + ", " + animParameter}");
         
