@@ -13,8 +13,10 @@ public class EnemyInformation : ScriptableObject
 
     [Header("Enemy Status")]
     public int enemyLevel;
-    public float enemyHP;
-    public float enemyDP;//¹æ¾î·Â
-    public float enemyAttackSpeed;
-    public float enemyMoveSpeed;
+    public float attackPoint;
+    public float healthPoint;
+    public float defensePoint;
+    public float attackSpeed;
+    public float moveSpeed;
+    public float skillDamage;
 }

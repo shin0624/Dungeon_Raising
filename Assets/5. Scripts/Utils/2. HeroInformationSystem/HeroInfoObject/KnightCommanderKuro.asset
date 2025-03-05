@@ -13,12 +13,15 @@ MonoBehaviour:
   m_Name: KnightCommanderKuro
   m_EditorClassIdentifier: 
   heroName: "\uAE30\uC0AC\uB2E8\uC7A5 \uCFE0\uB85C"
-  heroType: 0
+  heroType: 3
   heroRaise: 0
   heroPrefab: {fileID: 1065793465691049309, guid: ceb59f5280d9e014dae875b252ffa550, type: 3}
   heroHalfImage: {fileID: 21300000, guid: cbf9e2b63895a434aab346095cd4495a, type: 3}
   heroLevel: 1
   heroGrade: 0
-  attackPoint: 100
-  deffensePoint: 80
-  HealthPoint: 1000
+  attackPoint: 5
+  defensePoint: 120
+  healthPoint: 450
+  attackSpeed: 4.5
+  moveSpeed: 3
+  skillDamage: 1

@@ -17,10 +17,12 @@ public class SoldierInformation : ScriptableObject
 
     [Header("Soldier Status")]
     public int soldierLevel;
-    public int soldierHP;
-    public int soldierDP;//¹æ¾î·Â
-    public int soldierAttackSpeed;
-    public int soldierMoveSpeed;
+    public float attackPoint;
+    public float defensePoint;
+    public float healthPoint;
+    public float attackSpeed;
+    public float moveSpeed;
+    public float skillDamage;
 
 
 }

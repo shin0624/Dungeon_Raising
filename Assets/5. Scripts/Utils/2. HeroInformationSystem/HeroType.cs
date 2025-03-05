@@ -6,5 +6,6 @@ public enum HeroType
 {
     CloseType,
     LongRangeType,
-    MagicType
+    MagicType,
+    DefenseType
 }

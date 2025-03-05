@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossPrefab: {fileID: 2416403907065069602, guid: 4b76368888a69064d9320fd15f3f82d3, type: 3}
   bossType: 1
-  bossLevel: 10
-  bossHP: 120
-  bossDP: 100
-  bossAttackSpeed: 10
-  bossMoveSpeed: 10
+  bossLevel: 1
+  attackPoint: 45
+  healthPoint: 80
+  defensePoint: 30
+  attackSpeed: 6
+  moveSpeed: 6
+  skillDamage: 2

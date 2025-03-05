@@ -8,11 +8,11 @@ public class PlayerStatusDefine
     {
         public int [] pvpReport { get; set; }
         public int pvpRanking { get; set; }
-        public int playerPower { get; set; }
-        public int attackPower { get; set; }
-        public int healthPoint { get; set; }
-        public int defensePoint { get; set; }
-        public int speedPoint { get; set; }
-        public int manaPoint { get; set; }
+        public float attackPoint { get; set; }
+        public float defensePoint { get; set; }
+        public float healthPoint { get; set; }
+        public float attackSpeed { get; set; }
+        public float moveSpeed { get; set; }
+        public float skillDamage { get; set; }
     };
 }

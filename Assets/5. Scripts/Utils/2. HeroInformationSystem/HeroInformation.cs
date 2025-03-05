@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,10 +18,13 @@ public class HeroInformation : ScriptableObject
     
     
     [Header("Hero Status")]
-    public int heroLevel;
-    public ItemGrade heroGrade;
-    public float attackPoint;
-    public float deffensePoint;
-    public float HealthPoint;
+    public int heroLevel;//레벨
+    public Grade heroGrade;//등급
+    public float attackPoint;//공격력
+    public float defensePoint;//방어력
+    public float healthPoint;//체력
+    public float attackSpeed;//공격속도
+    public float moveSpeed;//이동속도
+    public float skillDamage;//스킬 피해량
 
 }

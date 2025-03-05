@@ -13,8 +13,10 @@ public class BossInformation : ScriptableObject
 
     [Header("Boss Status")]
     public int bossLevel;
-    public float bossHP;
-    public float bossDP;//¹æ¾î·Â
-    public float bossAttackSpeed;
-    public float bossMoveSpeed;
+    public float attackPoint;
+    public float healthPoint;
+    public float defensePoint;
+    public float attackSpeed;
+    public float moveSpeed;
+    public float skillDamage;
 }

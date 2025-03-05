@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 360778281630029430, guid: edd5bde25d2402745b5ee098c7c3ea20, type: 3}
   enemyType: 1
-  enemyLevel: 5
-  enemyHP: 50
-  enemyDP: 50
-  enemyAttackSpeed: 8
-  enemyMoveSpeed: 8
+  enemyLevel: 1
+  attackPoint: 20
+  healthPoint: 200
+  defensePoint: 150
+  attackSpeed: 1.5
+  moveSpeed: 1.5
+  skillDamage: 2
