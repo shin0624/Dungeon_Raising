@@ -19,7 +19,9 @@ public class UnitMoveController : MonoBehaviour
     private Transform targetUnit;//가장 가까운 유닛
     private string unitTag = "";
     private CombatAnimatorController combatAnimatorController;
+    private Coroutine moveCoroutine;//전투 시작 시 이동 코루틴을 멈추어야 하므로, 이동 코루틴을 변수에 저장.
     
+    private int HP = 100;// 자동 전투 구현을 위해 임시로 hp 설정. 추후 유닛 정보 참조.
     private void Start()
     {
         if(fightTilemap==null)
@@ -43,8 +45,8 @@ public class UnitMoveController : MonoBehaviour
             targetUnit = FindClosestUnit();//가장 가까운 유닛을 찾고 할당.
             if(targetUnit!=null)
             {
-                yield return StartCoroutine(MoveTowardTarget(targetUnit.position));//그 유닛을 목표 지점으로 하여 이동.
-                combatAnimatorController.SetState("isMoving");//상태 변경 : MOVE
+                if(moveCoroutine !=null) StopCoroutine(moveCoroutine);//기존 이동 중지.
+                moveCoroutine = StartCoroutine(MoveTowardTarget(targetUnit.position));//그 유닛을 목표 지점으로 하여 이동.
             }
             yield return new WaitForSeconds(0.5f);//이동 간격 조절.
         }
@@ -53,6 +55,9 @@ public class UnitMoveController : MonoBehaviour
 
     private IEnumerator MoveTowardTarget(Vector3 targetPositon)//유닛을 목표 지점으로 이동시키는 메서드.
     {
+        combatAnimatorController.StartMove();//이동 애니메이션 시작.
+        if(targetUnit==null) yield break;//목표 유닛이 제거되면 이동을 종료하고 FindTargetAndMove()루프로 돌아가 다시 타겟을 찾아야 한다.
+
         Vector3Int currentTile = fightTilemap.WorldToCell(transform.position);//현재 타일맵 좌표를 셀 좌표로 변환.
         Vector3Int targetTIle = fightTilemap.WorldToCell(targetPositon);//목표지점 타일맵 좌표를 셀 좌표로 변환.
 
@@ -62,9 +67,12 @@ public class UnitMoveController : MonoBehaviour
         Debug.Log("MoveTowardTarget() called.");
         while(Vector2.Distance(transform.position, worldMovePosition) > 0.1f)// 현재 포지션 <-> 다음 이동할 타일 중심좌표 간 거리가 일치할 때 까지
         {
+            if (targetUnit == null) yield break; 
             transform.position = Vector2.MoveTowards(transform.position, worldMovePosition, moveSpeed * Time.deltaTime);//유닛 이동 속도로 이동하며 포지션 값을 변경한다.
             yield return null;//한 프레임 대기
         }
+
+        combatAnimatorController.StopMove();//이동 종료 후 애니메이션 종료.
         
     }   
 
@@ -131,7 +139,8 @@ public class UnitMoveController : MonoBehaviour
             if(collision.CompareTag(unitTag))
             {
                 StopAllCoroutines();//이동 중지
-                combatAnimatorController.SetState("isAttacking");
+                combatAnimatorController.StartAttack();
+                combatAnimatorController.StartDecreaseHP(collision, HP);
                 Debug.Log("Fight !");
             }
         }

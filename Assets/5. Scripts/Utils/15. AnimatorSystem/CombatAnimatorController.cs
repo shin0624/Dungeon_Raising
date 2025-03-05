@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,99 +9,166 @@ using UnityEngine;
 public class CombatAnimatorController : MonoBehaviour
 {
     //전투 시 유닛들의 공통 애니메이션을 관리하는 클래스. 
-    //Animator의 FSM을 구성하는 애니메이션 클립은 [ IDLE - MOVE - ATTACK - SKILL01 - SKILL02 - SKILL 03 - DEATH ]이며
-    //각 트랜지션의 파라미터는 bool타입 [ isMoving, isAttacking, useSkill01, useSkill02, useSkill03, isDead ]이다.
-    //DEATH상태는 최우선으로 처리되어야 함. AnyState에서 isDead ==true가되면 즉시 전환되도록.
+    // 애니메이션 클립의 파라미터는 bool, Trigger 두 타입이 존재.
+    // Bool : 1_Move, 5_Debuff, isDeath, 7_Skill01, 8_Skill02, 9_Skill03
+    // Trigger : 2_Attack, 3_Damage, 4_Death, 6_Ohter
+    //isDeath상태는 최우선으로 처리되어야 함. AnyState에서 isDeath ==true가되면 즉시 전환되도록.
     //방치형 전투 구현 - SinglePlayScene 진입 시 IDLE -> UnitMoveController.cs의 FindTargetAndMove()가 호출될 때 Move
-    // -> 기본 공격 ATTACK -> 이후 SKILL01 ~ 03을 차례로 사용. -> 스킬에는 쿨타임이 존재. 쿨타임 미경과 시 기본 공격 또는 쿨타임이 경과된 스킬 먼저 사용
+    // -> 기본 공격 2_Attack -> 이후 7_Skill01 ~ 03을 차례로 사용. -> 스킬에는 쿨타임이 존재. 쿨타임 미경과 시 기본 공격 또는 쿨타임이 경과된 스킬 먼저 사용
 
     private Animator anim;
     private Transform unit;
-    private string animParameter = "";
+    private Rigidbody2D rb2D;
     
-    void Start()
+    private List<string> boolParamList = new List<string> {"1_Move", "5_Defbuff", "7_Skill01", "8_Skill02", "9_Skill03", "isDeath" };//bool타입 파라미터 리스트
+    private List<String> triggerParamList = new List<string> {"2_Attack", "3_Damage", "4_Death", "6_Other"};//Trigger타입 파라미터 리스트.
+    private string animParameter = "";
+
+   
+    private void Start()
     {
         unit ??= gameObject.transform;//본 클래스를 보유한 프리팹 인스턴스를 unit으로 설정.
-        anim ??= unit.GetComponent<Animator>();
+        anim ??= unit.GetComponentInChildren<Animator>();// 프리팹 오브젝트의 자식 객체인 UnitRoot의 Animator를 참조해야 함. 
+        rb2D ??= unit.GetComponent<Rigidbody2D>();
+    }
+    
+    public void StopMove()//이동 종료 후 애니메이션을 중지하는 메서드.
+    {
+        anim.SetBool("1_Move", false);
+        animParameter = "";
     }
 
-    private void Update()
+
+    public void StartMove()
     {
-        
+        StartCoroutine(UnitMove());
+        Debug.Log("유닛 이동 시작");
     }
 
-
-    private void FSM()
+    public void StartAttack()
     {
-        switch(animParameter)
+        StartCoroutine(UnitAttack());
+        Debug.Log("유닛 공격");
+    }
+
+    public void StartDecreaseHP(Collider2D collision, int hp)
+    {
+        StartCoroutine(SustainableAutoAttack(collision, hp));
+    }
+
+    private IEnumerator SustainableAutoAttack(Collider2D collision, int hp )//자동 전투 진행 및 유닛 사망처리를 위한 임시 메서드.
+    {
+        while(hp > 0)
         {
-            case "isMoving" :
-                break;
-
-            case "isAttacking" :
-                break;
-
-            case "useSkill01" :
-                break;
-
-            case "useSkill02" :
-                break;
-
-            case "useSkill03" :
-                break;
-
-            case "isDead" :
-                break;
+            yield return new WaitForSeconds(1.0f);
+            hp-=10;
+            Debug.Log($"{gameObject.name} HP : {hp}");
+            if(hp <=0)
+            {
+                Destroy(gameObject);
+                yield break;
+            }
         }
     }
 
-    private IEnumerator UnitAttack()
+    private IEnumerator UnitAttack()//공격 코루틴 메서드.
     {
-        if(animParameter != "isAttacking")
-        {
-            Debug.Log("Parameter Error");
-        }
-        anim.SetBool("isAttacking", true);
-        yield return new WaitForEndOfFrame();
-        anim.SetBool("isAttacking", false);
+        SetState("2_Attack");
+        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);//애니메이션 길이를 기반으로 대기.
+    }
+
+    private IEnumerator UnitMove()//이동 코루틴 메서드.
+    {
+        SetState("1_Move");
+        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
     }
 
     
 
     public void SetState(string param)//상태 변경 메서드. 호출 시 이전 상태 파라미터를 false로 초기화하여 파라미터 중복을 제거 후 해당 상태 파라미터를 true로 한다.
     {
-        if(animParameter ==param)return;// 현재 상태에서 동일 상태가 호출될 시 함수 종료.
+        if(animParameter == param) return;//동일 상태 호출 시 함수 종료.
         
-        //"현재 상태" <-> "다음 상태" 간 자연스러운 전환을 위해, 상태 변경 시 현재 상태를 유지할 필요가 없을 경우(ex : MOVE상태에서 ATTACK상태로 변경 시 MOVE상태를 유지할 필요가 없음.) false로 설정.
-        
-        if(param == "isMoving")
+        if(boolParamList.Contains(param))
         {
-            anim.SetBool("isAttacking", false);
-            anim.SetBool("useSkill01", false);
-            anim.SetBool("useSkill02", false);
-            anim.SetBool("useSkill03", false);
+            TestSetBool(param);
         }
-        else if(param == "isAttacking")//공격과 이동은 동시에 이루어지지 않음. 
+        else if(triggerParamList.Contains(param))
         {
-            anim.SetBool("isMoving", false);
-            StartCoroutine(UnitAttack());
+            TestSetTrigger(param);
         }
-        else if(param.StartsWith("useSkill"))//useSkill로 시작되는 파라미터로 제어되는 상태는 일반 공격과 동시에 이루어지지 않음.
+        else
         {
-            anim.SetBool("isAttacking", false);
+            Debug.LogWarning($"{param} is Invalid Parameter.");
+            return;
         }
-        else if(param == "isDead")
-        {
-            anim.SetBool("isAttacking", false);
-            anim.SetBool("isMoving", false);
-            anim.SetBool("useSkill01", false);
-            anim.SetBool("useSkill02", false);
-            anim.SetBool("useSkill03", false);
-        }
-        
-        anim.SetBool(param, true);
-        animParameter = param;
-        Debug.Log($"now State = {param + ", " + animParameter}");
-        
     }
+
+    private void TestSetBool(string param)
+    {
+        switch(param)
+        {
+            case "1_Move" :
+            anim.SetBool("7_Skill01", false);
+            anim.SetBool("8_Skill02", false);
+            anim.SetBool("9_Skill03", false);
+
+            anim.SetBool("1_Move", true);
+            break;
+
+            case "7_Skill01" : 
+            anim.SetBool("1_Move", false);
+            anim.SetBool("8_Skill02", false);
+            anim.SetBool("9_Skill03", false);
+
+            anim.SetBool("7_Skill01", true);
+            break;
+
+            case "8_Skill02" : 
+            anim.SetBool("1_Move", false);
+            anim.SetBool("7_Skill01", false);
+            anim.SetBool("9_Skill03", false);
+
+            anim.SetBool("8_Skill02", true);
+            break;
+
+            case "9_Skill03" : 
+            anim.SetBool("1_Move", false);
+            anim.SetBool("7_Skill01", false);
+            anim.SetBool("8_Skill02", false);
+
+            anim.SetBool("9_Skill03", true);
+            break;
+        }
+        animParameter = param;
+    }
+
+    private void TestSetTrigger(string param)
+    {
+        switch(param)
+        {
+            case "2_Attack" :
+            anim.ResetTrigger("3_Damage");
+            anim.ResetTrigger("4_Death");
+
+            anim.SetTrigger("2_Attack");
+            break;
+
+            case "3_Damage" :
+            anim.ResetTrigger("2_Attack");
+            anim.ResetTrigger("4_Death");
+
+            anim.SetTrigger("3_Damage");
+            break;
+
+            case "4_Death" :
+            anim.ResetTrigger("2_Attack");
+            anim.ResetTrigger("3_Damage");
+            anim.SetTrigger("4_Death");
+            break;
+        }
+
+        animParameter = param;
+    }
+
 }
