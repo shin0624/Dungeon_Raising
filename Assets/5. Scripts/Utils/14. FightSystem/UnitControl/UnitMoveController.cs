@@ -20,6 +20,7 @@ public class UnitMoveController : MonoBehaviour
     private string unitTag = "";
     private CombatAnimatorController combatAnimatorController;
     private Coroutine moveCoroutine;//전투 시작 시 이동 코루틴을 멈추어야 하므로, 이동 코루틴을 변수에 저장.
+
     
     private int HP = 100;// 자동 전투 구현을 위해 임시로 hp 설정. 추후 유닛 정보 참조.
     private void Start()
@@ -37,12 +38,14 @@ public class UnitMoveController : MonoBehaviour
         StartCoroutine(FindTargetAndMove());
     }
 
+    
     private IEnumerator FindTargetAndMove()//가장 가까운 적의 트랜스폼을 목표 지점으로 설정하고 MoveTowardTarget()을 실행하는 메서드.
     {
         Debug.Log("FindTargetAndMove() called.");
         while(true)
         {
             targetUnit = FindClosestUnit();//가장 가까운 유닛을 찾고 할당.
+
             if(targetUnit!=null)
             {
                 if(moveCoroutine !=null) StopCoroutine(moveCoroutine);//기존 이동 중지.
@@ -139,12 +142,14 @@ public class UnitMoveController : MonoBehaviour
             if(collision.CompareTag(unitTag))
             {
                 StopAllCoroutines();//이동 중지
+
                 combatAnimatorController.StartAttack();
-                combatAnimatorController.StartDecreaseHP(collision, HP);
+                combatAnimatorController.TestAutoAttack(collision, targetUnit.gameObject) ;
+                
                 Debug.Log("Fight !");
             }
         }
-
-
     }
+
+    
 }

@@ -3,8 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CombatAnimatorController : MonoBehaviour
 {
@@ -24,12 +24,19 @@ public class CombatAnimatorController : MonoBehaviour
     private List<String> triggerParamList = new List<string> {"2_Attack", "3_Damage", "4_Death", "6_Other"};//Trigger타입 파라미터 리스트.
     private string animParameter = "";
 
-   
+    private UnitDataSender unitDataSender;
+    private EnemyDataManager targetEnemyDataManager;
+    private BossDataManager targetBossDataManager;
+    private HeroDataManager targetHeroDataManager;
+
     private void Start()
     {
+
         unit ??= gameObject.transform;//본 클래스를 보유한 프리팹 인스턴스를 unit으로 설정.
         anim ??= unit.GetComponentInChildren<Animator>();// 프리팹 오브젝트의 자식 객체인 UnitRoot의 Animator를 참조해야 함. 
         rb2D ??= unit.GetComponent<Rigidbody2D>();
+        unitDataSender ??= GameObject.Find("SinglePlaySceneManager").GetComponent<UnitDataSender>();
+        
     }
     
     public void StopMove()//이동 종료 후 애니메이션을 중지하는 메서드.
@@ -51,17 +58,79 @@ public class CombatAnimatorController : MonoBehaviour
         Debug.Log("유닛 공격");
     }
 
-    public void StartDecreaseHP(Collider2D collision, int hp)
+    public void TestAutoAttack(Collider2D collision, GameObject targetUnit)
     {
-        StartCoroutine(SustainableAutoAttack(collision, hp));
+        StartCoroutine(TestSustainableAutoAttack(collision, targetUnit));
     }
 
-    private IEnumerator SustainableAutoAttack(Collider2D collision, int hp )//자동 전투 진행 및 유닛 사망처리를 위한 임시 메서드.
+    private IEnumerator TestSustainableAutoAttack(Collider2D collision, GameObject targetUnit)
+    {
+        SetTargetUnitType(collision, targetUnit);
+        yield return new WaitForSeconds(1.0f);
+    }
+
+    private float GetThisUnitDamage(float otherDefensePoint)
+    {
+        float damage = 0.0f;
+        float thisAttackPoint = 0.0f;
+        float thisAttackSpeed = 0.0f;
+        EnemyDataManager enemyData = gameObject.GetComponent<EnemyDataManager>();
+        BossDataManager bossData = gameObject.GetComponent<BossDataManager>();
+        HeroDataManager heroData = gameObject.GetComponent<HeroDataManager>();
+        if (enemyData != null)
+        {
+            thisAttackPoint = enemyData.enemyInformation.attackPoint;
+            thisAttackSpeed = enemyData.enemyInformation.attackSpeed;
+        }
+        else if (bossData != null)
+        {
+            thisAttackPoint = bossData.bossInformation.attackPoint;
+            thisAttackSpeed = bossData.bossInformation.attackSpeed;
+        }
+        else
+        {
+            thisAttackPoint = 20.0f;
+            thisAttackSpeed = 1.5f;
+        }
+        damage = unitDataSender.CalculateDamage(thisAttackPoint, thisAttackSpeed, otherDefensePoint);
+        return damage;
+    }
+
+    private void SetTargetUnitType(Collider2D collision, GameObject targetUnit)
+    {   
+        float testDamage = 0.0f;
+        if(targetUnit.GetComponent<EnemyDataManager>())
+        {
+             targetEnemyDataManager = unitDataSender.GetUnitType<EnemyDataManager>(targetUnit.gameObject);
+             testDamage = GetThisUnitDamage(targetEnemyDataManager.enemyInformation.defensePoint);
+             SustainableAutoAttack(collision, targetEnemyDataManager.enemyInformation.healthPoint, testDamage);
+        }
+        else if(targetUnit.GetComponent<BossDataManager>())
+        {
+            targetBossDataManager = unitDataSender.GetUnitType<BossDataManager>(targetUnit.gameObject);
+            testDamage = GetThisUnitDamage(targetBossDataManager.bossInformation.defensePoint);
+            SustainableAutoAttack(collision, targetBossDataManager.bossInformation.healthPoint, testDamage);
+        }
+        else if(targetUnit.GetComponent<HeroDataManager>())
+        {
+            targetHeroDataManager = unitDataSender.GetUnitType<HeroDataManager>(targetUnit.gameObject);
+            testDamage = GetThisUnitDamage(targetHeroDataManager.heroInformation.defensePoint);
+            SustainableAutoAttack(collision, targetHeroDataManager.heroInformation.healthPoint, testDamage);
+        }
+        else//플레이어 유닛인 경우 : 아직 플레이어 데이터 매니저가 준비되지 않음.
+        {
+            testDamage = GetThisUnitDamage(150.0f);
+            SustainableAutoAttack(collision, 100.0f, testDamage);
+            Debug.Log("Target Unit is PlayerCharacter.");
+        }
+    }
+
+    private IEnumerator SustainableAutoAttack(Collider2D collision, float hp, float damage)//자동 전투 진행 및 유닛 사망처리를 위한 임시 메서드.
     {
         while(hp > 0)
         {
             yield return new WaitForSeconds(1.0f);
-            hp-=10;
+            hp-=damage;
             Debug.Log($"{gameObject.name} HP : {hp}");
             if(hp <=0)
             {
