@@ -34,6 +34,7 @@ public class CombatAnimatorController : MonoBehaviour
         if(SceneManager.GetActiveScene().name=="SinglePlayScene")
         {
              unitDataSender ??= GameObject.Find("SinglePlaySceneManager").GetComponent<UnitDataSender>();
+             Debug.Log("unitDataSender is here!");
         }
         else
         {
@@ -73,11 +74,19 @@ public class CombatAnimatorController : MonoBehaviour
 
     public void TestAutoAttack(Collider2D collision, GameObject targetUnit)
     {
+        if(targetUnit==null)
+        {
+            Debug.LogError("TestAutoAttack : targetUnit이 null입니다.");
+        }
         StartCoroutine(TestSustainableAutoAttack(collision, targetUnit));
     }
 
     private IEnumerator TestSustainableAutoAttack(Collider2D collision, GameObject targetUnit)
     {
+        if(targetUnit==null)
+        {
+            Debug.LogError("TestSustainableAutoAttack : targetUnit이 null입니다.");
+        }
         SetTargetUnitType(collision, targetUnit);
         yield return new WaitForSeconds(1.0f);
     }
@@ -100,38 +109,69 @@ public class CombatAnimatorController : MonoBehaviour
             thisAttackPoint = bossData.bossInformation.attackPoint;
             thisAttackSpeed = bossData.bossInformation.attackSpeed;
         }
+        else if(heroData!=null)
+        {
+            thisAttackPoint = heroData.heroInformation.attackPoint;
+            thisAttackSpeed = heroData.heroInformation.attackSpeed;
+        }
         else
         {
             thisAttackPoint = 20.0f;
             thisAttackSpeed = 1.5f;
         }
-        damage = unitDataSender.CalculateDamage(thisAttackPoint, thisAttackSpeed, otherDefensePoint);
+        Debug.Log($"thisAttackPoint = {thisAttackPoint}, thisAttackSpeed = {thisAttackSpeed}, otherdefensePoint = {otherDefensePoint}");
+        
+        try{
+            damage = unitDataSender.CalculateDamage(thisAttackPoint, thisAttackSpeed, otherDefensePoint);         
+            Debug.Log($"damage = {damage}");
+        }
+        catch(Exception e){      
+            Debug.LogError($"CalculateDamage에서 오류 발생: {e.Message}\n{e.StackTrace}");
+        }
+        
+        
         return damage;
     }
 
     private void SetTargetUnitType(Collider2D collision, GameObject targetUnit)
     {   
+        if (targetUnit == null)
+        {
+            Debug.LogError("SetTargetUnitType: targetUnit이 NULL입니다!");
+            return;
+        }
+
         float testDamage = 0.0f;
-        if(targetUnit.GetComponent<EnemyDataManager>())
+        EnemyDataManager enemyData = targetUnit.GetComponent<EnemyDataManager>();
+        BossDataManager bossData = targetUnit.GetComponent<BossDataManager>();
+        HeroDataManager heroData = targetUnit.GetComponent<HeroDataManager>();
+        
+        if(enemyData!=null)
         {
-             targetEnemyDataManager = unitDataSender.GetUnitType<EnemyDataManager>(targetUnit.gameObject);
-             testDamage = GetThisUnitDamage(targetEnemyDataManager.enemyInformation.defensePoint);
-             SustainableAutoAttack(collision, targetEnemyDataManager.enemyInformation.healthPoint, testDamage);
+             //targetEnemyDataManager = unitDataSender.GetUnitType<EnemyDataManager>(targetUnit.gameObject);
+             //targetEnemyDataManager = enemyData;
+             testDamage = GetThisUnitDamage(enemyData.enemyInformation.defensePoint);
+             SustainableAutoAttack(collision, enemyData.enemyInformation.healthPoint, testDamage);
+
         }
-        else if(targetUnit.GetComponent<BossDataManager>())
+        else if(bossData!=null)
         {
-            targetBossDataManager = unitDataSender.GetUnitType<BossDataManager>(targetUnit.gameObject);
-            testDamage = GetThisUnitDamage(targetBossDataManager.bossInformation.defensePoint);
-            SustainableAutoAttack(collision, targetBossDataManager.bossInformation.healthPoint, testDamage);
+            //targetBossDataManager = unitDataSender.GetUnitType<BossDataManager>(targetUnit.gameObject);
+            //targetBossDataManager = bossData;
+            testDamage = GetThisUnitDamage(bossData.bossInformation.defensePoint);
+            SustainableAutoAttack(collision, bossData.bossInformation.healthPoint, testDamage);
+
         }
-        else if(targetUnit.GetComponent<HeroDataManager>())
+        else if(heroData!=null)
         {
-            targetHeroDataManager = unitDataSender.GetUnitType<HeroDataManager>(targetUnit.gameObject);
-            testDamage = GetThisUnitDamage(targetHeroDataManager.heroInformation.defensePoint);
-            SustainableAutoAttack(collision, targetHeroDataManager.heroInformation.healthPoint, testDamage);
+            //targetHeroDataManager = unitDataSender.GetUnitType<HeroDataManager>(targetUnit.gameObject);
+            //targetHeroDataManager = heroData;
+            testDamage = GetThisUnitDamage(heroData.heroInformation.defensePoint);
+            SustainableAutoAttack(collision, heroData.heroInformation.healthPoint, testDamage);
+
         }
         else//플레이어 유닛인 경우 : 아직 플레이어 데이터 매니저가 준비되지 않음.
-        {
+        {   
             testDamage = GetThisUnitDamage(150.0f);
             SustainableAutoAttack(collision, 100.0f, testDamage);
             Debug.Log("Target Unit is PlayerCharacter.");

@@ -17,6 +17,7 @@ public class UnitMoveController : MonoBehaviour
     private Tilemap fightTilemap;//전투가 실행될 타일맵.
     private float moveSpeed = 2.0f;//각 유닛의 스피드. 영웅 / 캐릭터 / 병사 마다 __Information에 설정된 __Speed가 존재하므로, 이를 가져온다.
     private Transform targetUnit;//가장 가까운 유닛
+    private GameObject targetUnitParent;
     private string unitTag = "";
     private CombatAnimatorController combatAnimatorController;
     private Coroutine moveCoroutine;//전투 시작 시 이동 코루틴을 멈추어야 하므로, 이동 코루틴을 변수에 저장.
@@ -41,7 +42,7 @@ public class UnitMoveController : MonoBehaviour
     {
         Debug.Log("FindTargetAndMove() called.");
         while(true)
-        {
+        {   
             targetUnit = FindClosestUnit();//가장 가까운 유닛을 찾고 할당.
 
             if(targetUnit!=null)
@@ -140,7 +141,7 @@ public class UnitMoveController : MonoBehaviour
             if(collision.CompareTag(unitTag))
             {
                 StopAllCoroutines();//이동 중지
-
+                Debug.Log("gameObject = " + gameObject.name + ", " +  targetUnit.name + "을 대상으로 공격 시작");
                 combatAnimatorController.StartAttack();
                 combatAnimatorController.TestAutoAttack(collision, targetUnit.gameObject) ;
                 Debug.Log($"TargetUnit : {targetUnit.name}");
