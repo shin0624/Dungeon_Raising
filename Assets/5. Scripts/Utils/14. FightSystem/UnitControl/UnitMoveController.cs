@@ -21,8 +21,6 @@ public class UnitMoveController : MonoBehaviour
     private CombatAnimatorController combatAnimatorController;
     private Coroutine moveCoroutine;//전투 시작 시 이동 코루틴을 멈추어야 하므로, 이동 코루틴을 변수에 저장.
 
-    
-    private int HP = 100;// 자동 전투 구현을 위해 임시로 hp 설정. 추후 유닛 정보 참조.
     private void Start()
     {
         if(fightTilemap==null)
@@ -145,8 +143,7 @@ public class UnitMoveController : MonoBehaviour
 
                 combatAnimatorController.StartAttack();
                 combatAnimatorController.TestAutoAttack(collision, targetUnit.gameObject) ;
-                
-                Debug.Log("Fight !");
+                Debug.Log($"TargetUnit : {targetUnit.name}");
             }
         }
     }

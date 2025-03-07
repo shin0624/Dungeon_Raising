@@ -29,13 +29,26 @@ public class CombatAnimatorController : MonoBehaviour
     private BossDataManager targetBossDataManager;
     private HeroDataManager targetHeroDataManager;
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if(SceneManager.GetActiveScene().name=="SinglePlayScene")
+        {
+             unitDataSender ??= GameObject.Find("SinglePlaySceneManager").GetComponent<UnitDataSender>();
+        }
+        else
+        {
+            unitDataSender = null;
+            Debug.Log("pass");
+        }
+    }
+
     private void Start()
     {
-
+        SceneManager.sceneLoaded+=OnSceneLoaded;
         unit ??= gameObject.transform;//본 클래스를 보유한 프리팹 인스턴스를 unit으로 설정.
         anim ??= unit.GetComponentInChildren<Animator>();// 프리팹 오브젝트의 자식 객체인 UnitRoot의 Animator를 참조해야 함. 
         rb2D ??= unit.GetComponent<Rigidbody2D>();
-        unitDataSender ??= GameObject.Find("SinglePlaySceneManager").GetComponent<UnitDataSender>();
+       //unitDataSender ??= GameObject.Find("SinglePlaySceneManager").GetComponent<UnitDataSender>();
         
     }
     
