@@ -1713,14 +1713,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8176089219841042487}
+  - component: {fileID: -7908406588907595325}
   - component: {fileID: -7476013642859728213}
-  - component: {fileID: 810404280874964414}
-  - component: {fileID: -1853844805029065593}
   - component: {fileID: 7947940308008065164}
   - component: {fileID: -3771493766291809048}
+  - component: {fileID: 810404280874964414}
+  - component: {fileID: -1853844805029065593}
   m_Layer: 5
   m_Name: WhiteFoot_SoldierKali
-  m_TagString: UNIT
+  m_TagString: Unit_Hero
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1745,6 +1746,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -170}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &-7908406588907595325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3340844659391732356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d8583bf05e078245be3ac10b5573c39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-7476013642859728213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1757,6 +1770,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a7ad70c7d82fe14896227af1048c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7947940308008065164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3340844659391732356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d2db17bd0dd1c4a9dd3f2afe0d62b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-3771493766291809048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3340844659391732356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d406f0c7c808daf409814059280e1579, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heroInformation: {fileID: 0}
 --- !u!61 &810404280874964414
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1830,31 +1868,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7947940308008065164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3340844659391732356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26d2db17bd0dd1c4a9dd3f2afe0d62b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-3771493766291809048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3340844659391732356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d406f0c7c808daf409814059280e1579, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heroInformation: {fileID: 0}
 --- !u!1 &3753339643241135548
 GameObject:
   m_ObjectHideFlags: 0

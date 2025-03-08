@@ -194,14 +194,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8508186890685871054}
+  - component: {fileID: -6930086036646888682}
   - component: {fileID: -4537909325667056363}
+  - component: {fileID: -9058414390666608109}
   - component: {fileID: 3761087875588309215}
   - component: {fileID: 3883011255820455566}
   - component: {fileID: 4484562719891530331}
-  - component: {fileID: -9058414390666608109}
   m_Layer: 5
   m_Name: MaleKnight
-  m_TagString: UNIT
+  m_TagString: Unit_Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -226,6 +227,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -170}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &-6930086036646888682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271434283675347063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d8583bf05e078245be3ac10b5573c39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-4537909325667056363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,6 +249,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a7ad70c7d82fe14896227af1048c66c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-9058414390666608109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271434283675347063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d2db17bd0dd1c4a9dd3f2afe0d62b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &3761087875588309215
@@ -3341,18 +3366,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-9058414390666608109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 271434283675347063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26d2db17bd0dd1c4a9dd3f2afe0d62b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &446822834517579019
 GameObject:
   m_ObjectHideFlags: 0

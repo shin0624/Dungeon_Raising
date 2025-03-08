@@ -41,8 +41,16 @@ public class PlaceUIController : MonoBehaviour
 
     private void StartUnitFight()
     {
-        GameObject[]playerUnits = GameObject.FindGameObjectsWithTag("UNIT");
-        GameObject[]enemyUnits = GameObject.FindGameObjectsWithTag("ENEMYUNIT");
+        List<GameObject>playerUnits = new List<GameObject>(GameObject.FindGameObjectsWithTag("Unit_Soldier"))
+        {
+            GameObject.FindGameObjectWithTag("Unit_Player"),
+            GameObject.FindGameObjectWithTag("Unit_Hero")
+        };
+
+        List<GameObject>enemyUnits = new List<GameObject>(GameObject.FindGameObjectsWithTag("Unit_Enemy"))
+        {
+            GameObject.FindGameObjectWithTag("Unit_Boss")
+        };
 
         foreach(GameObject unit in playerUnits)
         {
@@ -55,10 +63,10 @@ public class PlaceUIController : MonoBehaviour
 
         foreach(GameObject unit in enemyUnits)
         {
-            UnitMoveController unitMoveController = unit. GetComponent<UnitMoveController>();
-            if(unitMoveController!=null)
+            EnemyMoveController enemyMoveController = unit. GetComponent<EnemyMoveController>();
+            if(enemyMoveController!=null)
             {
-                unitMoveController.StartFight();
+                enemyMoveController.StartFight();
             }
         }
     }

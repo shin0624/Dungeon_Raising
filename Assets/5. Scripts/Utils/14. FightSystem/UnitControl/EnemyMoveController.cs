@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class UnitMoveController : MonoBehaviour
+
+public class EnemyMoveController : MonoBehaviour
 {
-    // UNIT, ENEMYUNIT 태그를 갖는 유닛에게 할당되는 클래스. 유닛들이 서로 상대를 찾고 타일맵을 따라 이동하는 기능을 구현한다.
-    /*
-        - 로직 : [유닛 탐색] -> [목표 방향 설정] -> [타일맵을 따라 이동] -> [공격] -> [HP가 먼저 0이 되는 유닛은 Destroy]
+    /*  전투 <-> 데이터 전달 <-> 데미지 계산 로직 재설계를 위한 UnitMoveController 분할 (플레이어블 캐릭터용 UnitMoveController | 에너미, 보스 용 EnemyMoveController)
+        태그 재설정 : 플레이어(Unit_Player), 영웅(Unit_Hero), 병사(Unit_Soldier), 에너미(Unit_Enemy), 보스(Unit_Boss)
+
+            유닛들이 서로 상대를 찾고 타일맵을 따라 이동하는 기능을 구현한다.
+    
+            [유닛 탐색] -> [목표 방향 설정] -> [타일맵을 따라 이동] -> [공격] -> [HP가 먼저 0이 되는 유닛은 Destroy]
             플레이어블 유닛이 적 유닛을 탐색 : 가장 가까운 적 유닛을 찾는 FindClosestUnit() 메서드.
             가장 가까운 적 유닛과 현재 플레이어블 유닛의 위치 차이를 구해서 방향 벡터 계산
             유닛이 한 타일씩 이동하도록 하는 MoveTowardTarget() 메서드.  이 때 이동 속도는 __Speed값.
@@ -25,7 +29,7 @@ public class UnitMoveController : MonoBehaviour
         {
             fightTilemap = GameObject.Find("Layer12_FightTilemap").GetComponent<Tilemap>();
         }
-        combatAnimatorController ??= gameObject.GetComponent<CombatAnimatorController>();//각 유닛의 상태 변화 메서드가 선언된 클래스.
+        combatAnimatorController ??= gameObject.GetComponent<CombatAnimatorController>();//각 유닛의 상태 변화 메서드가 선언된 클래스. 
     }
 
     public void StartFight()//게임 시작 시 호출.
@@ -86,12 +90,12 @@ public class UnitMoveController : MonoBehaviour
         }
 
         combatAnimatorController.StopMove();//이동 종료 후 애니메이션 종료.
-    }   
+    }     
 
-    public GameObject FindClosestUnit()//가장 가까운 유닛을 찾아 그 유닛을 리턴하는 메서드.
+    public GameObject FindClosestUnit()//가장 가까운 유닛을 찾아 그 유닛의 트랜스폼을 리턴하는 메서드.
     {
-        List<GameObject> units =  FindPlayableUnits();
-        GameObject closestUnit = null;//가장 가까운 유닛
+        List<GameObject> units = FindPlayableUnits();
+        GameObject closestUnit = null;//가장 가까운 유닛의 트랜스폼.
         float minDistance = Mathf.Infinity;//최소 거리는 양의 무한대 값으로. => 유닛 간의 거리 (2차원벡터값 Distance)가 양수가 되어야 최소 거리에 있는 유닛을 찾을 수 있기 때문.
         
         foreach(GameObject unit in units)
@@ -100,7 +104,7 @@ public class UnitMoveController : MonoBehaviour
             if(distance < minDistance)//양수 거리일 때
             {
                 minDistance = distance;//최소 거리 설정
-                closestUnit = unit;//가장 가까운 유닛의 트랜스폼 설정.
+                closestUnit = unit;//가장 가까운 유닛 설정.
             }
         }
         Debug.Log("FindClosestUnit() called.");
@@ -123,9 +127,10 @@ public class UnitMoveController : MonoBehaviour
 
     private List<GameObject> FindPlayableUnits()// 기존 FindClosestUnit에서는 GameObject배열에서 FindGameObjectsWithTag를 사용했기 때문에 하나의 태그밖에 찾지 못했지만, 유닛들을 담는 공간을 리스트로 변경 및 플레이어블 캐릭터를 찾는 방법을 메서드로 빼내고 널체크를 추가.
     {
-        List<GameObject> playableUnits = new List<GameObject>(GameObject.FindGameObjectsWithTag("Unit_Enemy"))
+        List<GameObject> playableUnits = new List<GameObject>(GameObject.FindGameObjectsWithTag("Unit_Soldier"))
         {
-            GameObject.FindGameObjectWithTag("Unit_Boss")
+            GameObject.FindGameObjectWithTag("Unit_Player"),
+            GameObject.FindGameObjectWithTag("Unit_Hero")
         };
         playableUnits.RemoveAll(unit => unit == null); // null 체크 추가
 

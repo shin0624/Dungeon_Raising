@@ -2,9 +2,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class CombatAnimatorController : MonoBehaviour
 {
@@ -24,33 +23,11 @@ public class CombatAnimatorController : MonoBehaviour
     private List<String> triggerParamList = new List<string> {"2_Attack", "3_Damage", "4_Death", "6_Other"};//Trigger타입 파라미터 리스트.
     private string animParameter = "";
 
-    private UnitDataSender unitDataSender;
-    private EnemyDataManager targetEnemyDataManager;
-    private BossDataManager targetBossDataManager;
-    private HeroDataManager targetHeroDataManager;
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if(SceneManager.GetActiveScene().name=="SinglePlayScene")
-        {
-             unitDataSender ??= GameObject.Find("SinglePlaySceneManager").GetComponent<UnitDataSender>();
-             Debug.Log("unitDataSender is here!");
-        }
-        else
-        {
-            unitDataSender = null;
-            Debug.Log("pass");
-        }
-    }
-
     private void Start()
     {
-        SceneManager.sceneLoaded+=OnSceneLoaded;
         unit ??= gameObject.transform;//본 클래스를 보유한 프리팹 인스턴스를 unit으로 설정.
         anim ??= unit.GetComponentInChildren<Animator>();// 프리팹 오브젝트의 자식 객체인 UnitRoot의 Animator를 참조해야 함. 
         rb2D ??= unit.GetComponent<Rigidbody2D>();
-       //unitDataSender ??= GameObject.Find("SinglePlaySceneManager").GetComponent<UnitDataSender>();
-        
     }
     
     public void StopMove()//이동 종료 후 애니메이션을 중지하는 메서드.
@@ -58,7 +35,6 @@ public class CombatAnimatorController : MonoBehaviour
         anim.SetBool("1_Move", false);
         animParameter = "";
     }
-
 
     public void StartMove()
     {
@@ -72,127 +48,6 @@ public class CombatAnimatorController : MonoBehaviour
         Debug.Log("유닛 공격");
     }
 
-    public void TestAutoAttack(Collider2D collision, GameObject targetUnit)
-    {
-        if(targetUnit==null)
-        {
-            Debug.LogError("TestAutoAttack : targetUnit이 null입니다.");
-        }
-        StartCoroutine(TestSustainableAutoAttack(collision, targetUnit));
-    }
-
-    private IEnumerator TestSustainableAutoAttack(Collider2D collision, GameObject targetUnit)
-    {
-        if(targetUnit==null)
-        {
-            Debug.LogError("TestSustainableAutoAttack : targetUnit이 null입니다.");
-        }
-        SetTargetUnitType(collision, targetUnit);
-        yield return new WaitForSeconds(1.0f);
-    }
-
-    private float GetThisUnitDamage(float otherDefensePoint)
-    {
-        float damage = 0.0f;
-        float thisAttackPoint = 0.0f;
-        float thisAttackSpeed = 0.0f;
-        EnemyDataManager enemyData = gameObject.GetComponent<EnemyDataManager>();
-        BossDataManager bossData = gameObject.GetComponent<BossDataManager>();
-        HeroDataManager heroData = gameObject.GetComponent<HeroDataManager>();
-        if (enemyData != null)
-        {
-            thisAttackPoint = enemyData.enemyInformation.attackPoint;
-            thisAttackSpeed = enemyData.enemyInformation.attackSpeed;
-        }
-        else if (bossData != null)
-        {
-            thisAttackPoint = bossData.bossInformation.attackPoint;
-            thisAttackSpeed = bossData.bossInformation.attackSpeed;
-        }
-        else if(heroData!=null)
-        {
-            thisAttackPoint = heroData.heroInformation.attackPoint;
-            thisAttackSpeed = heroData.heroInformation.attackSpeed;
-        }
-        else
-        {
-            thisAttackPoint = 20.0f;
-            thisAttackSpeed = 1.5f;
-        }
-        Debug.Log($"thisAttackPoint = {thisAttackPoint}, thisAttackSpeed = {thisAttackSpeed}, otherdefensePoint = {otherDefensePoint}");
-        
-        try{
-            damage = unitDataSender.CalculateDamage(thisAttackPoint, thisAttackSpeed, otherDefensePoint);         
-            Debug.Log($"damage = {damage}");
-        }
-        catch(Exception e){      
-            Debug.LogError($"CalculateDamage에서 오류 발생: {e.Message}\n{e.StackTrace}");
-        }
-        
-        
-        return damage;
-    }
-
-    private void SetTargetUnitType(Collider2D collision, GameObject targetUnit)
-    {   
-        if (targetUnit == null)
-        {
-            Debug.LogError("SetTargetUnitType: targetUnit이 NULL입니다!");
-            return;
-        }
-
-        float testDamage = 0.0f;
-        EnemyDataManager enemyData = targetUnit.GetComponent<EnemyDataManager>();
-        BossDataManager bossData = targetUnit.GetComponent<BossDataManager>();
-        HeroDataManager heroData = targetUnit.GetComponent<HeroDataManager>();
-        
-        if(enemyData!=null)
-        {
-             //targetEnemyDataManager = unitDataSender.GetUnitType<EnemyDataManager>(targetUnit.gameObject);
-             //targetEnemyDataManager = enemyData;
-             testDamage = GetThisUnitDamage(enemyData.enemyInformation.defensePoint);
-             SustainableAutoAttack(collision, enemyData.enemyInformation.healthPoint, testDamage);
-
-        }
-        else if(bossData!=null)
-        {
-            //targetBossDataManager = unitDataSender.GetUnitType<BossDataManager>(targetUnit.gameObject);
-            //targetBossDataManager = bossData;
-            testDamage = GetThisUnitDamage(bossData.bossInformation.defensePoint);
-            SustainableAutoAttack(collision, bossData.bossInformation.healthPoint, testDamage);
-
-        }
-        else if(heroData!=null)
-        {
-            //targetHeroDataManager = unitDataSender.GetUnitType<HeroDataManager>(targetUnit.gameObject);
-            //targetHeroDataManager = heroData;
-            testDamage = GetThisUnitDamage(heroData.heroInformation.defensePoint);
-            SustainableAutoAttack(collision, heroData.heroInformation.healthPoint, testDamage);
-
-        }
-        else//플레이어 유닛인 경우 : 아직 플레이어 데이터 매니저가 준비되지 않음.
-        {   
-            testDamage = GetThisUnitDamage(150.0f);
-            SustainableAutoAttack(collision, 100.0f, testDamage);
-            Debug.Log("Target Unit is PlayerCharacter.");
-        }
-    }
-
-    private IEnumerator SustainableAutoAttack(Collider2D collision, float hp, float damage)//자동 전투 진행 및 유닛 사망처리를 위한 임시 메서드.
-    {
-        while(hp > 0)
-        {
-            yield return new WaitForSeconds(1.0f);
-            hp-=damage;
-            Debug.Log($"{gameObject.name} HP : {hp}");
-            if(hp <=0)
-            {
-                Destroy(gameObject);
-                yield break;
-            }
-        }
-    }
-
     private IEnumerator UnitAttack()//공격 코루틴 메서드.
     {
         SetState("2_Attack");
@@ -204,8 +59,7 @@ public class CombatAnimatorController : MonoBehaviour
         SetState("1_Move");
         yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
     }
-
-    
+  
 
     public void SetState(string param)//상태 변경 메서드. 호출 시 이전 상태 파라미터를 false로 초기화하여 파라미터 중복을 제거 후 해당 상태 파라미터를 true로 한다.
     {

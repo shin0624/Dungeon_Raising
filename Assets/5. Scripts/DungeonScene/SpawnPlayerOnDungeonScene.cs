@@ -43,7 +43,7 @@ public class SpawnPlayerOnDungeonScene : MonoBehaviour
          newCharacter = Instantiate(playerPrefab, playerSpawnPoint);//플레이어 정보와 일치하는 플레이어 캐릭터 프리팹을 소환한다.
          newCharacter.transform.position = playerSpawnPoint.position;//플레이어 캐릭터의 위치를 스폰 포인트로 이동시킨다.
          newCharacter.AddComponent<PlayerMovementTemp>();//플레이어 캐릭터에 플레이어 이동 스크립트를 추가한다.
-         newCharacter.GetComponent<BoxCollider2D>().isTrigger = false;
+         newCharacter.GetComponent<BoxCollider2D>().isTrigger = true;
          newCharacter.GetComponent<UnitMoveController>().enabled = false;
          newCharacter.GetComponent<CombatAnimatorController>().enabled = false;
         

@@ -1336,7 +1336,6 @@ GameObject:
   - component: {fileID: 292618921}
   - component: {fileID: 292618922}
   - component: {fileID: 292618924}
-  - component: {fileID: 292618925}
   m_Layer: 0
   m_Name: SinglePlaySceneManager
   m_TagString: Untagged
@@ -1572,18 +1571,6 @@ MonoBehaviour:
   soliderButton: {fileID: 1146896204}
   slotPrefab: {fileID: 682616230906405825, guid: b88a611b39a181d4bbbac2ca71341bf7, type: 3}
   slotPivot: {fileID: 743476760}
---- !u!114 &292618925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 292618909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ca1784efc6d43248bc68d43a13c301f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &313842666
 GameObject:
   m_ObjectHideFlags: 0

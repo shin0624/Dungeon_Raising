@@ -31,7 +31,7 @@ public class DungeonEntranceTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if(other.gameObject.CompareTag("UNIT"))
+        if(other.gameObject.CompareTag("Unit_Player"))
         {
            if(popupCanvas != null && !popupCanvas.gameObject.activeSelf)
             {
