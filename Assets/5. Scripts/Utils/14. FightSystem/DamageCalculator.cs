@@ -14,9 +14,11 @@ public class DamageCalculater : MonoBehaviour
 
     private float attackPoint;
     private float attackSpeed;
+    private float healthPoint;
     private float otherDefensePoint;
     private float otherHealthPoint;
     private float damage;
+    private float currentHP;
     private GameObject closestUnit;
     private HeroDataManager heroDataManager;
     private SoldierDataManager soldierDataManager;
@@ -24,6 +26,7 @@ public class DamageCalculater : MonoBehaviour
     private BossDataManager bossDataManager;
     private UnitMoveController unitMoveController;
     private EnemyMoveController enemyMoveController;
+    private HealthBarController healthBarController;
 
     private void Awake()
     {   
@@ -31,6 +34,20 @@ public class DamageCalculater : MonoBehaviour
         {
             enabled = false;
             return;
+        }
+    }
+    private void Start()
+    {
+        healthBarController = GetComponentInChildren<HealthBarController>();
+    }
+
+    private void DecreaseHpBar()// HP Bar와 현재 gameObject의 healthPoint, damage를 연동하는 메서드.
+    {   
+        if(healthBarController!=null)
+        {
+            currentHP -=damage;
+            if(currentHP <=0) currentHP = 0;
+            healthBarController.SetHealthPoint(currentHP, healthPoint);
         }
     }
 
@@ -68,7 +85,7 @@ public class DamageCalculater : MonoBehaviour
             yield return new WaitForSeconds(attackSpeed);
 
             otherHealthPoint -= damage;  
-
+            DecreaseHpBar();
             if(otherHealthPoint <=0)
             {
                 Destroy(closestUnit);
@@ -78,10 +95,11 @@ public class DamageCalculater : MonoBehaviour
         }
     }
 
-    private void FindDamageValue()//gameObject의 태그에 따라 이 유닛의 공격력과 공격속도를 찾는다.
+    private void FindDamageValue()//gameObject의 태그에 따라 이 유닛의 공격력과 공격속도를 찾는다. + 체력도 찾는다.
     { 
         attackPoint = 10f;//null 오류 방지를 위해 기본값을 할당한다.
         attackSpeed = 1f;
+        healthPoint = 300.0f;
 
         switch(gameObject.tag)
         {
@@ -96,6 +114,7 @@ public class DamageCalculater : MonoBehaviour
                 {
                     attackPoint = heroDataManager.heroInformation.attackPoint;
                     attackSpeed = heroDataManager.heroInformation.attackSpeed;
+                    healthPoint = heroDataManager.heroInformation.healthPoint;
                 }
                 break;
 
@@ -105,6 +124,7 @@ public class DamageCalculater : MonoBehaviour
                 {
                     attackPoint = soldierDataManager.soldierInformation.attackPoint;
                     attackSpeed = soldierDataManager.soldierInformation.attackSpeed;
+                    healthPoint = soldierDataManager.soldierInformation.healthPoint;
                 }
                 break;
 
@@ -114,6 +134,7 @@ public class DamageCalculater : MonoBehaviour
                 {
                     attackPoint = enemyDataManager.enemyInformation.attackPoint;
                     attackSpeed = enemyDataManager.enemyInformation.attackSpeed;
+                    healthPoint = enemyDataManager.enemyInformation.healthPoint;
                 }
                 break;
 
@@ -123,6 +144,7 @@ public class DamageCalculater : MonoBehaviour
                 {
                     attackPoint = bossDataManager.bossInformation.attackPoint;
                     attackSpeed = bossDataManager.bossInformation.attackSpeed;
+                    healthPoint = bossDataManager.bossInformation.healthPoint;
                 }
                 break;
 
@@ -130,6 +152,7 @@ public class DamageCalculater : MonoBehaviour
                 Debug.LogError($"[ERROR] Unknown unit tag: {gameObject.tag}");
                 break;
         }
+        currentHP = healthPoint;
     }
 
     private void FindOtherUnitValue()//unitMoveController.cs에서 찾은 가장 가까운 유닛을 "상대 유닛"으로 지정하고, 그의 체력, 방어력을 가져온다. __DataManager가 FindDamageValue()에서 결정되어야 하므로, FindDamageValue()가 실행된 후에 실행한다.

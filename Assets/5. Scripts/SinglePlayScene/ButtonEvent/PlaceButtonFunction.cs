@@ -29,7 +29,7 @@ public class PlaceButtonFunction : MonoBehaviour
        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);//마우스 클릭 위치를 월드 좌표로 변환
        RaycastHit2D hit = Physics2D.Raycast(ray.origin, Vector2.zero);//마우스 클릭 위치에 레이캐스트를 쏴서 클릭한 위치에 존재하는 오브젝트를 찾는다.
 
-       if(hit.collider!=null && hit.collider.CompareTag("UNIT"))
+       if(hit.collider!=null && hit.collider.CompareTag("Unit_Player") || hit.collider.CompareTag("Unit_Hero") || hit.collider.CompareTag("Unit_Soldier"))
        {
             selectedUnit = hit.collider.transform;//선택된 유닛을 저장한다.
 

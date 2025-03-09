@@ -45,8 +45,8 @@ public class SpawnPlayerOnDungeonScene : MonoBehaviour
          newCharacter.AddComponent<PlayerMovementTemp>();//플레이어 캐릭터에 플레이어 이동 스크립트를 추가한다.
          newCharacter.GetComponent<BoxCollider2D>().isTrigger = true;
          newCharacter.GetComponent<UnitMoveController>().enabled = false;
-         newCharacter.GetComponent<CombatAnimatorController>().enabled = false;
-        
+         newCharacter.GetComponent<CombatAnimatorController>().enabled = false;       
+         
          newCharacter.transform.localScale = new Vector3(0.2f, 0.2f, 1.0f);//플레이어 캐릭터의 크기를 조정한다.
     }
 
