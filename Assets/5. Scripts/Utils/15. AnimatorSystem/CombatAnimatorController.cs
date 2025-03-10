@@ -52,6 +52,12 @@ public class CombatAnimatorController : MonoBehaviour
     {
         SetState("2_Attack");
         yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);//애니메이션 길이를 기반으로 대기.
+        SetState("7_Skill01");
+        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);//애니메이션 길이를 기반으로 대기.
+        SetState("8_Skill02");
+        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);//애니메이션 길이를 기반으로 대기.
+        SetState("9_Skill03");
+        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);//애니메이션 길이를 기반으로 대기.
     }
 
     private IEnumerator UnitMove()//이동 코루틴 메서드.

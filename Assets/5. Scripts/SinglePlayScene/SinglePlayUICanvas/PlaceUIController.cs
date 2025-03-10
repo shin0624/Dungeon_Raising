@@ -18,6 +18,7 @@ public class PlaceUIController : MonoBehaviour
         {
             Time.timeScale = 1;
         }
+
         isComleteButtonClicked = false;
         singleplayUICanvas.gameObject.SetActive(true);//Canvas는 기본적으로 비활성화되어 있으므로 활성화. 
         placeCompleteButton.onClick.AddListener(OnPlaceCompeteButtonClicked);//배치 완료 버튼에 이벤트 추가.
@@ -34,8 +35,8 @@ public class PlaceUIController : MonoBehaviour
         {
             isComleteButtonClicked = true;//플래그를 true로 바꾸어 다른 스크립트에서 게임 시작 여부를 판단할 수 있게 한다.
             Debug.Log("Game Start!");
-
             StartUnitFight();
+            
         }
     }
 

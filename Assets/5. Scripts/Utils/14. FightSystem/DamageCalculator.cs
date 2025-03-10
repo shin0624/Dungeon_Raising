@@ -86,12 +86,13 @@ public class DamageCalculater : MonoBehaviour
 
             otherHealthPoint -= damage;  
             DecreaseHpBar();
+            Debug.Log($"[ATTACK] {gameObject.name} ¡æ {closestUnit.name}, HP Left: {otherHealthPoint}");
             if(otherHealthPoint <=0)
             {
                 Destroy(closestUnit);
                 yield break;
             }
-            Debug.Log($"[ATTACK] {gameObject.name} ¡æ {closestUnit.name}, HP Left: {otherHealthPoint}");
+            
         }
     }
 

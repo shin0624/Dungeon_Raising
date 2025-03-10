@@ -21,7 +21,6 @@ public class PlaceButtonFunction : MonoBehaviour
         if(Input.GetMouseButtonDown(0)) OnMouseDown();
         if(isDragging) OnMouseDrag(); 
         if(Input.GetMouseButtonUp(0)) OnMouseUp();
-
     }
 
     public void OnMouseDown()// 마우스(터치) 클릭 시 시작 위치를 저장한다.
@@ -29,19 +28,22 @@ public class PlaceButtonFunction : MonoBehaviour
        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);//마우스 클릭 위치를 월드 좌표로 변환
        RaycastHit2D hit = Physics2D.Raycast(ray.origin, Vector2.zero);//마우스 클릭 위치에 레이캐스트를 쏴서 클릭한 위치에 존재하는 오브젝트를 찾는다.
 
-       if(hit.collider!=null && hit.collider.CompareTag("Unit_Player") || hit.collider.CompareTag("Unit_Hero") || hit.collider.CompareTag("Unit_Soldier"))
+       if(hit.collider!=null )
        {
-            selectedUnit = hit.collider.transform;//선택된 유닛을 저장한다.
+            if(hit.collider.CompareTag("Unit_Player") || hit.collider.CompareTag("Unit_Hero") || hit.collider.CompareTag("Unit_Soldier"))   
+            {
+                selectedUnit = hit.collider.transform;//선택된 유닛을 저장한다.
 
-             outlineShader.DrawTilemapOutlines();//드래그 중일 때 타일맵 테두리 색상을 변경한다.
+                outlineShader.DrawTilemapOutlines();//드래그 중일 때 타일맵 테두리 색상을 변경한다.
 
-            currentLayer = GetCurrentLayer(selectedUnit.position);//선택된 유닛이 존재하는 타일맵 레이어를 찾는다. --> 드래그 시작 시 현재 유닛이 속한 레이어를 정확히 찾아야 함. 이전에는 GetCurrentLayer()에서 startTile을 이용했으나, startTile이 설정되기 전에 호출되어 null 오류가 발생하였음. 이를 해결하기 위해 selectedUnit.position을 이용해 currentLayer를 즉시 설정.
-            if(currentLayer == null) 
-                return;//레이어를 찾지 못하면 종료.
+                currentLayer = GetCurrentLayer(selectedUnit.position);//선택된 유닛이 존재하는 타일맵 레이어를 찾는다. --> 드래그 시작 시 현재 유닛이 속한 레이어를 정확히 찾아야 함. 이전에는 GetCurrentLayer()에서 startTile을 이용했으나, startTile이 설정되기 전에 호출되어 null 오류가 발생하였음. 이를 해결하기 위해 selectedUnit.position을 이용해 currentLayer를 즉시 설정.
+                if(currentLayer == null) 
+                    return;//레이어를 찾지 못하면 종료.
 
-            startTile = currentLayer.WorldToCell(selectedUnit.position);//월드 좌표를 타일 좌표로 변환하여 시작 위치로 저장
-            offset = selectedUnit.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            isDragging = true;
+                startTile = currentLayer.WorldToCell(selectedUnit.position);//월드 좌표를 타일 좌표로 변환하여 시작 위치로 저장
+                offset = selectedUnit.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                isDragging = true;
+            }
        }
        else
        {
