@@ -20,8 +20,9 @@ public class CombatAnimatorController : MonoBehaviour
     private Rigidbody2D rb2D;
     
     private List<string> boolParamList = new List<string> {"1_Move", "5_Defbuff", "7_Skill01", "8_Skill02", "9_Skill03", "isDeath" };//bool타입 파라미터 리스트
-    private List<String> triggerParamList = new List<string> {"2_Attack", "3_Damage", "4_Death", "6_Other"};//Trigger타입 파라미터 리스트.
+    private List<string> triggerParamList = new List<string> {"2_Attack", "3_Damage", "4_Death", "6_Other"};//Trigger타입 파라미터 리스트.
     private string animParameter = "";
+    
 
     private void Start()
     {

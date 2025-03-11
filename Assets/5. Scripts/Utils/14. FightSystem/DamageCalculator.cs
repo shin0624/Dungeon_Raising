@@ -11,7 +11,6 @@ public class DamageCalculater : MonoBehaviour
     //__DataManager.cs를 참조하여, 체력, 레벨 등 스테이터스 증감 메서드 등을 작성한다.
     //작성할 메서드 : 체력, 레벨, 스킬 피해량, 공격력, 방어력, 공격 속도, 이동 속도 등 스테이터스 변화가 필요한 기능
     // 1. 공격 기능 : gameObject의 공격력, 공격 속도 <-> 상대 유닛의 체력, 방어력 필요
-
     private float attackPoint;
     private float attackSpeed;
     private float healthPoint;
@@ -27,6 +26,7 @@ public class DamageCalculater : MonoBehaviour
     private UnitMoveController unitMoveController;
     private EnemyMoveController enemyMoveController;
     private HealthBarController healthBarController;
+    
 
     private void Awake()
     {   
@@ -73,6 +73,8 @@ public class DamageCalculater : MonoBehaviour
         FindOtherUnitValue();
         yield return new WaitForSeconds(0.001f);
 
+        //Debug.Log($"[ATTACK] {gameObject.name} → {closestUnit.name}, HP Left: {otherHealthPoint}");
+
         if (closestUnit == null)//만약 closestUnit이 null일 경우 코루틴 종료.
         {
             Debug.LogWarning("No target unit found!");
@@ -86,7 +88,7 @@ public class DamageCalculater : MonoBehaviour
 
             otherHealthPoint -= damage;  
             DecreaseHpBar();
-            Debug.Log($"[ATTACK] {gameObject.name} → {closestUnit.name}, HP Left: {otherHealthPoint}");
+            
             if(otherHealthPoint <=0)
             {
                 Destroy(closestUnit);
@@ -159,6 +161,7 @@ public class DamageCalculater : MonoBehaviour
     private void FindOtherUnitValue()//unitMoveController.cs에서 찾은 가장 가까운 유닛을 "상대 유닛"으로 지정하고, 그의 체력, 방어력을 가져온다. __DataManager가 FindDamageValue()에서 결정되어야 하므로, FindDamageValue()가 실행된 후에 실행한다.
     {
         closestUnit = FindClosestUnit();
+        
         if (closestUnit == null)//가장 가까운 유닛에 null이 반환되었을 경우 메서드를 종료한다.
         {
             Debug.LogWarning("No enemy found nearby!");

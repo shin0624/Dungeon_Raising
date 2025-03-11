@@ -75,7 +75,7 @@ public class EnemyMoveController : MonoBehaviour
         Vector3Int nextMove = GetNextMove(currentTile, targetTIle);//두 타일 좌표 간 거리를 바탕으로 다음 이동할 타일을 결정.
         Vector3 worldMovePosition = fightTilemap.GetCellCenterWorld(nextMove);// 다음 이동할 타일의 Vector3Int형 좌표값을 타일 중심 위치 월드 좌표로 변환.
 
-        Debug.Log("MoveTowardTarget() called.");
+        //Debug.Log("MoveTowardTarget() called.");
 
         while(Vector2.Distance(transform.position, worldMovePosition) > 0.4f)// 현재 포지션 <-> 다음 이동할 타일 중심좌표 간 거리가 일치할 때 까지
         {
@@ -108,13 +108,13 @@ public class EnemyMoveController : MonoBehaviour
                 closestUnit = unit;//가장 가까운 유닛 설정.
             }
         }
-        Debug.Log("FindClosestUnit() called.");
+        //Debug.Log("FindClosestUnit() called.");
         return closestUnit;//가장 가까운 유닛을 리턴.   
     }
 
     private Vector3Int GetNextMove(Vector3Int current, Vector3Int target)//현재 타일에서 다음 이동할 타일을 결정하는 메서드.
     {
-        Debug.Log("GetNextMove() called.");
+        //Debug.Log("GetNextMove() called.");
         Vector3Int direction = target - current;//타겟 타일 좌표값 - 현재 타일 좌표값 => 두 타일 간 거리 차로 방향 벡터를 구한다.
         if(Mathf.Abs(direction.x) > Mathf.Abs(direction.y))//방향벡터의 x값이 y값 이상일 경우, 현재 위치에서 x방향으로 이동한다.
         {

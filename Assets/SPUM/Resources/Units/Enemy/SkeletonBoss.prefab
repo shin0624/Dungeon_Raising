@@ -1655,6 +1655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a7ad70c7d82fe14896227af1048c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleSystem: {fileID: 6294508013172393186, guid: 043176b6a68be2b43b073aaaa4782c7d, type: 3}
 --- !u!114 &665412633317853193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4982,7 +4983,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3167399222649557083, guid: 922ab69d44a9aea4b8493f9758af9000, type: 3}
       propertyPath: m_SortingLayer
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3823619517633240729, guid: 922ab69d44a9aea4b8493f9758af9000, type: 3}
       propertyPath: target
@@ -4990,7 +4991,7 @@ PrefabInstance:
       objectReference: {fileID: 7670309432987770086}
     - target: {fileID: 4808172101985813392, guid: 922ab69d44a9aea4b8493f9758af9000, type: 3}
       propertyPath: m_SortingLayer
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7613675040892433893, guid: 922ab69d44a9aea4b8493f9758af9000, type: 3}
       propertyPath: m_LocalPosition.x

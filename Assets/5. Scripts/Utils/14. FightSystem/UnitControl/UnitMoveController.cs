@@ -36,7 +36,7 @@ public class UnitMoveController : MonoBehaviour
     
     private IEnumerator FindTargetAndMove()//가장 가까운 적의 트랜스폼을 목표 지점으로 설정하고 MoveTowardTarget()을 실행하는 메서드.
     {
-        Debug.Log("FindTargetAndMove() called.");
+       // Debug.Log("FindTargetAndMove() called.");
         while(true)
         {   
             //targetUnit = FindClosestUnit().transform;//가장 가까운 유닛을 찾고 할당.
@@ -71,7 +71,7 @@ public class UnitMoveController : MonoBehaviour
         Vector3Int nextMove = GetNextMove(currentTile, targetTIle);//두 타일 좌표 간 거리를 바탕으로 다음 이동할 타일을 결정.
         Vector3 worldMovePosition = fightTilemap.GetCellCenterWorld(nextMove);// 다음 이동할 타일의 Vector3Int형 좌표값을 타일 중심 위치 월드 좌표로 변환.
 
-        Debug.Log("MoveTowardTarget() called.");
+       // Debug.Log("MoveTowardTarget() called.");
 
         while(Vector2.Distance(transform.position, worldMovePosition) > 0.4f)// 현재 포지션 <-> 다음 이동할 타일 중심좌표 간 거리가 일치할 때 까지
         {
@@ -105,7 +105,7 @@ public class UnitMoveController : MonoBehaviour
                 closestUnit = unit;//가장 가까운 유닛의 트랜스폼 설정.
             }
         }
-        Debug.Log("FindClosestUnit() called.");
+        //Debug.Log("FindClosestUnit() called.");
         return closestUnit;//가장 가까운 유닛을 리턴.   
     }
 
