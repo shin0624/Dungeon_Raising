@@ -21,6 +21,7 @@ TagManager:
   - Unit_Soldier
   - Unit_Enemy
   - Unit_Boss
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -58,15 +59,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: DungeonLayer01
+  - name: TilemapLayer
     uniqueID: 1293209243
     locked: 0
-  - name: DungeonLayer02
+  - name: ColliderLayer
     uniqueID: 838066353
     locked: 0
-  - name: Player
+  - name: UnitLayer
     uniqueID: 943882347
     locked: 0
-  - name: UI
+  - name: UILayer
     uniqueID: 760477583
     locked: 0

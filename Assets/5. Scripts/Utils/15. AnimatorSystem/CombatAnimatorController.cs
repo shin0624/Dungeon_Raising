@@ -7,12 +7,12 @@ using UnityEngine;
 
 public class CombatAnimatorController : MonoBehaviour
 {
-    //전투 시 유닛들의 공통 애니메이션을 관리하는 클래스. 
+    // 전투 시 유닛들의 공통 애니메이션을 관리하는 클래스. 
     // 애니메이션 클립의 파라미터는 bool, Trigger 두 타입이 존재.
     // Bool : 1_Move, 5_Debuff, isDeath, 7_Skill01, 8_Skill02, 9_Skill03
     // Trigger : 2_Attack, 3_Damage, 4_Death, 6_Ohter
-    //isDeath상태는 최우선으로 처리되어야 함. AnyState에서 isDeath ==true가되면 즉시 전환되도록.
-    //방치형 전투 구현 - SinglePlayScene 진입 시 IDLE -> UnitMoveController.cs의 FindTargetAndMove()가 호출될 때 Move
+    // isDeath상태는 최우선으로 처리되어야 함. AnyState에서 isDeath ==true가되면 즉시 전환되도록.
+    // 방치형 전투 구현 - SinglePlayScene 진입 시 IDLE -> UnitMoveController.cs의 FindTargetAndMove()가 호출될 때 Move
     // -> 기본 공격 2_Attack -> 이후 7_Skill01 ~ 03을 차례로 사용. -> 스킬에는 쿨타임이 존재. 쿨타임 미경과 시 기본 공격 또는 쿨타임이 경과된 스킬 먼저 사용
 
     private Animator anim;
