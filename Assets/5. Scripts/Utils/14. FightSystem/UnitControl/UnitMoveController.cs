@@ -86,7 +86,7 @@ public class UnitMoveController : MonoBehaviour
         }
 
         combatAnimatorController.StopMove();//이동 종료 후 애니메이션 종료.
-        combatAnimatorController.StartAttack();
+        combatAnimatorController.StartAutoBattle();
         
     }   
 

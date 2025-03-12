@@ -90,7 +90,7 @@ public class EnemyMoveController : MonoBehaviour
         }
 
         combatAnimatorController.StopMove();//이동 종료 후 애니메이션 종료.
-        combatAnimatorController.StartAttack();
+        combatAnimatorController.StartAutoBattle();
     }     
 
     public GameObject FindClosestUnit()//가장 가까운 유닛을 찾아 그 유닛의 트랜스폼을 리턴하는 메서드.

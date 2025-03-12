@@ -104,9 +104,7 @@ public class MoveTest : MonoBehaviour
                     break;//한 번에 하나의 스킬만 사용 가능하도록 함.
                 }
             }
-
-
-
+            
             for(int i=0; i < remainingCooltime.Length; i++)//스킬 쿨타임 감소 로직 
             {
                 if(remainingCooltime[i] > 0)
