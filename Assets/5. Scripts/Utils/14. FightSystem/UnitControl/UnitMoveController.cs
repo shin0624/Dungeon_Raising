@@ -25,7 +25,7 @@ public class UnitMoveController : MonoBehaviour
         {
             fightTilemap = GameObject.Find("Layer12_FightTilemap").GetComponent<Tilemap>();
         }
-        combatAnimatorController ??= gameObject.GetComponent<CombatAnimatorController>();//각 유닛의 상태 변화 메서드가 선언된 클래스.
+         combatAnimatorController ??= gameObject.GetComponentInChildren<CombatAnimatorController>();//각 유닛의 상태 변화 메서드가 선언된 클래스. CombatAnimatorController를 GameObject의 자식인UnitRoot로 이동시켰으므로 GetComponentInChindren으로 탐색.
     }
 
     public void StartFight()//게임 시작 시 호출.
@@ -70,10 +70,10 @@ public class UnitMoveController : MonoBehaviour
 
         Vector3Int nextMove = GetNextMove(currentTile, targetTIle);//두 타일 좌표 간 거리를 바탕으로 다음 이동할 타일을 결정.
         Vector3 worldMovePosition = fightTilemap.GetCellCenterWorld(nextMove);// 다음 이동할 타일의 Vector3Int형 좌표값을 타일 중심 위치 월드 좌표로 변환.
-
+        
        // Debug.Log("MoveTowardTarget() called.");
 
-        while(Vector2.Distance(transform.position, worldMovePosition) > 0.4f)// 현재 포지션 <-> 다음 이동할 타일 중심좌표 간 거리가 일치할 때 까지
+        while(Vector2.Distance(transform.position, worldMovePosition) > 0.6f)// 현재 포지션 <-> 다음 이동할 타일 중심좌표 간 거리가 일치할 때 까지
         {
             if (targetUnit == null)//목표 유닛이 사라지면 이동 중지 후 다시 목표 유닛을 탐색한다.
             {
@@ -81,7 +81,10 @@ public class UnitMoveController : MonoBehaviour
                 moveCoroutine = StartCoroutine(FindTargetAndMove());
                 yield break; 
             } 
-            transform.position = Vector2.MoveTowards(transform.position, worldMovePosition, moveSpeed * Time.deltaTime);//유닛 이동 속도로 이동하며 포지션 값을 변경한다.
+            //transform.position = Vector2.MoveTowards(transform.position, worldMovePosition, moveSpeed * Time.deltaTime);//유닛 이동 속도로 이동하며 포지션 값을 변경한다.
+            transform.position = new Vector3(Vector2.MoveTowards(transform.position, worldMovePosition, moveSpeed * Time.deltaTime).x,
+                                             Vector2.MoveTowards(transform.position, worldMovePosition, moveSpeed * Time.deltaTime).y,
+                                             transform.position.z);//기존 z값을 유지하도록 하고, 2D 환경에서 이동에 관여되는 x,y값만 Vector2.MoveToward를 사용하여 업데이트한다.
             yield return null;//한 프레임 대기
         }
 
@@ -111,8 +114,9 @@ public class UnitMoveController : MonoBehaviour
 
     private Vector3Int GetNextMove(Vector3Int current, Vector3Int target)//현재 타일에서 다음 이동할 타일을 결정하는 메서드.
     {
-        Debug.Log("GetNextMove() called.");
+        //Debug.Log("GetNextMove() called.");
         Vector3Int direction = target - current;//타겟 타일 좌표값 - 현재 타일 좌표값 => 두 타일 간 거리 차로 방향 벡터를 구한다.
+        
         if(Mathf.Abs(direction.x) > Mathf.Abs(direction.y))//방향벡터의 x값이 y값 이상일 경우, 현재 위치에서 x방향으로 이동한다.
         {
             return current + new Vector3Int(Mathf.Clamp(direction.x, -1, 1), 0, 0);//방향벡터 x값을 최소 -1 ~ 최대 1로 제한한다. 한 번의 이동은 최대 1타일 씩 가능해야 하기 때문.

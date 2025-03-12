@@ -29,10 +29,10 @@ public class CombatAnimatorController : MonoBehaviour
 
     
 
-    private void Start()
+    private void Start()//본 클래스를 부모 오브젝트에서 UnitRoot로 이동.
     {
-        unit ??= gameObject.transform;//본 클래스를 보유한 프리팹 인스턴스를 unit으로 설정.
-        anim ??= unit.GetComponentInChildren<Animator>();// 프리팹 오브젝트의 자식 객체인 UnitRoot의 Animator를 참조해야 함. 
+        unit ??= transform.parent.transform;//본 클래스를 보유한 프리팹 인스턴스를 unit으로 설정.
+        anim ??= gameObject.GetComponent<Animator>();// 프리팹 오브젝트의 자식 객체인 UnitRoot의 Animator를 참조해야 함. 
         rb2D ??= unit.GetComponent<Rigidbody2D>();
 
         SkillParticleInit();
@@ -40,15 +40,7 @@ public class CombatAnimatorController : MonoBehaviour
     }
     
     private void SkillParticleInit()//초기 파티클 오브젝트 비활성화.
-    {
-        if(skillParticles==null)
-        {
-            for(int i=0; i< skillParticles.Length; i++)
-            {
-                skillParticles[i] = GameObject.Find("ParticleParent").transform.GetChild(i).gameObject;
-            }
-        }
-
+    {   
         foreach(GameObject skill in skillParticles)
         {
             if(skill) skill.SetActive(false);
@@ -73,7 +65,7 @@ public class CombatAnimatorController : MonoBehaviour
     public void StartMove()
     {
         StartCoroutine(UnitMove());
-        Debug.Log("유닛 이동 시작");
+        //Debug.Log("유닛 이동 시작");
     }
 
     public void StartAutoBattle()//게임 시작 시 호출.
@@ -81,7 +73,12 @@ public class CombatAnimatorController : MonoBehaviour
         StartCoroutine(AutoBattleLoop());
     }
 
-    public IEnumerator SetSkillParticleTiming(int skillIndex)//공격, 스킬 등 각 애니메이션 클립에서 공격 타이밍에 맞추어 파티클이 나타나도록 하는 메서드. 애니메이션 클립에서 적절한 프레임에 이벤트를 추가하고, UnitRoot의 Signal Receiver에서 이벤트를 설정한다.
+    public void SetSkillParticle(int skillIndex)//인스펙터의 Signal Receiver에서 할당할 메서드.
+    {
+        StartCoroutine(SetSkillParticleTiming(skillIndex));
+    }
+
+    private IEnumerator SetSkillParticleTiming(int skillIndex)//공격, 스킬 등 각 애니메이션 클립에서 공격 타이밍에 맞추어 파티클이 나타나도록 하는 메서드. 애니메이션 클립에서 적절한 프레임에 이벤트를 추가하고, UnitRoot의 Signal Receiver에서 이벤트를 설정한다.
     {
         if(skillParticles[skillIndex] != null && !skillParticles[skillIndex].activeSelf)//스킬 파티클이 존재하고 비활성화 상태일 때 호출.
         {
@@ -146,7 +143,7 @@ public class CombatAnimatorController : MonoBehaviour
                     remainingCooltime[i] -= 1.0f;
                 }
             }
-            Debug.Log($"{skillUsed}");
+            //Debug.Log($"{skillUsed}");
             yield return new WaitForSeconds(1.0f);//1초마다 반복.
         }
     }
@@ -174,11 +171,11 @@ public class CombatAnimatorController : MonoBehaviour
     private void TestSetBool(string param)
     {
         anim.SetBool("1_Move", false);
-        anim.SetBool("5_Debuff", false);
+        //anim.SetBool("5_Debuff", false);
         anim.SetBool("7_Skill01", false);
         anim.SetBool("8_Skill02", false);
         anim.SetBool("9_Skill03", false);
-        anim.SetBool("isDeath", false);
+        //anim.SetBool("isDeath", false);
 
         anim.SetBool(param, true);
     }
@@ -186,9 +183,9 @@ public class CombatAnimatorController : MonoBehaviour
     private void TestSetTrigger(string param)
     {
        anim.ResetTrigger("2_Attack");
-       anim.ResetTrigger("3_Damage");
-       anim.ResetTrigger("4_Death");
-       anim.ResetTrigger("6_Ohter");
+       //anim.ResetTrigger("3_Damage");
+       //anim.ResetTrigger("4_Death");
+       //anim.ResetTrigger("6_Ohter");
 
        anim.SetTrigger(param);
     }

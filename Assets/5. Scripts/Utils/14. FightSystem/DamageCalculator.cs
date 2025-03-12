@@ -56,7 +56,7 @@ public class DamageCalculater : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "SinglePlayScene")
         {
             StartAutoAttack();
-            Debug.Log("AutoAttack Started!");
+            //Debug.Log("AutoAttack Started!");
         }
     }
 
