@@ -73,7 +73,7 @@ public class UnitMoveController : MonoBehaviour
         
        // Debug.Log("MoveTowardTarget() called.");
 
-        while(Vector2.Distance(transform.position, worldMovePosition) > 0.6f)// 현재 포지션 <-> 다음 이동할 타일 중심좌표 간 거리가 일치할 때 까지
+        while(Vector2.Distance(transform.position, worldMovePosition) > 0.5f)// 현재 포지션 <-> 다음 이동할 타일 중심좌표 간 거리가 일치할 때 까지
         {
             if (targetUnit == null)//목표 유닛이 사라지면 이동 중지 후 다시 목표 유닛을 탐색한다.
             {
