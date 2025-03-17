@@ -11,7 +11,7 @@ public class AutoSpawnerSoldier : MonoBehaviour
     // 3개의 레이어는 총 25칸(5*5)으로 구성되어 있고, 영웅과 캐릭터가 각각 1칸씩, 병사는 23칸에 배치된다.
     
     [SerializeField] private Tilemap soldierTilemapLayer;
-    [SerializeField] public int maxAmount = 10;//한 번의 SinglePlay에 사용되는 최대 병사 수는 10개. 10개의 병사를 28칸 중 랜덤으로 배치.
+    [SerializeField] public int maxAmount = 10;//한 번의 SinglePlay에 사용되는 최대 병사 수는 10개. 10개의 병사를 23칸 중 랜덤으로 배치.
     [SerializeField] private Transform prefabParent;//스폰될 프리팹을 자식으로 둘 부모 오브젝트
     [SerializeField] private UnitManager unitManager;
     
@@ -51,13 +51,13 @@ public class AutoSpawnerSoldier : MonoBehaviour
 
     private void FindSpawnPosition()//병사 프리팹을 타일맵 위 위치에 보유 숫자만큼 스폰한다.
     {
-        BoundsInt bounds = soldierTilemapLayer.cellBounds;//타일맵에서 BoundsInt는 주로 타일맵 내의 유효한 cell 영역을 나타내는 데 사용. 각 cell은 하나의 tile을 나타낸다.
-        foreach(Vector3Int position in bounds.allPositionsWithin)//타일맵 셀에 존재하는 모든 위치를 꺼내어 반복하면서, 타일이 존재하는 위치를 리스트에 저장
+        BoundsInt bounds = soldierTilemapLayer.cellBounds;//BoundsInt는 주로 타일맵 내의 유효한 cell 영역을 나타내는 데 사용. 각 cell은 하나의 tile을 나타낸다.
+        foreach(Vector3Int position in bounds.allPositionsWithin)
         {
-            if(soldierTilemapLayer.HasTile(position))
+            if(soldierTilemapLayer.HasTile(position))//타일맵 셀에 존재하는 모든 위치를 꺼내어 반복하면서, 타일이 존재하는 위치를 리스트에 저장
             {
                 soldierSpawnPositions.Enqueue(position);//병사 소환용 레이어에서 타일이 존재하는 위치만 좌표저장 큐에 삽입.
-                Debug.Log($"soldierSpawnPositions.Count = {soldierSpawnPositions.Count}");
+                //Debug.Log($"soldierSpawnPositions.Count = {soldierSpawnPositions.Count}");
             }
         }
         if(soldierSpawnPositions.Count == 0)
@@ -70,32 +70,37 @@ public class AutoSpawnerSoldier : MonoBehaviour
     {
         if(spawnedCount >=maxAmount)
         {
-            Debug.Log("maxAmount of soldier is spawned.");
+            Debug.LogWarning("maxAmount of soldier is spawned.");
             return;
         }
-
+        /*
+            캐릭터가 스폰될 타일은 FindSpawnPosition()에서 큐에 넣어진 타일이며, 순서대로 유닛이 배치된다.
+            Dequeue로 첫 좌표부터 꺼내고 나면 캐릭터가 위치한 타일을 제거하여 사용 불가하게 함. (같은 타일에 유닛이 중복 소환되는 현상 방지)
+        */
         if(soldierSpawnPositions.Count > 0)
         {
-            Vector3Int spawnTile = soldierSpawnPositions.Dequeue();//캐릭터가 스폰될 타일은 FIndSpawnPosition()에서 큐에 넣어진 타일이며, 순서대로 유닛이 배치된다. Dequeue로 첫 좌표부터 꺼내고 나면 캐릭터가 위치한 타일을 제거하여 사용 불가하게 함. (같은 타일에 유닛이 중복 소환되는 현상 방지)
+            Vector3Int spawnTile = soldierSpawnPositions.Dequeue();
             Vector3 worldPosition = soldierTilemapLayer.GetCellCenterWorld(spawnTile);//해당 타일 중심 위치를 가져와서 그곳에 캐릭터를 배치.
 
-            newSoldier = Instantiate(mySoldiers[0], worldPosition, rotation, prefabParent);//병사 유닛 리스트의 첫번째 요소를 스폰. 
+            GameObject newSoldier = Instantiate(mySoldiers[0], worldPosition, rotation, prefabParent);//병사 유닛 리스트의 첫번째 요소를 스폰. 
             spawnedSoldiers.Add(newSoldier);
             Debug.Log($"soldierSpawnPositions.Count = {soldierSpawnPositions.Count}");
             spawnedCount++;
         }
         else
         {
-            Debug.Log("There is no tile to spawn soldier.");
+            Debug.LogWarning("There is no tile to spawn soldier.");
         }
     }
 
     public void ClearSpawnedSoldiers()//배치 방식이 바뀔 때, 기존에 스폰되었던 병사 유닛 인스턴스들을  모두 제거한다.
     {
-        for(int i=0; i<maxAmount; i++)
+        foreach(var solider in spawnedSoldiers)
         {
-            Destroy(newSoldier);
+            Destroy(solider);
         }
+        spawnedSoldiers.Clear();
+        spawnedCount = 0; // 스폰된 병사 수 초기화
     }
 
     public int GetSpawnedCount()
