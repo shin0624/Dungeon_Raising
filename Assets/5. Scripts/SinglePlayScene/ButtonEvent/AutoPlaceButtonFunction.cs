@@ -63,6 +63,7 @@ public class AutoPlaceButtonFunction : MonoBehaviour
 //--------------병사 유닛 이동 함수----------------------------
     private void FindSoldiersPosition(Tilemap tilemap)//병사 유닛들의 스폰 장소를 찾는다.
     {
+        //BoundsInt는 주로 타일맵 내의 유효한 cell 영역을 나타내는 데 사용. 각 cell은 하나의 tile을 나타낸다.
         BoundsInt bounds = tilemap.cellBounds;
         foreach(Vector3Int pos in bounds.allPositionsWithin)//자동배치용 병사타일에서 배치 가능한 위치를 찾는다.
         {

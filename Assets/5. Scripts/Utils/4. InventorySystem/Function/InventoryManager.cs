@@ -29,32 +29,33 @@ public class InventoryManager : MonoBehaviour
     {
         if(items.Count >=maxSlots)//아이템 리스트의 원소 수가 맥스슬롯 이상이 되면 인벤토리 포화
         {
-            Debug.Log("Inventory is Full!");
-            //인벤토리 포화 메세지 추후 출력
+            //Debug.Log("Inventory is Full!");//인벤토리 포화 메세지 추후 출력
             return;
         }
-
-        if(newItem.Type == ItemType.Consumable)//소모성 아이템을 추가하는 경우
+        switch (newItem.Type)//아이템 타입에 따라 추가하는 방식을 다르게 한다. 소모성일 경우 수량을 늘리고, 장비의 경우 중복 보유를 허용하지 않을 것이므로 Add()만 실행.
         {
-            var consumable = newItem as ConsumableItem;
-            var existing = items.Find(i=>i.ItemID == newItem.ItemID) as ConsumableItem;//아이템아이디가 존재하면 ConsumableItem타입으로 리턴. 존재하지 않으면 null.
-            if(existing!=null)
-            {
-                existing.itemAmount+=consumable.itemAmount;//아이템이 존재할 경우 기존 아이템에 수량을 증가시킴.
-            }
-            else
-            {
-                items.Add(newItem);//인벤토리에 해당 id의 아이템이 없으면 새로운 아이템으로 추가.
-                itemDatabase.consumableItems.Add((ConsumableItem)newItem);//아이템 데이터베이스에 실제로 추가.
-            }
-        }
-        else//소모성 아이템이 아닐 경우(장비 아이템일 경우)-> 장비 아이템은 수량을 체크하지 않는 단일객체.
-        {
-            items.Add(newItem);
-            itemDatabase.armorItems.Add((ArmorItem)newItem);//아이템 데이터베이스에 실제로 추가.
-        }
+            case ItemType.Consumable://소모성 아이템을 추가하는 경우
+                {
+                    var consumable = newItem as ConsumableItem;
+                    var existing = items.Find(i => i.ItemID == newItem.ItemID) as ConsumableItem;//아이템 아이디가 존재하면 ConsumableItem타입으로 리턴. 존재하지 않으면 null.
+                    if (existing != null)
+                    {
+                        existing.itemAmount += consumable.itemAmount;//아이템이 존재할 경우 기존 아이템에 수량을 증가시킴.
+                    }
+                    else
+                    {
+                        items.Add(newItem);//인벤토리에 해당 id의 아이템이 없으면 새로운 아이템으로 추가.
+                        itemDatabase.consumableItems.Add((ConsumableItem)newItem);//아이템 데이터베이스에 실제로 추가.
+                    }
+                    break;
+                }
 
-        Debug.Log($"{newItem.ItemName}아이템이 추가되었습니다! 인벤토리를 확인해주세요.");
+            default://디폴트 : 장비 아이템을 추가하는 경우. 동일 장비는 발생하지 않는다.
+                items.Add(newItem);
+                itemDatabase.armorItems.Add((ArmorItem)newItem);//아이템 데이터베이스에 실제로 추가.
+                break;
+        }
+        //Debug.Log($"{newItem.ItemName}아이템이 추가되었습니다! 인벤토리를 확인해주세요.");
         OnInventoryUpdated?.Invoke();//실시간 인벤토리 업데이트.
         
         InventoryUIManager.Instance.InitSlots();// 추가 후 UI 강제 갱신
@@ -71,19 +72,19 @@ public class InventoryManager : MonoBehaviour
         {
             switch(item.Type)
             {
-                case ItemType.Consumable : 
+                case ItemType.Consumable : //소비 아이템의 경우
                 itemDatabase.consumableItems.Remove((ConsumableItem)item);
                 break;
 
-                case ItemType.Armor :
+                case ItemType.Armor :// 장비 아이템의 경우
                 itemDatabase.armorItems.Remove((ArmorItem)item);
                 break;
 
-                default : 
-                Debug.Log("제거 대상 아이템의 타입이 잘못되었습니다. ItemDatabase에서 삭제할 수 없습니다.");
+                default : //그 외의 경우(오류)
+                Debug.LogError("제거 대상 아이템의 타입이 잘못되었습니다. ItemDatabase에서 삭제할 수 없습니다.");
                 break;
             }
-            Debug.Log($"{item.ItemName}아이템이 삭제되었습니다. 아이템 ID : {itemID}");
+            //Debug.Log($"{item.ItemName}아이템이 삭제되었습니다. 아이템 ID : {itemID}");
             items.Remove(item);//제거
             OnInventoryUpdated?.Invoke();//실시간 인벤토리 업데이트.
             InventoryUIManager.Instance.InitSlots();// 추가 후 UI 강제 갱신

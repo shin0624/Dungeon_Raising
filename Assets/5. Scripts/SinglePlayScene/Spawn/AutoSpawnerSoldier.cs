@@ -51,18 +51,19 @@ public class AutoSpawnerSoldier : MonoBehaviour
 
     private void FindSpawnPosition()//병사 프리팹을 타일맵 위 위치에 보유 숫자만큼 스폰한다.
     {
-        BoundsInt bounds = soldierTilemapLayer.cellBounds;//BoundsInt는 주로 타일맵 내의 유효한 cell 영역을 나타내는 데 사용. 각 cell은 하나의 tile을 나타낸다.
+        //BoundsInt는 주로 타일맵 내의 유효한 cell 영역을 나타내는 데 사용. 각 cell은 하나의 tile을 나타낸다.
+        BoundsInt bounds = soldierTilemapLayer.cellBounds;
         foreach(Vector3Int position in bounds.allPositionsWithin)
-        {
-            if(soldierTilemapLayer.HasTile(position))//타일맵 셀에 존재하는 모든 위치를 꺼내어 반복하면서, 타일이 존재하는 위치를 리스트에 저장
-            {
+        {   
+            if(soldierTilemapLayer.HasTile(position))//타일맵 셀에 존재하는 모든 위치를 꺼내어 반복하며 타일이 존재하는 위치를 저장
+            {   
                 soldierSpawnPositions.Enqueue(position);//병사 소환용 레이어에서 타일이 존재하는 위치만 좌표저장 큐에 삽입.
                 //Debug.Log($"soldierSpawnPositions.Count = {soldierSpawnPositions.Count}");
             }
         }
         if(soldierSpawnPositions.Count == 0)
         {
-            Debug.LogWarning("There is no tile to spawn soldier.");
+            Debug.LogWarning("No Available Tiles found in soldierPlaceLayer");
         }
     }
 
@@ -89,7 +90,7 @@ public class AutoSpawnerSoldier : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("There is no tile to spawn soldier.");
+            Debug.LogWarning("No Available Tiles found in soldierPlaceLayer");
         }
     }
 

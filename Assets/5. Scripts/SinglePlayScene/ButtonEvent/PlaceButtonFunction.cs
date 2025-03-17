@@ -28,7 +28,7 @@ public class PlaceButtonFunction : MonoBehaviour
        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);//마우스 클릭 위치를 월드 좌표로 변환
        RaycastHit2D hit = Physics2D.Raycast(ray.origin, Vector2.zero);//마우스 클릭 위치에 레이캐스트를 쏴서 클릭한 위치에 존재하는 오브젝트를 찾는다.
 
-       if(hit.collider!=null )
+       if(hit.collider != null)
        {
             if(hit.collider.CompareTag("Unit_Player") || hit.collider.CompareTag("Unit_Hero") || hit.collider.CompareTag("Unit_Soldier"))   
             {
@@ -36,7 +36,8 @@ public class PlaceButtonFunction : MonoBehaviour
 
                 outlineShader.DrawTilemapOutlines();//드래그 중일 때 타일맵 테두리 색상을 변경한다.
 
-                currentLayer = GetCurrentLayer(selectedUnit.position);//선택된 유닛이 존재하는 타일맵 레이어를 찾는다. --> 드래그 시작 시 현재 유닛이 속한 레이어를 정확히 찾아야 함. 이전에는 GetCurrentLayer()에서 startTile을 이용했으나, startTile이 설정되기 전에 호출되어 null 오류가 발생하였음. 이를 해결하기 위해 selectedUnit.position을 이용해 currentLayer를 즉시 설정.
+                currentLayer = GetCurrentLayer(selectedUnit.position);//선택된 유닛이 존재하는 타일맵 레이어를 찾는다.
+
                 if(currentLayer == null) 
                     return;//레이어를 찾지 못하면 종료.
 
@@ -44,6 +45,11 @@ public class PlaceButtonFunction : MonoBehaviour
                 offset = selectedUnit.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 isDragging = true;
             }
+                /*
+                드래그 시작 시 현재 유닛이 속한 레이어를 정확히 찾아야 함.
+                이전에는 GetCurrentLayer()에서 startTile을 이용했으나, startTile이 설정되기 전에 호출되어 null 오류가 발생하였음.
+                이를 해결하기 위해 selectedUnit.position을 이용해 currentLayer를 즉시 설정.
+                */
        }
        else
        {
@@ -55,8 +61,9 @@ public class PlaceButtonFunction : MonoBehaviour
     {
         if(selectedUnit!=null)//선택된 유닛이 존재하는 경우
         {
-            Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;//유닛의 드래그 중 위치는 마우스 위치에 offset을 더한 값.
-            newPosition.z = 0; // 2D라서 z값 고정
+            //유닛의 드래그 중 위치는 마우스 위치에 offset을 더한 값.
+            Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
+            newPosition.z = 0; // 2D이므로 z값 고정
             selectedUnit.position = newPosition;
         }
     }
@@ -72,10 +79,10 @@ public class PlaceButtonFunction : MonoBehaviour
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);//마우스 클릭 위치를 월드 좌표로 변환
         Vector3Int targetTile = FindValidTile(worldPos);//월드 좌표를 다시 타일 좌표로 변환하여 이동하려는 위치의 타일을 찾음.
             
-        if(targetTile!=Vector3Int.zero)//이동하려는 위치의 타일이 존재하는 경우
+        if(targetTile != Vector3Int.zero)//이동하려는 위치의 타일이 존재하는 경우
         {
             Tilemap targetLayer = GetCurrentLayer(worldPos);//이동하려는 위치의 타일이 존재하는 레이어를 찾음.
-            if(targetLayer!=null)
+            if(targetLayer != null)
             {
                 selectedUnit.position = targetLayer.GetCellCenterWorld(targetTile);//이동하려는 위치의 타일의 중심으로 이동
                 currentLayer = targetLayer;//현재 레이어 업데이트.
@@ -88,22 +95,22 @@ public class PlaceButtonFunction : MonoBehaviour
         selectedUnit = null;//선택된 유닛 초기화
     }
 
-    private Tilemap GetCurrentLayer(Vector3 position)//현재 유닛 프리팹이 존재하는 타일맵 레이어를 찾는 메서드. 유닛이 존재하는 타일맵을 찾아 현재 레이어로 설정한다.
+    private Tilemap GetCurrentLayer(Vector3 position)//현재 유닛 프리팹이 존재하는 타일맵 레이어를 찾는 메서드. 
     {
         Vector3Int tilePos;
-        foreach(Tilemap layer in tileLayers)
+        foreach(Tilemap layer in tileLayers)//유닛이 존재하는 타일맵을 찾아 현재 레이어로 설정한다.
         {
-            tilePos = layer.WorldToCell(position);//월드 좌표를 타일 좌표로 변환. 가장 먼저 찾은 유효한 타일의 위치를 반환하도록 변경하여, Vector3 좌표를 받아 어떤 레이어에 해당 타일이 존재하는지 체크하도록 한다.
+            //가장 먼저 찾은 유효한 타일의 위치를 반환하도록 하여, Vector3 좌표를 받아 어떤 레이어에 해당 타일이 존재하는지 체크한다.
+            tilePos = layer.WorldToCell(position);//월드 좌표를 타일 좌표로 변환.
             if(layer.HasTile(tilePos)) return layer;//해당 타일이 존재하는 경우 해당 레이어를 반환
         }
         return null;//해당 위치에 타일이 존재하지 않는 경우 null을 반환
-       
     }
 
-    private Vector3Int FindValidTile(Vector3 worldPos)//프리팹을 드래그하여 목적지 타일까지 위치시킨 후, 그 위치가 유효한지 확인한다. 3개의 레이어를 모두 검사하여 이동 가능여부를 체크한다.
+    private Vector3Int FindValidTile(Vector3 worldPos)//프리팹을 드래그하여 목적지 타일까지 위치시킨 후, 그 위치가 유효한지 확인한다.
     {
         Vector3Int tilePos;
-        foreach(Tilemap layer in tileLayers)
+        foreach(Tilemap layer in tileLayers)// 3개의 레이어를 모두 검사하여 이동 가능여부를 체크한다.
         {
             tilePos = layer.WorldToCell(worldPos);//월드 좌표를 타일 좌표로 변환
             if(layer.HasTile(tilePos)) return tilePos;//해당 타일이 존재하는 경우 해당 타일 좌표를 반환
