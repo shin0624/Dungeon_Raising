@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -80,14 +81,46 @@ public class CombatAnimatorController : MonoBehaviour
 
     private IEnumerator SetSkillParticleTiming(int skillIndex)//공격, 스킬 등 각 애니메이션 클립에서 공격 타이밍에 맞추어 파티클이 나타나도록 하는 메서드. 애니메이션 클립에서 적절한 프레임에 이벤트를 추가하고, UnitRoot의 Signal Receiver에서 이벤트를 설정한다.
     {
-        if(skillParticles[skillIndex] != null && !skillParticles[skillIndex].activeSelf)//스킬 파티클이 존재하고 비활성화 상태일 때 호출.
-        {
-            skillParticles[skillIndex].SetActive(true);
+
+        try{
+            if(skillParticles[skillIndex] != null && !skillParticles[skillIndex].activeSelf)//스킬 파티클이 존재하고 비활성화 상태일 때 호출.
+            {
+                skillParticles[skillIndex].SetActive(true);
+            }
         }
+        catch(MissingReferenceException e)
+        {
+            Debug.LogWarning(e.Message);
+            
+            Debug.Log($"{gameObject.transform.parent.name} is Destroyed.");
+            yield break;
+        }
+
         yield return new WaitForSeconds(anim.GetCurrentAnimatorClipInfo(0)[0].clip.length);//스킬 애니메이션 클립 길이만큼 대기.
         //( 위의 대기 시간은 추후 파티클 시스템의 Duration으로 바꾸어야 함. )
 
-        skillParticles[skillIndex].SetActive(false);//스킬 애니메이션 종료 시 파티클 비활성화.
+        try{
+            if(gameObject!=null)
+            {
+                skillParticles[skillIndex].SetActive(false);//스킬 애니메이션 종료 시 파티클 비활성화.
+            }    
+        }
+        catch(MissingReferenceException e)
+        {
+            Debug.LogWarning(e.Message);
+            Debug.Log($"{gameObject.transform.parent.name} is Destroyed.");
+            yield break;
+        }
+
+
+        
+        /*
+        자동 전투 시 null오류 발생
+        - 호출 순서 : 공격 애니메이션 재생 -> 키 프레임에서 Signal 호출 -> SetSkillParticleTiming() 호출 -> 파티클 활성화 -> 애니메이션 종료 -> 파티클 비활성화
+        - 오류 원인 : 애니메이션 종료 후 유닛ㅅ의 hp가 0이 되어 gameObject가 파괴될 경우 -> 파티클 비활성화 불가능한 상황에서 SetActive(false)가 호출됨
+        */
+
+        
     }
 
     //----유닛 상태 변화 메서드----

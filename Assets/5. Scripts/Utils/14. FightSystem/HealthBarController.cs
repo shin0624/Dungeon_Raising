@@ -16,15 +16,13 @@ public class HealthBarController : MonoBehaviour
 
     private void Awake()
     {
-        if(SceneManager.GetActiveScene().name!= "SinglePlayScene")
-         {
-             gameObject.SetActive(false);
-             enabled = false;
-             return;
-         }
-        // gameObject.SetActive(false);
-        //     enabled = false;
-        //     return;
+        // if(SceneManager.GetActiveScene().name!= "SinglePlayScene")
+        //  {
+        //      gameObject.SetActive(false);
+        //      enabled = false;
+        //      return;
+        //  }
+
     }
     
     void Start()
@@ -57,6 +55,8 @@ public class HealthBarController : MonoBehaviour
             barTransform.localScale = new Vector3(originalScaleX * healthPercent, barTransform.localScale.y, barTransform.localScale.z);// HP Bar의 x 스케일 값이 체력 비율에 따라 조절되도록 설정. y,z크기는 그대로 유지.
         }
     }
+
+    
 
 
 
