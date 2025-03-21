@@ -13,11 +13,16 @@ public class EnemyStatusVisualizer : MonoBehaviour
     [SerializeField] private GameObject bossParent;
     [SerializeField] private GameObject statusImage;//프리팹
     [SerializeField] private GameObject statusPanel;
+    private string tempText = "100";
     void Start()
     {
         StartCoroutine(StartSetting());
+        //StartCoroutine(UpdateUnitStatus()); // 코루틴 한 번만 실행  
+    }
+
+    public void StartUpdateUnitStatus()
+    {
         StartCoroutine(UpdateUnitStatus()); // 코루틴 한 번만 실행
-        
     }
 
     private void GetUnitLists()//활성화된 유닛을가져온다.
@@ -25,19 +30,20 @@ public class EnemyStatusVisualizer : MonoBehaviour
          unitStatusList.Clear(); // 중복 방지
         foreach(Transform child in enemyParent.transform)
         {
+            if (child.gameObject.activeInHierarchy && child.gameObject.scene.IsValid())
             unitStatusList.Add(child.gameObject);
         }
         foreach(Transform child in bossParent.transform)
         {
+            if (child.gameObject.activeInHierarchy && child.gameObject.scene.IsValid())
             unitStatusList.Add(child.gameObject);
         }
 
-        Debug.Log("unitStatusList.Count : " + unitStatusList.Count);
+        Debug.Log($"유닛 리스트 초기화 완료. unitStatusList.Count: {unitStatusList.Count}");
     }
 
-    private void GetUnitStatus()//유닛의 상태를 가져온다.
-    {
-        
+     private void GetUnitStatus()//유닛의 상태를 가져온다.
+    {    
         for (int i = 0; i < unitStatusList.Count; i++)
         {
             if (i < statusUIList.Count) // UI가 충분한 경우에만 업데이트
@@ -49,16 +55,23 @@ public class EnemyStatusVisualizer : MonoBehaviour
                     TextMeshProUGUI unitHpText = statusUIList[i].transform.Find("UnitHP").GetComponent<TextMeshProUGUI>();
 
                     unitNameText.text = unit.name;
-                    unitHpText.text = unit.GetComponentInChildren<DamageCalculater>().currentHP.ToString();
+                    unitHpText.text = tempText;
+                    // unitHpText.text = unit.GetComponentInChildren<DamageCalculater>().currentHP.ToString();
+                    // if(unit.GetComponentInChildren<DamageCalculater>()==null)
+                    // {
+                    //     unitHpText.text = tempText;
+                    // }
                 }
                 else{
                     // 유닛이 사라졌다면 UI도 삭제하고 리스트에서 제거
-                    Destroy(statusUIList[i]);
+                    DestroyImmediate(statusUIList[i]);
                     statusUIList.RemoveAt(i);
                     unitStatusList.RemoveAt(i);
+                    i--;
                 }
 
             }
+
         }
     }
 

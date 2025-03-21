@@ -449,6 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d8583bf05e078245be3ac10b5573c39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHP: 100
 --- !u!114 &-6662616012704785265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,6 +462,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a7ad70c7d82fe14896227af1048c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillParticles:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &7363439951754873375
 MonoBehaviour:
   m_ObjectHideFlags: 0

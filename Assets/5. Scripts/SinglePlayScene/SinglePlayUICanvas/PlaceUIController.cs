@@ -10,6 +10,8 @@ public class PlaceUIController : MonoBehaviour
     //다른 버튼들은 추후 확장성 및 관리 용이를 위해 다른 스크립트에서 제어한다.
     [SerializeField] private Canvas singleplayUICanvas;
     [SerializeField] private Button placeCompleteButton;//배치 완료 버튼
+    [SerializeField] private EnemyStatusVisualizer enemyStatusVisualizer;
+    [SerializeField] private UnitStatusVisualizer unitStatusVisualizer;
     private bool isComleteButtonClicked = false;// 배치 완료가 결정되었음을 알리는 플래그.
 
     private void Start()
@@ -59,6 +61,8 @@ public class PlaceUIController : MonoBehaviour
             if(unitMoveController!=null)
             {
                 unitMoveController.StartFight();
+                unitStatusVisualizer.StartUpdateUnitStatus();
+                
             }
         }
 
@@ -68,6 +72,7 @@ public class PlaceUIController : MonoBehaviour
             if(enemyMoveController!=null)
             {
                 enemyMoveController.StartFight();
+                enemyStatusVisualizer.StartUpdateUnitStatus();
             }
         }
     }

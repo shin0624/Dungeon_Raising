@@ -16,12 +16,12 @@ public class HealthBarController : MonoBehaviour
 
     private void Awake()
     {
-        // if(SceneManager.GetActiveScene().name!= "SinglePlayScene")
-        //  {
-        //      gameObject.SetActive(false);
-        //      enabled = false;
-        //      return;
-        //  }
+        if(SceneManager.GetActiveScene().name!= "SinglePlayScene")
+        {
+            gameObject.SetActive(false);
+            enabled = false;
+            return;
+        }
 
     }
     
@@ -39,12 +39,9 @@ public class HealthBarController : MonoBehaviour
         {
             originalScaleX = barTransform.localScale.x;//HP Bar의 x스케일 값을 가져온다.
         }
-    }
 
-    
-    void Update()
-    {
-       
+        SetHealthPoint(100.0f, 100.0f);//초기 hp를 최대 hp로 설정.
+        
     }
 
     public void SetHealthPoint(float currentHP, float maxHP)//hp 비율에 따라 hp bar의 x스케일 크기를 조절하는 메서드. 유닛이 공격받아 실제 hp가 감소할 때 이 메서드를 같이 호출한다.
@@ -52,12 +49,8 @@ public class HealthBarController : MonoBehaviour
         if(barTransform!=null)
         {
             float healthPercent = Mathf.Clamp01(currentHP / maxHP);
+            //Debug.Log($"{originalScaleX}, {currentHP}, {maxHP}, {healthPercent}");
             barTransform.localScale = new Vector3(originalScaleX * healthPercent, barTransform.localScale.y, barTransform.localScale.z);// HP Bar의 x 스케일 값이 체력 비율에 따라 조절되도록 설정. y,z크기는 그대로 유지.
         }
     }
-
-    
-
-
-
 }

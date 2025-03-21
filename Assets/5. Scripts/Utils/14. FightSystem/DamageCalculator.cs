@@ -11,13 +11,13 @@ public class DamageCalculater : MonoBehaviour
     //__DataManager.cs를 참조하여, 체력, 레벨 등 스테이터스 증감 메서드 등을 작성한다.
     //작성할 메서드 : 체력, 레벨, 스킬 피해량, 공격력, 방어력, 공격 속도, 이동 속도 등 스테이터스 변화가 필요한 기능
     // 1. 공격 기능 : gameObject의 공격력, 공격 속도 <-> 상대 유닛의 체력, 방어력 필요
-    private float attackPoint;
-    private float attackSpeed;
-    private float healthPoint;
+    private float attackPoint = 30.0f;
+    private float attackSpeed = 1.5f;
+    private float healthPoint = 300.0f;
     private float otherDefensePoint;
     private float otherHealthPoint;
     private float damage;
-    public float currentHP;
+    public float currentHP = 100.0f;
     private GameObject closestUnit;
     private HeroDataManager heroDataManager;//gameObject가 Hero일 경우 사용.
     private SoldierDataManager soldierDataManager;//gameObject가 Soldier일 경우 사용.
@@ -30,11 +30,11 @@ public class DamageCalculater : MonoBehaviour
 
     private void Awake()
     {   
-        // if(SceneManager.GetActiveScene().name!= "SinglePlayScene" || SceneManager.GetActiveScene().name!="PlayTest")
-        // {
-        //     enabled = false;
-        //     return;
-        // }
+        if(SceneManager.GetActiveScene().name!= "SinglePlayScene")
+        {
+             enabled = false;
+             return;
+        }
     }
     private void Start()
     {
@@ -45,8 +45,8 @@ public class DamageCalculater : MonoBehaviour
     {
         if(closestUnit == null) 
         {
-            Debug.Log("No target unit found!");
-            return;
+             Debug.Log("No target unit found!");
+             return;
         }
 
         DamageCalculater targetDamageCalculater = closestUnit.GetComponent<DamageCalculater>();
@@ -54,13 +54,12 @@ public class DamageCalculater : MonoBehaviour
         {
             targetDamageCalculater.currentHP -= damage;//타겟의 hp 업데이트
 
-            Debug.Log($"{closestUnit.name} HP: {targetDamageCalculater.currentHP}");
-
             targetDamageCalculater.DecreaseHpBar(targetDamageCalculater.currentHP, otherHealthPoint);//타겟의 HPBar 업데이트
 
             if(targetDamageCalculater.currentHP <=0)//타겟의 hp가 0 이하가 되면 제거.
             {
                 Destroy(closestUnit);
+                Debug.Log($"{closestUnit.name} is destroyed!");
             }
         }
     }
@@ -70,7 +69,7 @@ public class DamageCalculater : MonoBehaviour
         if(healthBarController!=null)
         {     
             if(currentHP <=0) currentHP = 0;
-            healthBarController.SetHealthPoint(currentHP, healthPoint);
+            healthBarController.SetHealthPoint(targetCurrnetHP, targetHP);
         }
     }
 
@@ -78,8 +77,29 @@ public class DamageCalculater : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().name == "SinglePlayScene" || SceneManager.GetActiveScene().name == "PlayTest")//싱글플레이 씬에서만 작동하도록 설정.
         {
+            switch(gameObject.tag)
+            {
+                case "Unit_Player":
+                case "Unit_Hero":
+                case "Unit_Soldier":
+                    if(collision.gameObject.tag == "Unit_Enemy" || collision.gameObject.tag == "Unit_Boss")
+                    {
+                        StartAutoAttack();
+                    }
+                    break;
+
+                case "Unit_Enemy":
+                case "Unit_Boss":
+                    if(collision.gameObject.tag == "Unit_Player" || collision.gameObject.tag == "Unit_Hero" || collision.gameObject.tag == "Unit_Soldier")
+                    {
+                        StartAutoAttack();
+                    }
+                    break;
+
+                default:
+                    break;
+            }
             StartAutoAttack();
-            //Debug.Log("AutoAttack Started!");
         }
     }
 
@@ -113,14 +133,13 @@ public class DamageCalculater : MonoBehaviour
             ApplyDamageToTarget();//타겟의 체력 감소 적용.
 
             if(closestUnit == null) yield break;//타겟이 사망했을 경우 코루틴 종료.
-            
         }
     }
 
     private void FindDamageValue()//gameObject의 태그에 따라 이 유닛의 공격력과 공격속도를 찾는다. + 체력도 찾는다.
     { 
-        attackPoint = 30f;//null 오류 방지를 위해 기본값을 할당한다.
-        attackSpeed = 1f;
+        attackPoint = 30.0f;//null 오류 방지를 위해 기본값을 할당한다.
+        attackSpeed = 1.5f;
         healthPoint = 300.0f;
 
         switch(gameObject.tag)
@@ -128,45 +147,46 @@ public class DamageCalculater : MonoBehaviour
             case "Unit_Player" :
                 attackPoint = 30.0f;
                 attackSpeed = 1.5f;
+                healthPoint = 300.0f;
                 break;
 
             case "Unit_Hero" :
-                heroDataManager = gameObject.GetComponent<HeroDataManager>();
-                if (heroDataManager)
+                //heroDataManager = gameObject.GetComponent<HeroDataManager>();
+                if (gameObject.GetComponent<HeroDataManager>())//gameObject가 HeroDataManager를 가지고 있을 경우
                 {
-                    attackPoint = heroDataManager.heroInformation.attackPoint;
-                    attackSpeed = heroDataManager.heroInformation.attackSpeed;
-                    healthPoint = heroDataManager.heroInformation.healthPoint;
+                    attackPoint = gameObject.GetComponent<HeroDataManager>().heroInformation.attackPoint;
+                    attackSpeed = gameObject.GetComponent<HeroDataManager>().heroInformation.attackSpeed;
+                    healthPoint = gameObject.GetComponent<HeroDataManager>().heroInformation.healthPoint;
                 }
                 break;
 
             case "Unit_Soldier" :
-                soldierDataManager = gameObject.GetComponent<SoldierDataManager>();
-                if (soldierDataManager)
+                //soldierDataManager = gameObject.GetComponent<SoldierDataManager>();
+                if (gameObject.GetComponent<SoldierDataManager>())
                 {
-                    attackPoint = soldierDataManager.soldierInformation.attackPoint;
-                    attackSpeed = soldierDataManager.soldierInformation.attackSpeed;
-                    healthPoint = soldierDataManager.soldierInformation.healthPoint;
+                    attackPoint = gameObject.GetComponent<SoldierDataManager>().soldierInformation.attackPoint;
+                    attackSpeed = gameObject.GetComponent<SoldierDataManager>().soldierInformation.attackSpeed;
+                    healthPoint = gameObject.GetComponent<SoldierDataManager>().soldierInformation.healthPoint;
                 }
                 break;
 
             case "Unit_Enemy" :
-                enemyDataManager = gameObject.GetComponent<EnemyDataManager>();
-                if (enemyDataManager)
+                //enemyDataManager = gameObject.GetComponent<EnemyDataManager>();
+                if (gameObject.GetComponent<EnemyDataManager>())
                 {
-                    attackPoint = enemyDataManager.enemyInformation.attackPoint;
-                    attackSpeed = enemyDataManager.enemyInformation.attackSpeed;
-                    healthPoint = enemyDataManager.enemyInformation.healthPoint;
+                    attackPoint = gameObject.GetComponent<EnemyDataManager>().enemyInformation.attackPoint;
+                    attackSpeed = gameObject.GetComponent<EnemyDataManager>().enemyInformation.attackSpeed;
+                    healthPoint = gameObject.GetComponent<EnemyDataManager>().enemyInformation.healthPoint;
                 }
                 break;
 
             case "Unit_Boss" :
-                bossDataManager = gameObject.GetComponent<BossDataManager>();
-                if (bossDataManager)
+                //bossDataManager = gameObject.GetComponent<BossDataManager>();
+                if (gameObject.GetComponent<BossDataManager>())
                 {
-                    attackPoint = bossDataManager.bossInformation.attackPoint;
-                    attackSpeed = bossDataManager.bossInformation.attackSpeed;
-                    healthPoint = bossDataManager.bossInformation.healthPoint;
+                    attackPoint = gameObject.GetComponent<BossDataManager>().bossInformation.attackPoint;
+                    attackSpeed = gameObject.GetComponent<BossDataManager>().bossInformation.attackSpeed;
+                    healthPoint = gameObject.GetComponent<BossDataManager>().bossInformation.healthPoint;
                 }
                 break;
 
@@ -175,7 +195,6 @@ public class DamageCalculater : MonoBehaviour
                 break;
         }
         currentHP = healthPoint;
-        Debug.Log($"{gameObject.name} , HP : {currentHP}");
     }
 
     private void FindOtherUnitValue()//unitMoveController.cs에서 찾은 가장 가까운 유닛을 "상대 유닛"으로 지정하고, 그의 체력, 방어력을 가져온다. __DataManager가 FindDamageValue()에서 결정되어야 하므로, FindDamageValue()가 실행된 후에 실행한다.
@@ -232,7 +251,6 @@ public class DamageCalculater : MonoBehaviour
                 Debug.LogError($"[ERROR] Unknown enemy unit tag: {closestUnit.tag}");
                 break;
         }
-        Debug.Log($"{gameObject.name} → {closestUnit.name}, closeUnit`s HP: {otherHealthPoint}");
     }
 
     private GameObject FindClosestUnit()//gameObject의 태그에 따라 closestUnit을 어느 컴포넌트에서 가져올 지 결정하는 메서드.
