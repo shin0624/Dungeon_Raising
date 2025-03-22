@@ -60,12 +60,11 @@ public class UnitStatusVisualizer : MonoBehaviour
                     TextMeshProUGUI unitHpText = statusUIList[i].transform.Find("UnitHP").GetComponent<TextMeshProUGUI>();
 
                     unitNameText.text = unit.name;
-                    unitHpText.text =tempText;
-                    // unitHpText.text = unit.GetComponentInChildren<DamageCalculater>().currentHP.ToString();
-                    // if(unit.GetComponentInChildren<DamageCalculater>()==null)
-                    // {
-                    //     unitHpText.text = tempText;
-                    // }
+                    unitHpText.text = unit.GetComponentInChildren<DamageCalculater>().currentHP.ToString();
+                    if(unit.GetComponentInChildren<DamageCalculater>()==null)
+                    {
+                        unitHpText.text = tempText;
+                    }
                 }
                  else
                  {

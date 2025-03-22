@@ -30,15 +30,29 @@ public class DamageCalculater : MonoBehaviour
 
     private void Awake()
     {   
-        if(SceneManager.GetActiveScene().name!= "SinglePlayScene")
-        {
-             enabled = false;
-             return;
-        }
+        SceneCheck();
     }
+
     private void Start()
     {
         healthBarController = GetComponentInChildren<HealthBarController>();
+        FindDamageValue();
+    }
+
+    private void SceneCheck()//테스트 씬 또는 싱글플레이 씬 이외에 씬에서는 DamageCalulater를 비활성화한다.
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+        switch(sceneName)
+        {
+            case "SinglePlayScene":
+            case "PlayTest":
+                enabled = true;
+                break;
+
+            default:
+                enabled = false;
+                break;
+        }
     }
 
     private void ApplyDamageToTarget()//공격받는 타겟의 currentHP를 감소시키는 메서드.
@@ -84,6 +98,7 @@ public class DamageCalculater : MonoBehaviour
                 case "Unit_Soldier":
                     if(collision.gameObject.tag == "Unit_Enemy" || collision.gameObject.tag == "Unit_Boss")
                     {
+                        Debug.Log($"collision : {collision.gameObject.name}");
                         StartAutoAttack();
                     }
                     break;
@@ -92,14 +107,15 @@ public class DamageCalculater : MonoBehaviour
                 case "Unit_Boss":
                     if(collision.gameObject.tag == "Unit_Player" || collision.gameObject.tag == "Unit_Hero" || collision.gameObject.tag == "Unit_Soldier")
                     {
-                        StartAutoAttack();
+                        Debug.Log($"collision : {collision.gameObject.name}");
+                        StartAutoAttack();   
                     }
                     break;
 
                 default:
                     break;
             }
-            StartAutoAttack();
+            //StartAutoAttack();
         }
     }
 

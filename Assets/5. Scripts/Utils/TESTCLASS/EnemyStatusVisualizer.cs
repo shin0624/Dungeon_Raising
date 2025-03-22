@@ -55,12 +55,11 @@ public class EnemyStatusVisualizer : MonoBehaviour
                     TextMeshProUGUI unitHpText = statusUIList[i].transform.Find("UnitHP").GetComponent<TextMeshProUGUI>();
 
                     unitNameText.text = unit.name;
-                    unitHpText.text = tempText;
-                    // unitHpText.text = unit.GetComponentInChildren<DamageCalculater>().currentHP.ToString();
-                    // if(unit.GetComponentInChildren<DamageCalculater>()==null)
-                    // {
-                    //     unitHpText.text = tempText;
-                    // }
+                    unitHpText.text = unit.GetComponentInChildren<DamageCalculater>().currentHP.ToString();
+                    if(unit.GetComponentInChildren<DamageCalculater>()==null)
+                    {
+                        unitHpText.text = tempText;
+                    }
                 }
                 else{
                     // 유닛이 사라졌다면 UI도 삭제하고 리스트에서 제거
