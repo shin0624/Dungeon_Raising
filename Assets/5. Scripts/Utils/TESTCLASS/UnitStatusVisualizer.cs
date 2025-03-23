@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class UnitStatusVisualizer : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class UnitStatusVisualizer : MonoBehaviour
     [SerializeField] private GameObject statusImage;//프리팹
     [SerializeField] private GameObject statusPanel;
     private string tempText = "100";
+    public static event Action<int> OnUnitCountChanged;//유닛 리스트의 개수가 변할 때 마다 호출될 이벤트.
     void Start()
     {
         StartCoroutine(StartSetting());
@@ -73,6 +75,7 @@ public class UnitStatusVisualizer : MonoBehaviour
                     statusUIList.RemoveAt(i);
                     unitStatusList.RemoveAt(i);
                     i--;
+                    OnUnitCountChanged?.Invoke(unitStatusList.Count);//유닛이 제거될 때 마다 이벤트를 호출.
                  }
              }
         }

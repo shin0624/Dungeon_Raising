@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class EnemyStatusVisualizer : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class EnemyStatusVisualizer : MonoBehaviour
     [SerializeField] private GameObject statusImage;//프리팹
     [SerializeField] private GameObject statusPanel;
     private string tempText = "100";
+    public static event Action<int> OnEnemyCountChanged;// 에너미 리스트의 개수가 줄어들 때 마다 호출될 이벤트.
     void Start()
     {
         StartCoroutine(StartSetting());
@@ -67,6 +69,7 @@ public class EnemyStatusVisualizer : MonoBehaviour
                     statusUIList.RemoveAt(i);
                     unitStatusList.RemoveAt(i);
                     i--;
+                    OnEnemyCountChanged?.Invoke(unitStatusList.Count);//유닛이 제거될 때 마다 이벤트를 호출.
                 }
 
             }
