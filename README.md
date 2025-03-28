@@ -1,5 +1,5 @@
 # Dungeon_Raising
-![Title](./Image/DungeonRaising.PNGising.PNG)
+![Title](./Image/DungeonRaising.PNG)
 ### SPUM 기반 2D 픽셀아트와 레트로 스타일을 살린 모바일 판타지 RPG 게임입니다.
 
 # 개발 기간
