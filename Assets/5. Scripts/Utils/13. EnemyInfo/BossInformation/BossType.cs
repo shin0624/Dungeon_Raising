@@ -6,7 +6,11 @@ public enum BossType
 {
     Empty,
     Skeleton,
-    WereWolf,
-    Lizard,
-    Dragon,
+    Dwarf,
+    DungeonGuard,
+    NinjaFrog,
+    LizardMagician,
+    Ghoul,
+    Bone,
+    Biking,
 }

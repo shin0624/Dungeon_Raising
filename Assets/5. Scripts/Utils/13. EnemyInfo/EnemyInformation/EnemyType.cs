@@ -6,7 +6,11 @@ public enum EnemyType
 {
     Empty,
     Skeleton,
-    WereWolf,
-    Lizard,
-    Dragon,
+    Dwarf,
+    DungeonGuard,
+    NinjaFrog,
+    LizardMagician,
+    Ghoul,
+    Bone,
+    Biking,
 }

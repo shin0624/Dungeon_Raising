@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78b0abe4cb392b742a2638f0ceb07fca, type: 3}
-  m_Name: WereWolfEnemy
+  m_Script: {fileID: 11500000, guid: 54706a64dd2b29f439f1deb95973b64f, type: 3}
+  m_Name: TetsuKamenBoss
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 5364296570191604959, guid: 0a6c769b789026542b3ab5c4e6fb31c6, type: 3}
-  enemyType: 2
-  enemyLevel: 1
+  bossPrefab: {fileID: 8588245510040717024, guid: 70db1273d543b7240b58e380add7a193, type: 3}
+  bossType: 7
+  bossLevel: 1
   attackPoint: 20
-  healthPoint: 200
+  healthPoint: 300
   defensePoint: 150
   attackSpeed: 1.5
   moveSpeed: 1.5
-  skillDamage: 2
+  skillDamage: 1
