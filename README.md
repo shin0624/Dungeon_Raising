@@ -6,24 +6,28 @@
 ### 2025.01 ~ 2025.04
 
 # 장르
-- 모바일 / 판타지 / RPG / 방치형
+### 모바일 / 판타지 / RPG / 방치형
 
-# 2024.04 **Google Play** 출시 예정
+# 다운로드
+### 2024.04 **Google Play** 출시 예정
 
 # 사용 기술
 - **Engine** : ![Unity](https://img.shields.io/badge/unity-%23000000.svg?style=for-the-badge&logo=unity&logoColor=white)
 - **Language** : ![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=csharp&logoColor=white)
 - **Framework** : ![.Net](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
 - **VCS** : ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
-- **3rd Party Library / SDK** : **SPUM(2D 캐릭터 제작)**, **뒤끝**(비속어 필터링 / 클라우드 / 네트워킹 관련), **DOTWeen**(애니메이션 / 스크립팅)
+- **3rd Party Library / SDK**
+    - **SPUM**(2D 캐릭터 제작)
+    - **뒤끝**(비속어 필터링 / 클라우드 / 네트워킹 관련)
+    - **DOTWeen**(애니메이션 / 스크립팅)
 - **Art** : **Leonardo AI**(게임 내 모든 스프라이트 리소스 제작)
-
+    
 # 게임 소개 (개발 진행 중인 사진입니다.)
 - **거꾸로 솟은 50층의 타워에 갇힌 플레이어는 각 층의 던전을 정복해 나가며 자신만의 던전을 키워갑니다.**
 
 - 원하는 **성별** / **직업**을 선택하고, 같이 던전을 키워나갈 **파트너 종족**을 선택합니다.
 ![GenderUI](./Image/GenderUI.PNG)
-
+### 남성 검사 | 남성 궁수 | 여성 궁수 | 여성 마법사
 ![JobAndGender](./Image/JobAndGender.png)
 
 - 선택한 파트너 종족은 **영웅**으로 불리며, 게임 내 재화를 소비하여 새로운 영웅을 소환할 수 있습니다.
