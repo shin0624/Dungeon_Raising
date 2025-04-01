@@ -25,12 +25,10 @@ public class InventoryCategoryManager : MonoBehaviour
 
     public void SwitchCategory(ItemType newCategory)//카테고리 변경 메서드. 인벤토리 패널의 버튼 인스펙터에서 OnClick이벤트로 할당.
     {
-        //StartCoroutine(SwitchCategoryCoroutine(newCategory));
-
         if(currentCategory == newCategory) return;//동일 카테고리가 반복호출될 경우 슬롯 재생성을 방지하기 위해 무시.
 
         currentCategory = newCategory;//현재 카테고리를 Consumable, Armor 중 하나로 변경
-        Debug.Log($"카테고리 전환: {currentCategory}");
+        //Debug.Log($"카테고리 전환: {currentCategory}");
 
         if(InventoryUIManager.Instance!=null)
         {
@@ -48,7 +46,7 @@ public class InventoryCategoryManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
         currentCategory = newCategory;//현재 카테고리를 Consumable, Armor 중 하나로 변경
-        Debug.Log($"카테고리 전환: {currentCategory}");
+        //Debug.Log($"카테고리 전환: {currentCategory}");
 
         if(InventoryUIManager.Instance!=null)
         {

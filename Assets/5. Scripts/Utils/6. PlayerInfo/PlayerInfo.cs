@@ -169,4 +169,17 @@ public class PlayerInfo : MonoBehaviour
             return playerInformation.playerGold;//재화가 존재하면 반환
     }
 
+    public int GetPlayerFloor()
+    {
+        if(playerInformation.towerFloor == 0)//플레이어 층 정보가 설정되지 않았다면 0을 반환
+        {
+            return 1;//플레이어 층 정보가 설정되지 않았다면 가장 처음 층인 1층을 반환
+        }
+        else
+        {
+            return playerInformation.towerFloor;//플레이어 층 정보가 설정되어 있다면 해당 층 정보를 반환
+        }
+        
+    }
+
 }

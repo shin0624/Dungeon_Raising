@@ -2,7 +2,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -27,8 +26,6 @@ public class CombatAnimatorController : MonoBehaviour
     private List<string> triggerParamList = new List<string> {"2_Attack", "3_Damage", "4_Death", "6_Other"};//Trigger타입 파라미터 리스트.  
     private float[] skillCoolTimeArray = new float[3] {2.0f, 2.5f, 3.0f};//유닛 별 스킬 01, 02, 03의 쿨타임. 테스트 성공 시 유닛 스킬 별 쿨타임을 다르게 설정해야 함.
     private float[] remainingCooltime = new float[3];
-
-    
 
     private void Start()//본 클래스를 부모 오브젝트에서 UnitRoot로 이동.
     {
@@ -79,19 +76,17 @@ public class CombatAnimatorController : MonoBehaviour
         StartCoroutine(SetSkillParticleTiming(skillIndex));
     }
 
-    private IEnumerator SetSkillParticleTiming(int skillIndex)//공격, 스킬 등 각 애니메이션 클립에서 공격 타이밍에 맞추어 파티클이 나타나도록 하는 메서드. 애니메이션 클립에서 적절한 프레임에 이벤트를 추가하고, UnitRoot의 Signal Receiver에서 이벤트를 설정한다.
-    {
-
+    private IEnumerator SetSkillParticleTiming(int skillIndex)// 공격, 스킬 등 각 애니메이션 클립에서 공격 타이밍에 맞추어 파티클이 나타나도록 하는 메서드. 
+    {                                                         // 애니메이션 클립에서 적절한 프레임에 이벤트를 추가하고, UnitRoot의 Signal Receiver에서 이벤트를 설정한다.
         try{
             if(skillParticles[skillIndex] != null && !skillParticles[skillIndex].activeSelf)//스킬 파티클이 존재하고 비활성화 상태일 때 호출.
             {
-                skillParticles[skillIndex].SetActive(true);
+                skillParticles[skillIndex].SetActive(true);//스킬 파티클은 Instantiate하지 않고, 비활성화 상태로 두었다가 애니메이션에서 호출 시 활성화한다.
             }
         }
         catch(MissingReferenceException e)
         {
             Debug.LogWarning(e.Message);
-            
             Debug.Log($"{gameObject.transform.parent.name} is Destroyed.");
             yield break;
         }
@@ -111,13 +106,10 @@ public class CombatAnimatorController : MonoBehaviour
             Debug.Log($"{gameObject.transform.parent.name} is Destroyed.");
             yield break;
         }
-
-
-        
         /*
         자동 전투 시 null오류 발생
         - 호출 순서 : 공격 애니메이션 재생 -> 키 프레임에서 Signal 호출 -> SetSkillParticleTiming() 호출 -> 파티클 활성화 -> 애니메이션 종료 -> 파티클 비활성화
-        - 오류 원인 : 애니메이션 종료 후 유닛ㅅ의 hp가 0이 되어 gameObject가 파괴될 경우 -> 파티클 비활성화 불가능한 상황에서 SetActive(false)가 호출됨
+        - 오류 원인 : 애니메이션 종료 후 유닛의 hp가 0이 되어 gameObject가 파괴될 경우 -> 파티클 비활성화 불가능한 상황에서 SetActive(false)가 호출됨
         */
 
         
@@ -144,8 +136,11 @@ public class CombatAnimatorController : MonoBehaviour
     private IEnumerator UnitUseSkill(int skillIndex, string param)//유닛 스킬 사용을 제어하는 메서드.
     {
         if(skillParticles[skillIndex] == null) yield break;//스킬 파티클이 할당되지 않았을 경우 종료.
+
         SetState(param);
+
         yield return new WaitForSeconds(anim.GetCurrentAnimatorClipInfo(0)[0].clip.length);//애니메이션 클립 길이만큼 대기.
+        
         anim.SetBool(param, false);//스킬 사용 후 바로 파라미터를 false로 초기화하여 중복 실행을 방지.
     }
 
@@ -153,14 +148,15 @@ public class CombatAnimatorController : MonoBehaviour
     {
         while(true)
         {
-            bool skillUsed = false;
+            bool skillUsed = false;//스킬 사용 여부 플래그.
             if(!skillUsed)
             {
                 StartCoroutine(UnitAttack());//스킬 사용 중이 아니라면 기본 공격 실행.
             }
+
             for(int i=0; i< skillCoolTimeArray.Length; i++)//쿨타임 배열 길이만큼 반복하며 스킬01 ~ 03을 실행.
             {
-                if(remainingCooltime[i] <=0)//쿨타임이 0이라면(쿨타임 경과 시) 실행.
+                if(remainingCooltime[i] <=0)//쿨타임이 0이라면(즉, 쿨타임 경과 시) 스킬 실행.
                 {
                     StartCoroutine(UnitUseSkill(i, $"{7 + i}_Skill0{i + 1}"));//스킬 파라미터는 bool타입, 7,8,9 Skill01,02,03이므로 해당 파라미터명을 매개변수로 전달.
                     remainingCooltime[i] = skillCoolTimeArray[i];//스킬 실행 후, 잔여 쿨타임 배열(원소 모두 0)을 지정한 쿨타임 배열(flaot형 원소)값으로 다시 초기화.
@@ -176,7 +172,6 @@ public class CombatAnimatorController : MonoBehaviour
                     remainingCooltime[i] -= 1.0f;
                 }
             }
-            //Debug.Log($"{skillUsed}");
             yield return new WaitForSeconds(1.0f);//1초마다 반복.
         }
     }

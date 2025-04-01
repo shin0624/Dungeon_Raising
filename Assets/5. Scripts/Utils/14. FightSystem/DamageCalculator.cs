@@ -132,15 +132,13 @@ public class DamageCalculater : MonoBehaviour
         FindOtherUnitValue();
         yield return new WaitForSeconds(0.001f);
 
-        //Debug.Log($"[ATTACK] {gameObject.name} → {closestUnit.name}, HP Left: {otherHealthPoint}");
-
         if (closestUnit == null)//만약 closestUnit이 null일 경우 코루틴 종료.
         {
             Debug.LogWarning("No target unit found!");
             yield break;
         }
 
-        damage = CalculateDamage();;
+        damage = CalculateDamage();
 
         while(otherHealthPoint > 0)
         {
