@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -8,6 +10,10 @@ public class TowerProgressManager : MonoBehaviour// 던전 진행 상태를 관리하는 매
     public static TowerProgressManager Instance {get; private set;}//타워 진행 매니저의 인스턴스. 다른 클래스에서 접근할 수 있도록 public으로 설정.
 
     private TowerProgressData towerProgress = new TowerProgressData();//타워 진행 상태를 저장하는 데이터. TowerProgressData 클래스의 인스턴스.
+    
+    private Dictionary<int, int> floorDungeonCount = new Dictionary<int, int>{ {1,3}, {10,4}, {20,5}, {30,5}, {40,6}, {50,1}};// 층 별 던전 개수 규칙 딕셔너리. 각 층에 존재할 던전의 개수이다.
+
+    public List<DungeonInformation> allDungeons;// 각 층에 들어갈 던전 SO 리스트.
     private void Awake()
     {
         if(Instance==null)
@@ -19,6 +25,11 @@ public class TowerProgressManager : MonoBehaviour// 던전 진행 상태를 관리하는 매
         {
             Destroy(gameObject);//타워 진행 매니저의 인스턴스가 이미 존재하면 현재 인스턴스를 파괴.
         }
+    }
+
+    private void Start()
+    {
+        InitProgress(50, allDungeons);// 총 50층의 타워, 그 안에 있는 던전들의 클리어 여부를 False로 초기화.
     }
 
     public void SetDungeonClear(int floor, string dungeonID)//특정 층의 던전 클리어 여부를 true로 설정하는 메서드.
@@ -58,5 +69,53 @@ public class TowerProgressManager : MonoBehaviour// 던전 진행 상태를 관리하는 매
         return true;//모든 던전이 클리어되었다면 true 리턴.
     }
 
+    private void InitProgress(int totalFloors, List<DungeonInformation> allDungeons)// 각 층의 모든 던전 클리어 상태를 초기화하는 메서드. 각 층에 존재하는 던전의 ID를 clearedDungeons에 저장하고, 기본값으로 false를 설정.
+    {
+        towerProgress.floorProgress.Clear();//기존 진행 데이터 초기화.
+
+        Dictionary<int, List<string>> dungeonData = new Dictionary<int, List<string>>();// 층 별 던전ID를 저장할 딕셔너리. 층 번호를 키로, 그 층에 속한 던전들의 id리스트를 값으로 설정.
+
+        foreach(DungeonInformation dungeon in allDungeons)//  던전 정보를 dungeonData 딕셔너리에 분류한다.
+        {
+            if(!dungeonData.ContainsKey(dungeon.floorNumber))// dungeonData딕셔너리에 floorNumber 층이 없다면 (즉, 해당 층이 처음 등장하면)
+            {
+                dungeonData[dungeon.floorNumber] = new List<string>();// 빈 리스트를 생성.
+            }
+            dungeonData[dungeon.floorNumber].Add(dungeon.dungeonID);//해당 층에 포함된 던전의 ID를 리스트에 추가한다.          
+        }
+
+        for(int floor = 1; floor <= totalFloors; floor++)//1층부터 반복
+        {
+            towerProgress.floorProgress[floor] = new DungeonFloorData();// 각 층의 던전 클리어 정보를 저장하는 객체를 생성.
+
+            int maxDungeonCount = GetDungeonCountForFloor(floor);// 각 층에 위치할 수 있는 최대 던전 수를 저장.
+
+            if(dungeonData.ContainsKey(floor))//해당 층에 던전이 존재하는 경우.
+            {
+                int dungeonCount = Mathf.Min(dungeonData[floor].Count, maxDungeonCount);//그 층에 있는 던전 수와 floorDungeonCount의 규칙을 비교하여 최대 배정 가능한 던전의 개수를 결정.
+                for(int i = 0; i< dungeonCount; i++)//최대 배정 가능한 던전 개수만큼 반복하며
+                {
+                    towerProgress.floorProgress[floor].clearedDungeons[dungeonData[floor][i]] = false;//던전 ID를 clearedDungeons에 저장한다. 각 던전의 클리어 여부는 false.
+                }
+            }
+            else//만약 해당 층에 해당하는 던전SO가 없을 경우. 즉, 아직 그 층에 어떤 던전을 넣을 지 몰라서 던전 SO를 만들어놓지 않았다면
+            {
+                towerProgress.floorProgress[floor].clearedDungeons = new Dictionary<string, bool>();// 빈 층으로 만들어서 놓는다. 추후 추가 가능하도록.
+            }
+        }  
+    }
+
+    private int GetDungeonCountForFloor(int floor)// 층에 따라 최대 던전의 개수를 반환하는 메서드. 1층~9층은 3개의 던전이 존재하고, 10층~29층까지는 4개..
+    {
+        foreach(var entry in floorDungeonCount.OrderByDescending(e => e.Key))//층수 별 던전 수 규칙 딕셔너리의 원소 중 키(층수)를 내림차순으로 정렬한 후 뽑는다.
+        {
+            if(floor >= entry.Key) return entry.Value;// floor는 타워 층 수 => floorDungeonCount의 key인 {50,40,30,20,10,1}순서로 비교되며, floor에 해당하는 value인 "각 층별 던전수"가 반환됨.
+        } // --> 즉, floor = 1 -> floorDungeonCount{ {1, 3} } => 1층의 최대 던전 수 3 반환 / floor = 28 -> floorDungeonCount{ {20, 5} } => 28층의 최대 던전 수 5를 반환.
+
+        return 3;//기본값은 3(1층)
+    }
+    
+
 
 }
+
