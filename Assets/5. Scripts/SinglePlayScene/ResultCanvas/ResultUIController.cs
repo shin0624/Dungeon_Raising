@@ -38,23 +38,12 @@ public class ResultUIController : MonoBehaviour
     public void PlayerWin()// 플레이어 승리 시 -> winPanel 활성화.
     {
         resultCanvas.gameObject.SetActive(true);
-        //winPanel.SetActive(true);
-
-        // DoTweenTest(winPanel);
-
-        // Time.timeScale = 0.0f;
-
         StartCoroutine(LateActivePanel(winPanel));
     }
 
     public void PlayerLose()// 플레이어 패배 시 -> LosePanel 활성화.
     {
         resultCanvas.gameObject.SetActive(true);
-        //losePanel.SetActive(true);
-
-        // DoTweenTest(losePanel);
-
-        // Time.timeScale = 0.0f;
         StartCoroutine(LateActivePanel(losePanel));
     }
 
