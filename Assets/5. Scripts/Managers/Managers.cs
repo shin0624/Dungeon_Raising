@@ -39,6 +39,7 @@ public class Managers : MonoBehaviour
                 manager.AddComponent<PlayerCharacterManager>();
             }
         }
+        DOTWeenUIAnimation.Init();// DOTWeen의 초기화는 싱글톤 기반이기에, 게임 시작 시 한 번만 초기화 해주면 게임 종료 시 까지 초기화가 유지됨.
         
     }
 

@@ -16,7 +16,8 @@ public class CloseButton : MonoBehaviour
     {
         if(targetPanel.activeSelf)
         {
-            targetPanel.SetActive(false);
+            //targetPanel.SetActive(false);
+            DOTWeenUIAnimation.PopupDownAnimationInUI(targetPanel, Vector3.zero, 0.2f);
         }
         else
         {

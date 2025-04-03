@@ -25,10 +25,11 @@ public class DutyButtonController : MonoBehaviour
         if(!dutyPanel.activeSelf)//패널이 닫혀 있을 때 버튼 클릭 시 
         {
             dutyPanel.SetActive(true);//패널 활성화
+            DOTWeenUIAnimation.PopupAnimationInUI(dutyPanel, dutyPanel.transform.localScale * 0.2f, 0.001f, dutyPanel.transform.localScale, 0.2f);
         }
         else//패널이 열려 있을 때 버튼 클릭 시
         {
-            dutyPanel.SetActive(false);//버튼 비활성화
+            DOTWeenUIAnimation.PopupDownAnimationInUI(dutyPanel, dutyPanel.transform.localScale * 0.2f, 0.2f);
         }
     }
 }
