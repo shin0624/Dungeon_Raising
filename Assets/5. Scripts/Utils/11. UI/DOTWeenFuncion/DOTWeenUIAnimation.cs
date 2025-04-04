@@ -1,5 +1,7 @@
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class DOTWeenUIAnimation// UI 컨트롤러 클래스에서 DOTWeen 기능을 만들지 않고 바로 사용할 수 있게 하는 클래스. 어디서든 쉽게 호출하기 위해 정적 클래스로 선언.
 {
@@ -43,4 +45,17 @@ public static class DOTWeenUIAnimation// UI 컨트롤러 클래스에서 DOTWeen 기능을 �
         }//람다식 형태로 내부에 선언하지 않고, DoScale 실행 후 UI크기를 복구하면 의도대로 실행되지 않는다. DOScale이 끝나기도 전에 localScale을 원래 크기로 돌려버리기 때문.
         );
     }
+
+    public static IEnumerator PopupDownCoroutineInUI(GameObject obj, Vector3 aftertAndValue, float afterDuration, string sceneName)// UI를 끌 때 사용하는 메서드. timeScale이나 SceneManagement를 사용할 때는 부득이하게 코루틴으로 타이밍 조절이 필요하기 때문에 선언.
+    {
+        if(Time.timeScale == 0)
+        {
+            Time.timeScale = 1;//UI가 작아지는 동안 게임이 멈춰있다면 다시 게임을 진행하도록 설정.
+        }
+        PopupDownAnimationInUI(obj, aftertAndValue, afterDuration);//UI를 점점 작아지게 만든다. 작아진 후 자동으로 비활성화 및 크기 복구 수행.
+        yield return new WaitForSecondsRealtime(afterDuration -0.2f);//UI가 작아지는 동안 대기.
+        SceneManager.LoadScene(sceneName);//UI가 작아진 후 씬을 로드한다. 씬 로드 시 UI가 비활성화되어 있기 때문에, UI가 사라지지 않고 씬이 전환되는 현상을 방지하기 위해 UI를 비활성화한 후 씬을 로드한다.
+    }
+
+
 }

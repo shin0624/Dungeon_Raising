@@ -309,6 +309,7 @@ GameObject:
   - component: {fileID: 13669069}
   - component: {fileID: 13669071}
   - component: {fileID: 13669070}
+  - component: {fileID: 13669072}
   m_Layer: 5
   m_Name: WinPanel
   m_TagString: Untagged
@@ -377,6 +378,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 13669068}
   m_CullTransparentMesh: 1
+--- !u!114 &13669072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13669068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de4cdc9e22cd06b41b460c311d48bac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextDungeonButton: {fileID: 971180112}
+  mainSceneButton: {fileID: 1392734055}
 --- !u!1 &16174713
 GameObject:
   m_ObjectHideFlags: 0
@@ -1431,7 +1446,6 @@ GameObject:
   - component: {fileID: 196107083}
   - component: {fileID: 196107082}
   - component: {fileID: 196107081}
-  - component: {fileID: 196107084}
   m_Layer: 5
   m_Name: MainSceneButton
   m_TagString: Untagged
@@ -1541,20 +1555,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 196107079}
   m_CullTransparentMesh: 1
---- !u!114 &196107084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 196107079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a5aaec7c6032764e8082c8b7633bb0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextSceneName: MainScene
-  button: {fileID: 196107081}
 --- !u!1 &252550212
 GameObject:
   m_ObjectHideFlags: 0
@@ -4758,6 +4758,7 @@ GameObject:
   - component: {fileID: 583338794}
   - component: {fileID: 583338796}
   - component: {fileID: 583338795}
+  - component: {fileID: 583338797}
   m_Layer: 5
   m_Name: LosePanel
   m_TagString: Untagged
@@ -4826,6 +4827,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583338793}
   m_CullTransparentMesh: 1
+--- !u!114 &583338797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583338793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ff79b1094e5ab42900223153282166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerReturnButton: {fileID: 998193909}
+  mainSceneButton: {fileID: 196107081}
+  retryButton: {fileID: 682568258}
 --- !u!1 &585510563
 GameObject:
   m_ObjectHideFlags: 0
@@ -6403,7 +6419,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB358\uC804 \uC785\uAD6C"
+  m_text: "\uD0C0\uC6CC\uB85C \uB3CC\uC544\uAC00\uAE30"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe6eadbef09b96c44bf903cf63e1b2e6, type: 2}
   m_sharedMaterial: {fileID: -6848732974039993106, guid: fe6eadbef09b96c44bf903cf63e1b2e6, type: 2}
@@ -6468,7 +6484,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -12.971298, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -8378,9 +8394,8 @@ GameObject:
   - component: {fileID: 998193911}
   - component: {fileID: 998193910}
   - component: {fileID: 998193909}
-  - component: {fileID: 998193912}
   m_Layer: 5
-  m_Name: DungeonEntranceButton
+  m_Name: TowerReturnButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8488,20 +8503,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 998193907}
   m_CullTransparentMesh: 1
---- !u!114 &998193912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 998193907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a5aaec7c6032764e8082c8b7633bb0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextSceneName: DungeonScene
-  button: {fileID: 998193909}
 --- !u!1 &1042361050
 GameObject:
   m_ObjectHideFlags: 0
@@ -10839,7 +10840,6 @@ GameObject:
   - component: {fileID: 1392734057}
   - component: {fileID: 1392734056}
   - component: {fileID: 1392734055}
-  - component: {fileID: 1392734058}
   m_Layer: 5
   m_Name: MainSceneButton
   m_TagString: Untagged
@@ -10949,20 +10949,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1392734053}
   m_CullTransparentMesh: 1
---- !u!114 &1392734058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1392734053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a5aaec7c6032764e8082c8b7633bb0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextSceneName: MainScene
-  button: {fileID: 1392734055}
 --- !u!1 &1414690763
 GameObject:
   m_ObjectHideFlags: 0

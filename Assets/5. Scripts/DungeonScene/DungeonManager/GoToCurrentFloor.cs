@@ -84,9 +84,32 @@ public class GoToCurrentFloor : MonoBehaviour//현재 플레이어의 층 수 정보를 받아
     }
 
     public void CheckLockImage(int currentFloor, Image[] lockImages)//ChoicePanel이 오픈될 때 마다 현재 플레이어의 클리어 여부를 체크하고 LockImage를 제어하는 메서드.
-    {
-        List<string> dungeonIDs = TowerProgressManager.Instance.allDungeons.FindAll(
-                                                                            dungeonInfo =>dungeonInfo.floorNumber == currentFloor)
+    {   
+        //dungeonInfo.floorNumber는 1부터 6까지. currentFloor는 1부터 50까지이기 때문에, 두 변수의 범위가 다르다. 왜? => 실제 플레이어가 플레이해야 하는 층은 50층인데, 게임 아키텍처는 한 씬 당 10개의 던전을 표현하기로 했기 때문.
+        int realCurrentFloor = 0;//현재 층 수를 저장할 변수. 1층부터 50층까지의 층 수를 저장. currentFloor와 floorNumber의 범위가 다르기 때문에, floorNumber에 맞게 변환해주어야 한다.
+        switch(currentFloor/10)
+        {
+            case 0 : 
+                realCurrentFloor = 1;//1층 ~ 9층.
+                break;
+            case 1 : 
+                realCurrentFloor = 2;//10층 ~ 19층.
+                break;
+            case 2 : 
+                realCurrentFloor = 3;//20층 ~ 29층.
+                break;
+            case 3 : 
+                realCurrentFloor = 4;//30층 ~ 39층.
+                break;
+            case 4 : 
+                realCurrentFloor = 5;//40층 ~ 49층.
+                break;
+            case 5 : 
+                realCurrentFloor = 6;//50층.
+                break;
+        }
+
+        List<string> dungeonIDs = TowerProgressManager.Instance.allDungeons.FindAll(dungeonInfo =>dungeonInfo.floorNumber == realCurrentFloor)
                                                                             .ConvertAll(dungeonInfo => dungeonInfo.dungeonID);
         //allDungeon리스트에서 현재 층에 해당하는 DungeonInformation객체들을 추려낸다.
         //그 객체들에서 dungeonID만 추출하여 리스트로 반환한다.
@@ -101,5 +124,4 @@ public class GoToCurrentFloor : MonoBehaviour//현재 플레이어의 층 수 정보를 받아
             return;
         }
     }
-    
 }

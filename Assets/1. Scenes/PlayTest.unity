@@ -1488,13 +1488,14 @@ GameObject:
   - component: {fileID: 290779894}
   - component: {fileID: 290779896}
   - component: {fileID: 290779895}
+  - component: {fileID: 290779897}
   m_Layer: 5
   m_Name: WinPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &290779894
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1556,6 +1557,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 290779893}
   m_CullTransparentMesh: 1
+--- !u!114 &290779897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290779893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de4cdc9e22cd06b41b460c311d48bac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextDungeonButton: {fileID: 2138303132}
+  mainSceneButton: {fileID: 572447115}
 --- !u!1 &319220249
 GameObject:
   m_ObjectHideFlags: 0
@@ -3057,13 +3072,14 @@ GameObject:
   - component: {fileID: 503773837}
   - component: {fileID: 503773839}
   - component: {fileID: 503773838}
+  - component: {fileID: 503773840}
   m_Layer: 5
   m_Name: LosePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &503773837
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3125,6 +3141,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 503773836}
   m_CullTransparentMesh: 1
+--- !u!114 &503773840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503773836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ff79b1094e5ab42900223153282166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerReturnButton: {fileID: 2000981472}
+  mainSceneButton: {fileID: 2139501796}
+  retryButton: {fileID: 1838858561}
 --- !u!1 &511156015
 GameObject:
   m_ObjectHideFlags: 0
@@ -3863,9 +3894,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 691323726}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -350, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &592546110
@@ -4359,9 +4390,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1331828281}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 461, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &676874512
@@ -7207,7 +7238,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB358\uC804 \uC785\uAD6C"
+  m_text: "\uD0C0\uC6CC\uB85C \uB3CC\uC544\uAC00\uAE30"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe6eadbef09b96c44bf903cf63e1b2e6, type: 2}
   m_sharedMaterial: {fileID: -6848732974039993106, guid: fe6eadbef09b96c44bf903cf63e1b2e6, type: 2}
@@ -9639,9 +9670,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 691323726}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 461, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1433871763
@@ -10306,7 +10337,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1596401276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15409,9 +15440,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1331828281}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -350, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1913653803
