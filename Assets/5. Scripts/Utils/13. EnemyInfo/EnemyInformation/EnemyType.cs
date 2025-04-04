@@ -13,4 +13,6 @@ public enum EnemyType
     Ghoul,
     Bone,
     Biking,
+    RedDevil,
+    Golem,
 }

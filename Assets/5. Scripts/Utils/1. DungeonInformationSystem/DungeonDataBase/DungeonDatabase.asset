@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50cd59cad94737041ac80442dc63c0cd, type: 3}
+  m_Name: DungeonDatabase
+  m_EditorClassIdentifier: 
+  undergroundDungeonList:
+  - {fileID: 11400000, guid: dc439f5f2ee6d7c46ad2235e24d9d69d, type: 2}
+  - {fileID: 11400000, guid: 8e5985b229aa4a9448be3d72e9f315d2, type: 2}
+  - {fileID: 11400000, guid: 77013751ac76ed844a8a2106bb0cf114, type: 2}
+  hellDungeonList:
+  - {fileID: 11400000, guid: 0c3dbf9fee5f323478b4034b3bee9cdc, type: 2}
+  - {fileID: 11400000, guid: 1e71be07c048fa945b18923ac313fe98, type: 2}
+  silvanDungeonList:
+  - {fileID: 11400000, guid: b796e1a913b6a9243a45298dc5e37693, type: 2}
+  - {fileID: 11400000, guid: 16d58a9f658cddf4a988fff7c6fcbe27, type: 2}
+  - {fileID: 11400000, guid: 4e55277556507cc4bae4d854977308e2, type: 2}
+  KrisosDungeonList:
+  - {fileID: 11400000, guid: 988344a4e374d60499e6ca8746f8b4d0, type: 2}
+  - {fileID: 11400000, guid: 4551b8613cf7a8846919ede6b2f78ed1, type: 2}
+  - {fileID: 11400000, guid: 9ecd69710f04c6541918f971ddb3b62c, type: 2}
+  skyDungeonList: []
+  lastFloorDungeonList: []

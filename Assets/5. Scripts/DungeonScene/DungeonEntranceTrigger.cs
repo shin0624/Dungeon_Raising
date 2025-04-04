@@ -47,6 +47,7 @@ public class DungeonEntranceTrigger : MonoBehaviour
     private IEnumerator PopUI()//던전 입구 트리거 캔버스는 TimeScale과 던전 정보 동기화가 필요하기 때문에, 코루틴으로 프레임 단위 타이밍을 조절한다.
     {
         popupCanvas.gameObject.SetActive(true);
+        dungeonEnterPanel.SetActive(true);//던전 입구 패널 활성화.
         yield return new WaitForEndOfFrame();         
         dungeonInfoPrintToPanel.SynchronizeDungeonInfo();//던전 정보 출력.
         yield return new WaitForEndOfFrame();

@@ -18,12 +18,13 @@ public class CanvasCloseButton : MonoBehaviour
     {
         if(popupCanvas.gameObject.activeSelf)
         {
-            popupCanvas.gameObject.SetActive(false);
-            if(Time.timeScale==0)
+            if(Time.timeScale == 0)
             {
                 Time.timeScale = 1;
-                DOTWeenUIAnimation.PopupDownAnimationInUI(targetPanel, Vector3.zero, 0.2f);
             }
+            DOTWeenUIAnimation.PopupDownAnimationInUI(targetPanel, Vector3.zero, 0.2f);
+            popupCanvas.gameObject.SetActive(false);
+
         }
         else
         {

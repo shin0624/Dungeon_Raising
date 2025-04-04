@@ -13,4 +13,6 @@ public enum BossType
     Ghoul,
     Bone,
     Biking,
+    RedDevil,
+    Golem,
 }
