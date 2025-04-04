@@ -14,6 +14,8 @@ public class TowerProgressManager : MonoBehaviour// 던전 진행 상태를 관리하는 매
     private Dictionary<int, int> floorDungeonCount = new Dictionary<int, int>{ {1,3}, {10,4}, {20,5}, {30,5}, {40,6}, {50,1}};// 층 별 던전 개수 규칙 딕셔너리. 각 층에 존재할 던전의 개수이다.
 
     public List<DungeonInformation> allDungeons;// 각 층에 들어갈 던전 SO 리스트.
+    [SerializeField] private DungeonDatabase dungeonDatabase;//던전 데이터베이스. 던전 정보를 담고 있는 SO.
+    
     private void Awake()
     {
         if(Instance==null)
@@ -29,6 +31,7 @@ public class TowerProgressManager : MonoBehaviour// 던전 진행 상태를 관리하는 매
 
     private void Start()
     {
+        InputToAllDungeons();//던전 DB의 각 층 리스트 원소인 던전 정보들을 모두 allDungeons에 추가한다.
         InitProgress(50, allDungeons);// 총 50층의 타워, 그 안에 있는 던전들의 클리어 여부를 False로 초기화.
     }
 
@@ -113,6 +116,17 @@ public class TowerProgressManager : MonoBehaviour// 던전 진행 상태를 관리하는 매
         } // --> 즉, floor = 1 -> floorDungeonCount{ {1, 3} } => 1층의 최대 던전 수 3 반환 / floor = 28 -> floorDungeonCount{ {20, 5} } => 28층의 최대 던전 수 5를 반환.
 
         return 3;//기본값은 3(1층)
+    }
+
+    private void InputToAllDungeons()//던전 DB의 각 층 리스트 원소인 던전 정보들을 모두 allDungeons에 추가한다. 리스트 내의 원소들을 풀어서 한 리스트에 넣기 위해 AddRange를 사용하였고, AddRange는 매개변수로 받은 리스트들의 원소들을 타겟 리스트에 넣는 것이므로, allDungeons의 원소는 리스트가 아니라 DungeonInformation객체들이다.
+    {
+        allDungeons = new List<DungeonInformation>();//던전 정보를 담을 리스트 초기화.
+        allDungeons.AddRange(dungeonDatabase.undergroundDungeonList);//지하 던전 리스트 추가.
+        allDungeons.AddRange(dungeonDatabase.hellDungeonList);//연옥 던전 리스트 추가.
+        allDungeons.AddRange(dungeonDatabase.silvanDungeonList);//실반 던전 리스트 추가.
+        allDungeons.AddRange(dungeonDatabase.KrisosDungeonList);//크리소스 던전 리스트 추가.
+        allDungeons.AddRange(dungeonDatabase.skyDungeonList);//천궁 던전 리스트 추가.
+        allDungeons.AddRange(dungeonDatabase.lastFloorDungeonList);//보스 플로어 던전 리스트 추가.
     }
     
 

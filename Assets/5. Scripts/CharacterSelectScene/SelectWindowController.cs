@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine;
 public class SelectWindowController : MonoBehaviour
 {
     //캐릭터 선택창 활/비활성화를 제어하는 스크립트.
@@ -36,7 +34,7 @@ public class SelectWindowController : MonoBehaviour
         Init();
     }
 
-    private void Init()//초기 경고 패널 모두 비활성화. 
+    private void Init()//초기 경고 패널 모두 비활성화
     {
         foreach(GameObject panel in failurePanels)
         {
@@ -61,21 +59,25 @@ public class SelectWindowController : MonoBehaviour
                 characterWindow.SetActive(true);
                 characterButton.color = activeColor;
                 break;
+
             case "Job": // 직업 선택 창
                 jobWindow.SetActive(true);
                 RestrictionJobButtonByGender();
                 jobButton.color = activeColor;
                 break;
+
             case "Race"://종족 선택 창
                 raceWindow.SetActive(true);
                 raceButton.color = activeColor;
                 break;
+
             case "Nickname": //닉네임 입력 창
                 nicknameWindow.SetActive(true);
                 characterButton.gameObject.SetActive(false);
                 jobButton.gameObject.SetActive(false);
                 raceButton.gameObject.SetActive(false);
                 break;
+
             case "UserInfoSave":
             //추후 사용자 입력 데이터 저장 구현. 그 전에 닉네임 창에서 유효성 검사 로직 구현
                 gameObject.SetActive(false);
@@ -198,4 +200,5 @@ public class SelectWindowController : MonoBehaviour
             StartCoroutine(ActiveFailureText(2));
         }
     }
+
 }

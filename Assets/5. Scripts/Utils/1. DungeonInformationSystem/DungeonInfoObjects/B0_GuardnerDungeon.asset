@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d74d8d41ef1e0134897f325cf78575ee, type: 3}
+  m_Name: B0_GuardnerDungeon
+  m_EditorClassIdentifier: 
+  dungeonName: "\uACE0\uB300\uBB38\uBA85 \uC720\uC801\uC9C0"
+  dungeonID: 002
+  floorNumber: 1
+  firstRewardSprite: {fileID: 21300000, guid: 3e4fcc84a0ac95b429c56452575f6021, type: 3}
+  secondRewardSprite: {fileID: 21300000, guid: 3676a0b185daeb54fb257f700ba7ead4, type: 3}
+  firstRewardAmount: 110
+  secondRewardAmount: 2100
+  enemyType: 3
+  bossType: 3

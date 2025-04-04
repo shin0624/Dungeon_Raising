@@ -8,6 +8,7 @@ public class CanvasCloseButton : MonoBehaviour
 {
     [SerializeField] private Button closeButton;
     [SerializeField] private Canvas popupCanvas;
+    [SerializeField] private GameObject targetPanel;
     void Start()
     {
         closeButton.onClick.AddListener(OnCloseButtonClicked);
@@ -17,11 +18,13 @@ public class CanvasCloseButton : MonoBehaviour
     {
         if(popupCanvas.gameObject.activeSelf)
         {
-            popupCanvas.gameObject.SetActive(false);
-            if(Time.timeScale==0)
+            if(Time.timeScale == 0)
             {
                 Time.timeScale = 1;
             }
+            DOTWeenUIAnimation.PopupDownAnimationInUI(targetPanel, Vector3.zero, 0.2f);
+            popupCanvas.gameObject.SetActive(false);
+
         }
         else
         {

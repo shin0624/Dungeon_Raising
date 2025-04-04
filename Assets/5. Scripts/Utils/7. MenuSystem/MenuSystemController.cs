@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,6 +48,7 @@ public class MenuSystemController : MonoBehaviour
         if(panelsInPivot[index] != null)//index번지에 해당하는 패널이 존재하면 활성화
         {
             panelsInPivot[index].SetActive(true);
+            DOTWeenUIAnimation.PopupAnimationInUI(panelsInPivot[index], panelsInPivot[index].transform.localScale * 1.2f, 0.2f, panelsInPivot[index].transform.localScale, 0.2f);
         }
     }
 }
