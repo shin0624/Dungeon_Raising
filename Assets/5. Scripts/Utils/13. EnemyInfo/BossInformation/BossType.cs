@@ -15,4 +15,5 @@ public enum BossType
     Biking,
     RedDevil,
     Golem,
+    Wolf,
 }
