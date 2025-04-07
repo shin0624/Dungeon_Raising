@@ -12,6 +12,7 @@ public class PlaceUIController : MonoBehaviour
     [SerializeField] private Button placeCompleteButton;//배치 완료 버튼
     [SerializeField] private EnemyStatusVisualizer enemyStatusVisualizer;
     [SerializeField] private UnitStatusVisualizer unitStatusVisualizer;
+    [SerializeField] private GameObject timerPanel;//타이머 패널.
     private bool isComleteButtonClicked = false;// 배치 완료가 결정되었음을 알리는 플래그.
 
     private void Start()
@@ -23,6 +24,7 @@ public class PlaceUIController : MonoBehaviour
 
         isComleteButtonClicked = false;
         singleplayUICanvas.gameObject.SetActive(true);//Canvas는 기본적으로 비활성화되어 있으므로 활성화. 
+        timerPanel.SetActive(false);//타이머 패널은 비활성화.
         placeCompleteButton.onClick.AddListener(OnPlaceCompeteButtonClicked);//배치 완료 버튼에 이벤트 추가.
     }
 
@@ -38,11 +40,12 @@ public class PlaceUIController : MonoBehaviour
             isComleteButtonClicked = true;//플래그를 true로 바꾸어 다른 스크립트에서 게임 시작 여부를 판단할 수 있게 한다.
             Debug.Log("Game Start!");
             StartUnitFight();
+            timerPanel.SetActive(true);//타이머 패널 활성화.
             
         }
     }
 
-    private void StartUnitFight()
+    private void StartUnitFight()//플레이어 유닛과 적 유닛의 정보를 가져오고, 각각 전투 실행 메서드를 호출한다.
     {
         List<GameObject>playerUnits = new List<GameObject>(GameObject.FindGameObjectsWithTag("Unit_Soldier"))
         {

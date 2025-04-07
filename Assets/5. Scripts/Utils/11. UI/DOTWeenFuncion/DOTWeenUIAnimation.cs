@@ -56,6 +56,4 @@ public static class DOTWeenUIAnimation// UI 컨트롤러 클래스에서 DOTWeen 기능을 �
         yield return new WaitForSecondsRealtime(afterDuration -0.2f);//UI가 작아지는 동안 대기.
         SceneManager.LoadScene(sceneName);//UI가 작아진 후 씬을 로드한다. 씬 로드 시 UI가 비활성화되어 있기 때문에, UI가 사라지지 않고 씬이 전환되는 현상을 방지하기 위해 UI를 비활성화한 후 씬을 로드한다.
     }
-
-
 }
