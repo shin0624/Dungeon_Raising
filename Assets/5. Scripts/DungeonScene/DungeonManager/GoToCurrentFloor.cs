@@ -7,46 +7,16 @@ using UnityEngine.UI;
 public class GoToCurrentFloor : MonoBehaviour//현재 플레이어의 층 수 정보를 받아와, 해당하는 층의 Scene으로 이동하는 스크립트. 
 {   // ChoicePanelController.cs에서 호출된다.
     private string[] floors = {"DungeonScene", "10_19Floor", "20_29Floor", "30_39Floor", "40_49Floor", "50Floor"};//각 층의 던전 이름을 저장하는 배열. 1층부터 50층까지의 던전 이름을 저장.
-    public void CheckCurrentFloor(int currentFloor)//플레이어의 현재 층 수를 체크하고, 해당하는 씬으로 이동하는 메서드.
+
+    public void CheckCurrentFloor(int targetFloor)//플레이어의 현재 층 수를 체크하고, 해당하는 씬으로 이동하는 메서드. targetFloor는 입장하려는 층의 대표 층(10,20,30.40,50)
     {
-        if(currentFloor != PlayerInfo.Instance.GetPlayerFloor())//현재 플레이어 층 수와 플레이어 정보에 저장된 층 수가 맞지 않다면
+        int playerFloor = PlayerInfo.Instance.GetPlayerFloor();//현재 플레이어의 층 수를 가져옴.
+        if(targetFloor > playerFloor)
         {
-            Debug.Log("Current floor does not match.");//디버그 로그 출력.
-            return;//메서드 종료.
+            return;//플레이어의 층 수보다 높은 층으로 이동할 수 없도록 설정.
         }
-        else
-        {
-            switch(currentFloor / 10)//플레이어의 층 수에 따라 이동할 씬을 결정.
-            {
-                case 0:
-                    LoadCurrentFloorScene(0);//1_9Floor 씬으로 이동.
-                    break;
-
-                case 1:
-                    LoadCurrentFloorScene(1);//10_19Floor 씬으로 이동.
-                    break;
-
-                case 2:
-                    LoadCurrentFloorScene(2);//20_29Floor 씬으로 이동.
-                    break;
-
-                case 3:
-                    LoadCurrentFloorScene(3);//30_39Floor 씬으로 이동.
-                    break;
-
-                case 4:
-                    LoadCurrentFloorScene(4);//40_49Floor 씬으로 이동.
-                    break;
-
-                case 5 :
-                    LoadCurrentFloorScene(5);//50Floor 씬으로 이동.
-                    break;
-
-                default:
-                    Debug.Log("Invalid floor number.");//유효하지 않은 층 수일 경우 디버그 로그 출력.
-                    break;
-            }
-        }
+        int index = targetFloor / 10;
+        LoadCurrentFloorScene(index);//층 수에 해당하는 씬을 로드하는 메서드 호출.
     }
 
     private void LoadCurrentFloorScene(int index)//층 수에 해당하는 씬을 로드하는 메서드.
@@ -72,14 +42,11 @@ public class GoToCurrentFloor : MonoBehaviour//현재 플레이어의 층 수 정보를 받아
 
     private void UnlockingFloor(int currentFloor, Image[] lockImages)//현재 플레이어의 층 수에 따라, 해당 층이 모두 클리어되었다면 LockImage를 비활성화하는 메서드.
     {
-        if(currentFloor-1 < lockImages.Length)//현재 층 수가 LockImage 배열의 길이보다 작을 경우에만 LockImage를 비활성화.
+        int maxIndex = currentFloor / 10;
+        for(int i = 0; i <= maxIndex && i < lockImages.Length; i++)
         {
-            lockImages[currentFloor/10].gameObject.SetActive(false);//LockImage를 비활성화.
-            Debug.Log($"Unlocking floor: {currentFloor}");//해당 층을 해금했다는 디버그 로그 출력.
-        }
-        else
-        {
-            Debug.Log("Invalid floor index for unlocking.");//유효하지 않은 층 수일 경우 디버그 로그 출력.
+            lockImages[i].gameObject.SetActive(false);//LockImage를 비활성화.
+            Debug.Log($"Unlocking floor: {i}");//해당 층을 해금했다는 디버그 로그 출력. 
         }
     }
 
@@ -87,6 +54,7 @@ public class GoToCurrentFloor : MonoBehaviour//현재 플레이어의 층 수 정보를 받아
     {   
         //dungeonInfo.floorNumber는 1부터 6까지. currentFloor는 1부터 50까지이기 때문에, 두 변수의 범위가 다르다. 왜? => 실제 플레이어가 플레이해야 하는 층은 50층인데, 게임 아키텍처는 한 씬 당 10개의 던전을 표현하기로 했기 때문.
         int realCurrentFloor = 0;//현재 층 수를 저장할 변수. 1층부터 50층까지의 층 수를 저장. currentFloor와 floorNumber의 범위가 다르기 때문에, floorNumber에 맞게 변환해주어야 한다.
+
         switch(currentFloor/10)
         {
             case 0 : 
@@ -115,13 +83,15 @@ public class GoToCurrentFloor : MonoBehaviour//현재 플레이어의 층 수 정보를 받아
         //그 객체들에서 dungeonID만 추출하여 리스트로 반환한다.
         //ConvertAll은 람다식으로 새 리스트를 만들 수 있음. Select()로도 구현할 수 있으나, 유니티에서 LINQ사용은 지양하는 편이 좋기에 C#의 내장메서드를 사용.
 
-        if(TowerProgressManager.Instance.IsFloorCleared(currentFloor, dungeonIDs))//currentFloor층의 모든 던전이 클리어되었다면
-        {
-            UnlockingFloor(currentFloor, lockImages);//LockImage를 비활성화.
-        }
-        else
-        {
-            return;
-        }
+        UnlockingFloor(currentFloor, lockImages);//LockImage를 비활성화.
+
+        // if(TowerProgressManager.Instance.IsFloorCleared(currentFloor, dungeonIDs))//currentFloor층의 모든 던전이 클리어되었다면
+        // {
+            
+        // }
+        // else
+        // {
+        //     return;
+        // }
     }
 }
