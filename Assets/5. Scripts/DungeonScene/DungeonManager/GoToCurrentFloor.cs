@@ -89,7 +89,7 @@ public class GoToCurrentFloor : MonoBehaviour//현재 플레이어의 층 수 정보를 받아
         
         if(TowerProgressManager.Instance.IsFloorCleared(currentFloor, dungeonIDs))//currentFloor에 존재하는 던전리스트를 불러와서 모두 클리어되었는지 체크.
         {
-            PlayerInfo.Instance.SetPlayerFloor();//true이면 현재 층 수를 +1
+            PlayerInfo.Instance.SetPlayerFloor();//true이면 현재 층 수를 +1한 값을 리턴.
         }
         else//아직 currentFloor의 모든 던전이 클리어되지 않았다면
         {

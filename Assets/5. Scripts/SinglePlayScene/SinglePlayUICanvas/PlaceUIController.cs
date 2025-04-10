@@ -71,7 +71,7 @@ public class PlaceUIController : MonoBehaviour
 
         foreach(GameObject unit in enemyUnits)
         {
-            EnemyMoveController enemyMoveController = unit. GetComponent<EnemyMoveController>();
+            EnemyMoveController enemyMoveController = unit.GetComponent<EnemyMoveController>();
             if(enemyMoveController!=null)
             {
                 enemyMoveController.StartFight();

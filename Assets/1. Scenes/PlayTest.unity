@@ -1569,8 +1569,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de4cdc9e22cd06b41b460c311d48bac8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextDungeonButton: {fileID: 2138303132}
+  towerReturnButton: {fileID: 0}
   mainSceneButton: {fileID: 572447115}
+  goToCurrentFloor: {fileID: 0}
 --- !u!1 &319220249
 GameObject:
   m_ObjectHideFlags: 0
@@ -2962,6 +2963,7 @@ GameObject:
   - component: {fileID: 497900666}
   - component: {fileID: 497900668}
   - component: {fileID: 497900667}
+  - component: {fileID: 497900669}
   m_Layer: 0
   m_Name: TestManager
   m_TagString: Untagged
@@ -3033,6 +3035,7 @@ MonoBehaviour:
   placeCompleteButton: {fileID: 1945512954}
   enemyStatusVisualizer: {fileID: 497900663}
   unitStatusVisualizer: {fileID: 497900664}
+  timerPanel: {fileID: 0}
 --- !u!114 &497900667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3048,6 +3051,7 @@ MonoBehaviour:
   resultCanvas: {fileID: 1596401278}
   winPanel: {fileID: 290779893}
   losePanel: {fileID: 503773836}
+  goToCurrentFloor: {fileID: 497900669}
 --- !u!114 &497900668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3061,6 +3065,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resultUIController: {fileID: 497900667}
+--- !u!114 &497900669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497900662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd924576586a45418aefcb1e9f2e990, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &503773836
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ public class WinPanelController : MonoBehaviour// 게임 승리 시 보여지는 winPanel
         mainSceneButton.onClick.RemoveListener(OnMainSceneButtonClicked);
     }
 
-    private void OnTowerReturnButtonClicked()//패배하여 다시 던전이 있던 층으로 돌아가는 버튼.
+    private void OnTowerReturnButtonClicked()//다시 던전이 있던 층으로 돌아가는 버튼.
     {
         string nextDungeon = goToCurrentFloor.GoToNextDungeon(PlayerInfo.Instance.GetPlayerFloor());
 
