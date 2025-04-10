@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class TowerProgressManager : MonoBehaviour// 던전 진행 상태를 관리하는 매니저. 던전 클리어 상태는 게임이 실행되는 내내 같은 데이터를 유지해야 하므로, 싱글톤으로 선언.
@@ -33,6 +34,12 @@ public class TowerProgressManager : MonoBehaviour// 던전 진행 상태를 관리하는 매
     {
         InputToAllDungeons();//던전 DB의 각 층 리스트 원소인 던전 정보들을 모두 allDungeons에 추가한다.
         InitProgress(50, allDungeons);// 총 50층의 타워, 그 안에 있는 던전들의 클리어 여부를 False로 초기화.
+        SceneManager.sceneLoaded+=OnSceneLoaded;//씬이 로드될 때마다 OnSceneLoaded 메서드를 호출.
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)//씬이 변경될 때 마다 던전 클리어 여부 및 현재 층 수, 클리어 던전 수를 업데이트한다.
+    {
+        //PlayerInfo.Instance.SetPlayerFloor();// 타워 층 수 테스트.
     }
 
     public void SetDungeonClear(int floor, string dungeonID)//특정 층의 던전 클리어 여부를 true로 설정하는 메서드.

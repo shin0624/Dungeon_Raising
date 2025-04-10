@@ -105,6 +105,18 @@ public class PlayerInfo : MonoBehaviour
         playerInformation.playerGold = gold;
     }
 
+    private int SetCurrentFloor()//플레이어가 해당 층의 모든 던전을 클리어했을 때, 현재 층을 다음 층으로 변경하는 메서드.
+    {
+        int nextFloor = playerInformation.towerFloor+=1;//플레이어가 클리어한 층 수를 1 증가시킨다.
+        Debug.Log("next Floor : "+ nextFloor);//디버그 로그로 층 수를 출력한다.
+        return nextFloor;// playerInformation이 PlayerInfo의 멤버변수이고, 그 안의 towerFloor는 구조체 내의 필드이기에, 값 변경 가능.
+    }
+
+    public void SetPlayerFloor()//명시적으로 변경된 값을 실제 구조체 변수값에 넣는다.
+    {
+        playerInformation.towerFloor = SetCurrentFloor();
+    }
+
 //--------------Getter------------------------------------------------------------------------------------
     public string GetPlayerID()
     {
@@ -171,15 +183,11 @@ public class PlayerInfo : MonoBehaviour
 
     public int GetPlayerFloor()
     {
-        if(playerInformation.towerFloor == 0)//플레이어 층 정보가 설정되지 않았다면 0을 반환
+        if(playerInformation.towerFloor == 0)//플레이어 층 정보가 설정되지 않아서 0인 경우, 1로 설정 후 1을 반환.
         {
-            return 1;//플레이어 층 정보가 설정되지 않았다면 가장 처음 층인 1층을 반환
+            SetPlayerFloor();
         }
-        else
-        {
-            return playerInformation.towerFloor;//플레이어 층 정보가 설정되어 있다면 해당 층 정보를 반환
-        }
-        
+        return playerInformation.towerFloor;//플레이어 층 정보가 설정되어 있다면 해당 층 정보를 반환
     }
 
 }

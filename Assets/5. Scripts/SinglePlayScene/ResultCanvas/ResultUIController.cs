@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +12,7 @@ public class ResultUIController : MonoBehaviour
     [SerializeField] private Canvas resultCanvas;//resultCanvas는 sortOrder가 모든 캔버스보다 높은 1 이므로 먼저 활성화 해준다.
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
+    [SerializeField] private GoToCurrentFloor goToCurrentFloor;
 
     void Start()
     {
@@ -39,6 +39,9 @@ public class ResultUIController : MonoBehaviour
     public void PlayerWin()// 플레이어 승리 시 -> winPanel 활성화.
     {
         resultCanvas.gameObject.SetActive(true);
+        
+        goToCurrentFloor.ClearProcess(PlayerInfo.Instance.GetPlayerFloor());// 현재 던전 클리어 처리, 해당 층 클리어 여부 체크
+        
         StartCoroutine(LateActivePanel(winPanel));
     }
 

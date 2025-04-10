@@ -15,4 +15,5 @@ public enum EnemyType
     Biking,
     RedDevil,
     Golem,
+    Wolf,
 }

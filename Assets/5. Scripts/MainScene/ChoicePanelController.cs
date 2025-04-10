@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening.Plugins;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,15 +23,8 @@ public class ChoicePanelController : MonoBehaviour//이동하고자 하는 층 수를 선택
         currentFloor = PlayerInfo.Instance.GetPlayerFloor();//현재 층수를 가져옴.
         currentFloorText.text = $"현재 층 수 : {currentFloor}층";//현재 층수를 가져와서 TextMeshProUGUI에 표시.
         AttachFuncToButtons();// 각 버튼에 리스너 등록.
-                
-        if(currentFloor < 10)//1층~9층까지는 비활성화시키지 않음.
-        {
-            return;
-        }
-        else
-        {
-            goToCurrentFloor.CheckLockImage(currentFloor, lockImages);//현재 층의 클리어 여부를 확인 후 LockImage를 비활성화.
-        }
+
+        goToCurrentFloor.UnlockingFloor(currentFloor, lockImages);//현재 층 및 이전 층들의 LockImage를 비활성화.
     }
 
     private void OnDisable()
@@ -40,9 +34,11 @@ public class ChoicePanelController : MonoBehaviour//이동하고자 하는 층 수를 선택
 
     private void AttachFuncToButtons()// 각 버튼에 타워 이동 메서드를 리스너로 등록.
     {
-        foreach(Button btn in floorButtons)
+        int[] floorEntries = {0, 10, 20, 30, 40, 50};
+        for(int i = 0; i < floorButtons.Length; i++)
         {
-            btn.onClick.AddListener(() => goToCurrentFloor.CheckCurrentFloor(currentFloor));//각 버튼에 클릭 이벤트를 추가. 매개변수로 현재 층 수를 전달하여, 해당하는 층으로 이동할 수 있게 한다.
+            int floor = floorEntries[i];//버튼에 해당하는 층 수를 가져옴. 클로저 캡쳐 방지를 위해 로컬 변수 사용.
+            floorButtons[i].onClick.AddListener(() => goToCurrentFloor.CheckCurrentFloor(floor));//버튼 클릭 시 CheckCurrentFloor 메서드를 호출하여 해당 층으로 이동.
         }
     }
 
