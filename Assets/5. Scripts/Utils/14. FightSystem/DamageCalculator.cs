@@ -140,7 +140,7 @@ public class DamageCalculater : MonoBehaviour
 
         damage = CalculateDamage();
 
-        while(otherHealthPoint > 0)
+        while(closestUnit != null && closestUnit.GetComponent<DamageCalculater>()?.currentHP > 0)
         {
             yield return new WaitForSeconds(attackSpeed);
 
@@ -298,8 +298,8 @@ public class DamageCalculater : MonoBehaviour
 		공격 메서드는 공격 속도에 맞추어 실행되므로, 공격속도가 빠를 수록 데미지 누적량이 빠르게 늘어난다. 즉, 상대 유닛에게 빠르게 데미지를 줄 수 있다.*/
 
         float rawDamage = attackPoint * (100.0f / (100.0f + otherDefensePoint));//gameObject의 공격력 * (100 / (100 + 상대 의 방어력))
-        rawDamage = Mathf.Max(rawDamage, 10.0f); //방어력이 너무 높을 경우를 대비하여, 최소 10의 데미지를 보장하도록 한다.
+        rawDamage = Mathf.Max(rawDamage, 1.0f) * attackSpeed; //방어력이 너무 높을 경우를 대비하여, 최소 10의 데미지를 보장하도록 한다.
           
-        return rawDamage * attackSpeed;//gameObject의 공격속도를 곱하여 리턴.
+        return rawDamage;//gameObject의 공격속도를 곱하여 리턴.
     }
 }
