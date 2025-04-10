@@ -28,6 +28,7 @@ public class DungeonInfoPrintToPanel : MonoBehaviour
 
         dungeonInfoDeliver.SetEnemyInfo(dungeonInformation);
         dungeonInfoDeliver.SetBossInfo(dungeonInformation);
+        dungeonInfoDeliver.SetDungeonInfo(dungeonInformation);
     }
 
     public void ClearDungeonInfo()//던전 정보를 초기화하는 메서드. PopupCanvas가 비활성화될 때(전투 시작 버튼을 누르지 않고 팝업을 끄거나, SinglePlayScene으로 진입하여 씬이 전환될 때 호출.)
@@ -40,7 +41,6 @@ public class DungeonInfoPrintToPanel : MonoBehaviour
 
         dungeonInfoDeliver.ClearEnemyInfo();
         dungeonInfoDeliver.ClearBossInfo();
-
-        
+        dungeonInfoDeliver.ClearDungeonInfo();
     }
 }

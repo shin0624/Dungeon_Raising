@@ -39,7 +39,7 @@ public class TowerProgressManager : MonoBehaviour// 던전 진행 상태를 관리하는 매
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)//씬이 변경될 때 마다 던전 클리어 여부 및 현재 층 수, 클리어 던전 수를 업데이트한다.
     {
-        PlayerInfo.Instance.SetPlayerFloor();// 타워 층 수 테스트.
+        //PlayerInfo.Instance.SetPlayerFloor();// 타워 층 수 테스트.
     }
 
     public void SetDungeonClear(int floor, string dungeonID)//특정 층의 던전 클리어 여부를 true로 설정하는 메서드.

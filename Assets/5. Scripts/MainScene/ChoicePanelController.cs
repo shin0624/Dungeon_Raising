@@ -24,7 +24,7 @@ public class ChoicePanelController : MonoBehaviour//이동하고자 하는 층 수를 선택
         currentFloorText.text = $"현재 층 수 : {currentFloor}층";//현재 층수를 가져와서 TextMeshProUGUI에 표시.
         AttachFuncToButtons();// 각 버튼에 리스너 등록.
 
-        goToCurrentFloor.CheckLockImage(currentFloor, lockImages);//현재 층의 클리어 여부를 확인 후 LockImage를 비활성화.
+        goToCurrentFloor.UnlockingFloor(currentFloor, lockImages);//현재 층 및 이전 층들의 LockImage를 비활성화.
     }
 
     private void OnDisable()

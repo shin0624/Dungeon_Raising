@@ -8,11 +8,13 @@ public class SingleDungeonInfoRepository : MonoBehaviour
 
     public EnemyType enemyType;
     public BossType bossType;
+    public DungeonInformation dungeonInformation;
 
     private void Start()
     {
         enemyType = EnemyType.Empty;
         bossType = BossType.Empty;
+        dungeonInformation.dungeonID = "";
     }
 
 

@@ -107,8 +107,8 @@ public class PlayerInfo : MonoBehaviour
 
     public void SetPlayerFloor()//플레이어가 해당 층의 모든 던전을 클리어했을 때, 현재 층을 다음 층으로 변경하는 메서드.
     {
-        playerInformation.towerFloor+=10;//플레이어가 클리어한 층 수를 1 증가시킨다.
-        Debug.Log("Next Floor : " + playerInformation.towerFloor);//디버그 로그로 층 수를 출력한다.
+        playerInformation.towerFloor+=1;//플레이어가 클리어한 층 수를 1 증가시킨다.
+        Debug.Log("next Floor : "+ playerInformation.towerFloor);//디버그 로그로 층 수를 출력한다.
     }
 
 //--------------Getter------------------------------------------------------------------------------------

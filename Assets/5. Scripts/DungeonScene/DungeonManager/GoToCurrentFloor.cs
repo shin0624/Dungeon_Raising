@@ -40,7 +40,7 @@ public class GoToCurrentFloor : MonoBehaviour//현재 플레이어의 층 수 정보를 받아
         SceneManager.LoadScene(floors[index]);//index에 해당하는 씬을 로드.
     }
 
-    private void UnlockingFloor(int currentFloor, Image[] lockImages)//현재 플레이어의 층 수에 따라, 해당 층이 모두 클리어되었다면 LockImage를 비활성화하는 메서드.
+    public void UnlockingFloor(int currentFloor, Image[] lockImages)//현재 플레이어의 층 수에 따라, 해당 층이 모두 클리어되었다면 LockImage를 비활성화하는 메서드.
     {
         int maxIndex = currentFloor / 10;
         for(int i = 0; i <= maxIndex && i < lockImages.Length; i++)
@@ -50,8 +50,8 @@ public class GoToCurrentFloor : MonoBehaviour//현재 플레이어의 층 수 정보를 받아
         }
     }
 
-    public void CheckLockImage(int currentFloor, Image[] lockImages)//ChoicePanel이 오픈될 때 마다 현재 플레이어의 클리어 여부를 체크하고 LockImage를 제어하는 메서드.
-    {   
+    public void ClearProcess(int currentFloor)//WinPanelController.cs에서 호출되며, 현재 던전을 클리어처리 한 후 현재 층 클리어 여부를 체크하는 메서드. 클리어 여부에 따라 "다음 던전"클릭 시 이동하는 층이 변경된다.
+    {
         //dungeonInfo.floorNumber는 1부터 6까지. currentFloor는 1부터 50까지이기 때문에, 두 변수의 범위가 다르다. 왜? => 실제 플레이어가 플레이해야 하는 층은 50층인데, 게임 아키텍처는 한 씬 당 10개의 던전을 표현하기로 했기 때문.
         int realCurrentFloor = 0;//현재 층 수를 저장할 변수. 1층부터 50층까지의 층 수를 저장. currentFloor와 floorNumber의 범위가 다르기 때문에, floorNumber에 맞게 변환해주어야 한다.
 
@@ -83,15 +83,25 @@ public class GoToCurrentFloor : MonoBehaviour//현재 플레이어의 층 수 정보를 받아
         //그 객체들에서 dungeonID만 추출하여 리스트로 반환한다.
         //ConvertAll은 람다식으로 새 리스트를 만들 수 있음. Select()로도 구현할 수 있으나, 유니티에서 LINQ사용은 지양하는 편이 좋기에 C#의 내장메서드를 사용.
 
-        UnlockingFloor(currentFloor, lockImages);//LockImage를 비활성화.
+        SingleDungeonInfoRepository singleDungeonInfoRepository = GameObject.Find("Managers").GetComponent<SingleDungeonInfoRepository>();
 
-        // if(TowerProgressManager.Instance.IsFloorCleared(currentFloor, dungeonIDs))//currentFloor층의 모든 던전이 클리어되었다면
-        // {
-            
-        // }
-        // else
-        // {
-        //     return;
-        // }
+        TowerProgressManager.Instance.SetDungeonClear(currentFloor, singleDungeonInfoRepository.dungeonInformation.dungeonID);//현재 저장된 던전id에 해당하는 던전의 클리어 여부를 true로 설정.
+        
+        if(TowerProgressManager.Instance.IsFloorCleared(currentFloor, dungeonIDs))//currentFloor에 존재하는 던전리스트를 불러와서 모두 클리어되었는지 체크.
+        {
+            PlayerInfo.Instance.SetPlayerFloor();//true이면 현재 층 수를 +1
+        }
+        else//아직 currentFloor의 모든 던전이 클리어되지 않았다면
+        {
+            Debug.Log($"Number of Remaining dungeon is {dungeonIDs.Count}");
+            return;
+        }
+    }
+
+    public string GoToNextDungeon(int currentFloor)//WinPanelController.cs에서 호출될 다음 던전 이동 메서드.
+    {
+        int nextFloorSceneNum = PlayerInfo.Instance.GetPlayerFloor() / 10;// 현재 층 수를 가져온다.ResultUIController.cs에서 이미 towerFloor값 변경 작업을 마쳤기에, 클리어 여부에 따라 업데이트되어있을 것.
+        
+        return floors[nextFloorSceneNum];//현재 층 수 /10의 값 (ex : 32층이면 3 반환 -> floors[3] = 30_39Floor씬)을 리턴턴
     }
 }
