@@ -112,10 +112,9 @@ public class PlayerInfo : MonoBehaviour
         return nextFloor;// playerInformation이 PlayerInfo의 멤버변수이고, 그 안의 towerFloor는 구조체 내의 필드이기에, 값 변경 가능.
     }
 
-    public void SetPlayerFloor()
+    public void SetPlayerFloor()//명시적으로 변경된 값을 실제 구조체 변수값에 넣는다.
     {
-        int currentFloor = SetCurrentFloor();
-        playerInformation.towerFloor = currentFloor;
+        playerInformation.towerFloor = SetCurrentFloor();
     }
 
 //--------------Getter------------------------------------------------------------------------------------
