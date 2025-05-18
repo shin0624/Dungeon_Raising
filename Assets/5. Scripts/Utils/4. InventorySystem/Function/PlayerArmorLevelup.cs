@@ -35,7 +35,7 @@ public class PlayerArmorLevelup : MonoBehaviour
                         armorItem.defensivePower += statIncrease; // 방어력 상승치
                         break;
                 }
-                //TODO: 레벨업 정보 저장 처리 필요
+                //TODO : 레벨업 정보 저장 처리 필요
             }
         }
         else
@@ -69,7 +69,10 @@ public class PlayerArmorLevelup : MonoBehaviour
         // 승급 수행
         PlayerInfo.Instance.SetPlayerGold(playerGold - armorItem.gradeUpCost);
         armorItem.itemGrade += 1;
-            //승급 시 아이템 스프라이트 변경 및 저장 필요.
+        armorItem.itemLevel = 1;// 승급 시 레벨 초기화
+    
+
+        //TODO : 승급 시 아이템 스프라이트 변경 및 저장 필요.
     }
 
 
