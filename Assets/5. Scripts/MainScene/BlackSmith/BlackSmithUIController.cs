@@ -54,16 +54,17 @@ public class BlackSmithUIController : MonoBehaviour
 
     private void RemoveAllListeners()//OnDisable()에서 호출할 모든 리스너 제거 메서드
     {
-        foreach(Button button in characterPanelButtons)
+        foreach (Button button in characterPanelButtons)
         {
             button.onClick.RemoveAllListeners();
         }
-        foreach(Button button in heroPanelButtons)
+        foreach (Button button in heroPanelButtons)
         {
             button.onClick.RemoveAllListeners();
         }
         characterButton.onClick.RemoveListener(OnCharacterButtonClicked);
         heroButton.onClick.RemoveListener(OnHeroButtonClicked);
+        
     }
 
     private void DeActiveAllPanels()//OnDisable()에서 호출할 모든 패널 비활성화 메서드

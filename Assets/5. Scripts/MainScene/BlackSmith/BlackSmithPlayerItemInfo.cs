@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class BlackSmithPlayerItemInfo : MonoBehaviour
 {
@@ -20,12 +21,12 @@ public class BlackSmithPlayerItemInfo : MonoBehaviour
 
     [SerializeField] private BlackSmithItemList[] blackSmithItemList = new BlackSmithItemList[6];
 
-    private void OnEnable() 
+    private void OnEnable()
     {
         AttachAllListeners();//리스너 등록
     }
 
-    private void OnDisable() 
+    private void OnDisable()
     {
         DettachAllListeners();//리스너 해제
     }
@@ -44,7 +45,7 @@ public class BlackSmithPlayerItemInfo : MonoBehaviour
 
     private void DettachAllListeners()//창이 비활성화 되면 모든 리스너를 제거.
     {
-        foreach(Button armorItemButton in armorItemButtons)
+        foreach (Button armorItemButton in armorItemButtons)
         {
             armorItemButton.onClick.RemoveAllListeners();
         }
@@ -55,15 +56,15 @@ public class BlackSmithPlayerItemInfo : MonoBehaviour
     {
         Debug.Log($"아이템 버튼 클릭됨 : {part}");
         bool isExist = itemDatabase.armorItems.Exists(i => i.itemParts == part);//해당 파트의 아이템이 있다면 true, 없으면 false.
-        if(isExist)
+        if (isExist)
         {
-            if(armorItemInfoPanels[num].activeSelf)//이미 해당 리스트가 열려있으면 닫는다.
+            if (armorItemInfoPanels[num].activeSelf)//이미 해당 리스트가 열려있으면 닫는다.
             {
                 armorItemInfoPanels[num].SetActive(false);
             }
             else//해당 리스트가 닫혀있을 때에만 리스트를 활성화.
             {
-                for(int i=0; i<armorItemInfoPanels.Length; i++)
+                for (int i = 0; i < armorItemInfoPanels.Length; i++)
                 {
                     armorItemInfoPanels[i].SetActive(false);//열려있는 패널은 닫고
                 }
@@ -77,6 +78,6 @@ public class BlackSmithPlayerItemInfo : MonoBehaviour
         {
             Debug.Log($"{part}에 해당하는 아이템을 보유하고 있지 않습니다.");
         }
-        
     }
+
 }
