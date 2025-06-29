@@ -32887,6 +32887,7 @@ GameObject:
   - component: {fileID: 1755420895}
   - component: {fileID: 1755420894}
   - component: {fileID: 1755420893}
+  - component: {fileID: 1755420896}
   m_Layer: 0
   m_Name: MainSceneManager
   m_TagString: Untagged
@@ -33020,6 +33021,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b845792fa6948a49b2ac1499f4b76af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1755420896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755420884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 773083c6d71bf6e42a34c9d43725eece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1783518071
@@ -42022,6 +42035,7 @@ MonoBehaviour:
   - {fileID: 133849496}
   beforeGrade: {fileID: 416728710}
   afterGrade: {fileID: 1851895590}
+  itemLevelUp: {fileID: 1755420896}
 --- !u!114 &4605770045634123312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42049,6 +42063,7 @@ MonoBehaviour:
   - {fileID: 133849496}
   beforeGrade: {fileID: 416728710}
   afterGrade: {fileID: 1851895590}
+  itemLevelUp: {fileID: 1755420896}
 --- !u!114 &4605770045664547439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42076,6 +42091,7 @@ MonoBehaviour:
   - {fileID: 133849496}
   beforeGrade: {fileID: 416728710}
   afterGrade: {fileID: 1851895590}
+  itemLevelUp: {fileID: 1755420896}
 --- !u!114 &4605770046353703570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42103,6 +42119,7 @@ MonoBehaviour:
   - {fileID: 133849496}
   beforeGrade: {fileID: 416728710}
   afterGrade: {fileID: 1851895590}
+  itemLevelUp: {fileID: 1755420896}
 --- !u!114 &4605770046561734447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42130,6 +42147,7 @@ MonoBehaviour:
   - {fileID: 133849496}
   beforeGrade: {fileID: 416728710}
   afterGrade: {fileID: 1851895590}
+  itemLevelUp: {fileID: 1755420896}
 --- !u!114 &4605770046581449066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42157,6 +42175,7 @@ MonoBehaviour:
   - {fileID: 133849496}
   beforeGrade: {fileID: 416728710}
   afterGrade: {fileID: 1851895590}
+  itemLevelUp: {fileID: 1755420896}
 --- !u!1 &4672210583995533003
 GameObject:
   m_ObjectHideFlags: 0
