@@ -19,6 +19,7 @@ public class BlackSmithItemElementClicker : MonoBehaviour
     [SerializeField] private GameObject[] reinforcementPanels = new GameObject[2];// 레벨업 패널과 승급 패널을 구분하기 위한 배열. [0] : 레벨업 패널, [1] : 승급 패널
     [SerializeField] private TextMeshProUGUI beforeGrade;
     [SerializeField] private TextMeshProUGUI afterGrade;
+    [SerializeField] private AdvancementAlert advancementAlert;//승급 실패 시 알림을 표시하기 위한 AdvancementAlert 스크립트 참조. 승급 실패 시 UI로 알림을 표시하기 위해 필요.
 
     //250629 : 실제 아이템 레벨업과 승급을 수행하는 기능 추가를 위해 ItemLevelUp.cs로 armorItem 매개변수를 전달하는 로직 추가
     [SerializeField] private ItemLevelUp itemLevelUp;//아이템 레벨업 스크립트. 아이템 레벨업 및 승급을 수행하는 메서드를 호출하기 위해 필요.
@@ -110,17 +111,28 @@ public class BlackSmithItemElementClicker : MonoBehaviour
             Debug.LogWarning("선택된 아이템이 없습니다.");
             return;
         }
-
+        if (currentSelectedItem.itemLevel < 10)
+        {
+            ShowAdvancementFailedUI("아이템 레벨이 10이 되어야 승급이 가능합니다.");
+            return;
+        }
         if (itemLevelUp == null)
         {
             Debug.LogError("ItemLevelUp 참조가 설정되지 않았습니다!");
             return;
         }
-        itemLevelUp.PerformItemAdvancement(currentSelectedItem);// ItemLevelUp의 승급 메서드 호출
-        UpdateUpgradeUI();
+        bool advancementSuccess = itemLevelUp.PerformItemAdvancement(currentSelectedItem);// ItemLevelUp의 승급 메서드 호출
+        if (advancementSuccess)
+        {
+            currentSelectedItem.itemLevel = 1; // 승급 시 레벨 초기화. 승급하면 다시 1레벨로 돌아가야 다음 승급을 위해 레벨업이 가능.
+            Debug.Log($"아이템 승급 성공: {currentSelectedItem.itemName} - 현재 등급: {currentSelectedItem.itemGrade}, 현재 재화: {PlayerInfo.Instance.GetplayerGold()}");
+            UpdateAdvancementUI();
+            UpdateLevelUpUI();
+        }
+
     }
-    
-    
+
+
     // 레벨업 UI 업데이트
     private void UpdateLevelUpUI()
     {
@@ -129,7 +141,7 @@ public class BlackSmithItemElementClicker : MonoBehaviour
             beforeLevel.text = $"Lv {currentSelectedItem.itemLevel} / 10";
             afterLevel.text = $"Lv {Mathf.Min(currentSelectedItem.itemLevel + 1, 10)} / 10";
             levelUpCost.text = $"{PlayerInfo.Instance.GetplayerGold()} / {currentSelectedItem.levelUpCost}";
-            
+
             switch (currentSelectedItem.itemParts)
             {
                 case ItemPart.Weapon:
@@ -145,13 +157,13 @@ public class BlackSmithItemElementClicker : MonoBehaviour
     }
 
     // 승급 UI 업데이트
-    private void UpdateUpgradeUI()
+    private void UpdateAdvancementUI()
     {
         if (reinforcementPanels[1].activeSelf && currentSelectedItem != null)
         {
             gradeUpCost.text = $"{PlayerInfo.Instance.GetplayerGold()} / {currentSelectedItem.gradeUpCost}";
             beforeGrade.text = currentSelectedItem.itemGrade.ToString();
-            
+
             int nextGradeInt = (int)currentSelectedItem.itemGrade + 1;
             if (nextGradeInt >= 4) // BlackStone
             {
@@ -163,5 +175,10 @@ public class BlackSmithItemElementClicker : MonoBehaviour
                 afterGrade.text = ((Grade)nextGradeInt).ToString();
             }
         }
+    }
+
+    private void ShowAdvancementFailedUI(string message)// 승급 실패 메시지를 UI로 표시하는 메서드
+    {
+        advancementAlert.AdvancementFailed(message);// AdvancementAlert 스크립트의 AdvancementFailed 메서드를 호출하여 실패 메시지를 표시
     }
 }

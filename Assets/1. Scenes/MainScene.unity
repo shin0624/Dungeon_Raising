@@ -6607,10 +6607,10 @@ RectTransform:
   - {fileID: 695527375}
   - {fileID: 365980499}
   - {fileID: 1397279740}
-  - {fileID: 932032373}
   - {fileID: 1957234209}
   - {fileID: 563113451}
   - {fileID: 431739308}
+  - {fileID: 932032373}
   m_Father: {fileID: 1455582161}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -30532,7 +30532,7 @@ GameObject:
   - component: {fileID: 1620816001}
   - component: {fileID: 1620816000}
   m_Layer: 5
-  m_Name: Text
+  m_Name: FaildText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30577,7 +30577,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCE90\uB9AD\uD130 \uB808\uBCA8 \uB610\uB294 \uC7AC\uD654\uAC00 \uBD80\uC871\uD569\uB2C8\uB2E4."
+  m_text: "\uC7A5\uBE44 \uB808\uBCA8 10\uC774 \uB418\uC5B4\uC57C \uC2B9\uAE09 \uAC00\uB2A5\uD569\uB2C8\uB2E4"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe6eadbef09b96c44bf903cf63e1b2e6, type: 2}
   m_sharedMaterial: {fileID: -6848732974039993106, guid: fe6eadbef09b96c44bf903cf63e1b2e6, type: 2}
@@ -32888,6 +32888,7 @@ GameObject:
   - component: {fileID: 1755420894}
   - component: {fileID: 1755420893}
   - component: {fileID: 1755420896}
+  - component: {fileID: 1755420897}
   m_Layer: 0
   m_Name: MainSceneManager
   m_TagString: Untagged
@@ -33035,6 +33036,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 773083c6d71bf6e42a34c9d43725eece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  advancementAlert: {fileID: 1755420897}
+--- !u!114 &1755420897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755420884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0457cf92fc3886e4ca4b7db66ced1aca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  failedPanel: {fileID: 932032372}
+  failedMessageText: {fileID: 1620816000}
 --- !u!1 &1783518071
 GameObject:
   m_ObjectHideFlags: 0
@@ -42035,6 +42051,7 @@ MonoBehaviour:
   - {fileID: 133849496}
   beforeGrade: {fileID: 416728710}
   afterGrade: {fileID: 1851895590}
+  advancementAlert: {fileID: 1755420897}
   itemLevelUp: {fileID: 1755420896}
 --- !u!114 &4605770045634123312
 MonoBehaviour:
@@ -42063,6 +42080,7 @@ MonoBehaviour:
   - {fileID: 133849496}
   beforeGrade: {fileID: 416728710}
   afterGrade: {fileID: 1851895590}
+  advancementAlert: {fileID: 1755420897}
   itemLevelUp: {fileID: 1755420896}
 --- !u!114 &4605770045664547439
 MonoBehaviour:
@@ -42091,6 +42109,7 @@ MonoBehaviour:
   - {fileID: 133849496}
   beforeGrade: {fileID: 416728710}
   afterGrade: {fileID: 1851895590}
+  advancementAlert: {fileID: 1755420897}
   itemLevelUp: {fileID: 1755420896}
 --- !u!114 &4605770046353703570
 MonoBehaviour:
@@ -42119,6 +42138,7 @@ MonoBehaviour:
   - {fileID: 133849496}
   beforeGrade: {fileID: 416728710}
   afterGrade: {fileID: 1851895590}
+  advancementAlert: {fileID: 1755420897}
   itemLevelUp: {fileID: 1755420896}
 --- !u!114 &4605770046561734447
 MonoBehaviour:
@@ -42147,6 +42167,7 @@ MonoBehaviour:
   - {fileID: 133849496}
   beforeGrade: {fileID: 416728710}
   afterGrade: {fileID: 1851895590}
+  advancementAlert: {fileID: 1755420897}
   itemLevelUp: {fileID: 1755420896}
 --- !u!114 &4605770046581449066
 MonoBehaviour:
@@ -42175,6 +42196,7 @@ MonoBehaviour:
   - {fileID: 133849496}
   beforeGrade: {fileID: 416728710}
   afterGrade: {fileID: 1851895590}
+  advancementAlert: {fileID: 1755420897}
   itemLevelUp: {fileID: 1755420896}
 --- !u!1 &4672210583995533003
 GameObject:

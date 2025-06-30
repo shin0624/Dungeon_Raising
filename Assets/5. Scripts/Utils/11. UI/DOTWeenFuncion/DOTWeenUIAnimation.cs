@@ -2,14 +2,17 @@ using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public static class DOTWeenUIAnimation// UI 컨트롤러 클래스에서 DOTWeen 기능을 만들지 않고 바로 사용할 수 있게 하는 클래스. 어디서든 쉽게 호출하기 위해 정적 클래스로 선언.
 {
     //UI를 컨트롤하는 클래스에서 DOTWeen의 기능을 사용하기 위해 일일히 DG.Tweening 네임스페이스를 선언하지 않아도 되고, 애니메이션 메서드도 만들지 않아도 됨.
     private static bool isInitialized = false;// DOTWeen의 Init()가 한 번만 호출될 수 있도록 제어하는 플래그.
+    private static LoopType loopType;// DOTWeen의 반복 타입을 설정하기 위한 변수. UI 깜빡임 효과 연출에 사용.
     public static void Init()// Managers.cs의 Init()에서 한 번만 호출됨.
     {
-        if(!isInitialized)//DOTWeen의 초기화는 한 번만 수행되면 게임 내내 유지되는 싱글톤 기반이므로, TitleScene에서 Managers에 의해 한 번만 초기화된다.
+        if (!isInitialized)//DOTWeen의 초기화는 한 번만 수행되면 게임 내내 유지되는 싱글톤 기반이므로, TitleScene에서 Managers에 의해 한 번만 초기화된다.
         {
             DOTween.Init();
             isInitialized = true;
@@ -38,7 +41,7 @@ public static class DOTWeenUIAnimation// UI 컨트롤러 클래스에서 DOTWeen 기능을 �
     {
         var seq = DOTween.Sequence();
         Vector3 originScale = obj.transform.localScale;// DOScale 실행 후에는 localScale이 고정되어 버리니까, 미리 obj의 크기를 저장해놓는다.
-        seq.Append(obj.transform.DOScale(aftertAndValue, afterDuration)).OnComplete( () =>//UI를 점점 작아지게 만든다.
+        seq.Append(obj.transform.DOScale(aftertAndValue, afterDuration)).OnComplete(() =>//UI를 점점 작아지게 만든다.
         {
             obj.SetActive(false);//UI 비활성화.
             obj.transform.localScale = originScale;//저장해놓았던 원래 크기로 UI 크기를 복구.
@@ -48,12 +51,23 @@ public static class DOTWeenUIAnimation// UI 컨트롤러 클래스에서 DOTWeen 기능을 �
 
     public static IEnumerator PopupDownCoroutineInUI(GameObject obj, Vector3 aftertAndValue, float afterDuration, string sceneName)// UI를 끌 때 사용하는 메서드. timeScale이나 SceneManagement를 사용할 때는 부득이하게 코루틴으로 타이밍 조절이 필요하기 때문에 선언.
     {
-        if(Time.timeScale == 0)
+        if (Time.timeScale == 0)
         {
             Time.timeScale = 1;//UI가 작아지는 동안 게임이 멈춰있다면 다시 게임을 진행하도록 설정.
         }
         PopupDownAnimationInUI(obj, aftertAndValue, afterDuration);//UI를 점점 작아지게 만든다. 작아진 후 자동으로 비활성화 및 크기 복구 수행.
-        yield return new WaitForSecondsRealtime(afterDuration -0.2f);//UI가 작아지는 동안 대기.
+        yield return new WaitForSecondsRealtime(afterDuration - 0.2f);//UI가 작아지는 동안 대기.
         SceneManager.LoadScene(sceneName);//UI가 작아진 후 씬을 로드한다. 씬 로드 시 UI가 비활성화되어 있기 때문에, UI가 사라지지 않고 씬이 전환되는 현상을 방지하기 위해 UI를 비활성화한 후 씬을 로드한다.
+    }
+
+    public static void BlinkAnimationInUI(GameObject obj)// UI 깜빡임 효과 연출을 위한 메서드. 
+    {
+        loopType = LoopType.Yoyo;// 깜빡임 효과를 위해 Yoyo 타입으로 설정.
+        var seq = DOTween.Sequence();
+        seq.Append(obj.GetComponent<MeshRenderer>().material.DOFade(0.0f, 1.5f))// 깜빡임 효과를 위해 투명도 0으로 설정.
+            .Append(obj.GetComponent<MeshRenderer>().material.DOFade(1.0f, 1.5f))// 다시 불투명도로 설정.
+            .SetLoops(3, loopType);// 반복 횟수 설정.
+
+        obj.SetActive(false);// 깜빡임 효과가 끝난 후 UI를 비활성화한다. 이 부분은 필요에 따라 조정할 수 있다.
     }
 }
