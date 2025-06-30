@@ -42,11 +42,12 @@ public class PlayerInfo : MonoBehaviour
             return;
         }
     }
-    
+
     void Start()
     {
         //PlayerIDCheck(playerID);
         Debug.Log($"[DEBUG] CharacterInfoPanelSetting Start(): {PlayerInfo.Instance.GetPlayerNickname()}");
+        playerInformation.playerGold = 1000;//플레이어 재화량 초기화. 추후 게임 시작 시, 서버에서 불러온 플레이어 정보를 통해 초기화할 예정.
     }
 //------------------Setter---------------------------------------------------------------------------------------
     public string SetPlayerID(string id)//플레이어 아이디를 string변수에 저장

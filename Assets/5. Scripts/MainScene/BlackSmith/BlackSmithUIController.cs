@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BlackSmithUIController : MonoBehaviour
+public class BlackSmithUIController : MonoBehaviour, IBlackSmithManager
 {
     //대장간 UI 컨트롤러. 대장간은 2개의 업그레이드 패널 위에서 캐릭터 강화, 영웅 강화 두 기능을 수행한다.
     // 캐릭터 업그레이드 패널 : 버튼 4개 ( 장비 이미지 그리드는 프리팹으로 슬롯 불러오기를 구현할 것이므로 본 클래스에서 버튼을 구현하지 않음.)
@@ -20,19 +20,21 @@ public class BlackSmithUIController : MonoBehaviour
     [SerializeField] private GameObject heroMainPanel;
     [SerializeField] private Button characterButton;
     [SerializeField] private Button heroButton;
-
+    //250629 : 아이템 레벨업, 승급 기능 추가(인터페이스 사용)
+    private BlackSmithItemElementClicker currentActiveClicker;//현재 클릭된 아이템의 정보를 표시하는 Clicker. IBlackSmithManager 인터페이스를 통해 BlackSmithItemElementClicker.cs에서 접근할 수 있도록 함.
     //추후 재화 부족 텍스트 출력
 
-    private void OnEnable() 
+    private void OnEnable()
     {
         RemoveAllListeners();//이벤트 중복 등록을 방지하기 위해, 처음 활성화 시 모든 리스너 초기화.
         characterMainPanel.SetActive(true);//처음 대장간 창이 오픈되면 캐릭터 메인패널이 출력됨.
         AttachAllListeners();//각 패널의 버튼에 리스너를 등록.
     }
-    private void OnDisable() 
+    private void OnDisable()
     {
         RemoveAllListeners();//각 패널의 버튼 리스너들을 모두 제거.
         DeActiveAllPanels();//모든 패널을 비활성화.
+        currentActiveClicker = null;//현재 활성화된 Clicker를 null로 초기화.
     }
 
     private void AttachAllListeners()//리스너 등록
@@ -54,16 +56,17 @@ public class BlackSmithUIController : MonoBehaviour
 
     private void RemoveAllListeners()//OnDisable()에서 호출할 모든 리스너 제거 메서드
     {
-        foreach(Button button in characterPanelButtons)
+        foreach (Button button in characterPanelButtons)
         {
             button.onClick.RemoveAllListeners();
         }
-        foreach(Button button in heroPanelButtons)
+        foreach (Button button in heroPanelButtons)
         {
             button.onClick.RemoveAllListeners();
         }
         characterButton.onClick.RemoveListener(OnCharacterButtonClicked);
         heroButton.onClick.RemoveListener(OnHeroButtonClicked);
+        
     }
 
     private void DeActiveAllPanels()//OnDisable()에서 호출할 모든 패널 비활성화 메서드
@@ -79,12 +82,43 @@ public class BlackSmithUIController : MonoBehaviour
             subPanel.SetActive(false);
         }
     }
+    //----------------강화승급 인터페이스 구현-------------------------------------
+    public void SetActiveClicker(BlackSmithItemElementClicker clicker)// 클릭된 아이템의 정보를 표시하는 Clicker를 활성화하는 메서드
+    {
+        currentActiveClicker = clicker;
+        Debug.Log("현재 활성화된 Clicker: " + clicker.name);
+    }
 
-//----------------메인 패널 전환 버튼 이벤트-------------------------------------
+    public void PerformArmorItemLevelUp()//아이템 레벨업 수행(인터페이스 오버라이드)
+    {
+        if (currentActiveClicker != null)
+        {
+            currentActiveClicker.OnItemLevelUp();
+        }
+        else
+        {
+            Debug.LogWarning("선택된 아이템이 없습니다. 레벨업을 수행할 수 없습니다.");
+        }
+    }
+
+    public void PerformArmorItemAdvancement()//아이템 승급 수행(인터페이스 오버라이드)
+    {
+        if (currentActiveClicker != null)
+        {
+            currentActiveClicker.OnItemAdvancement();
+        }
+        else
+        {
+            Debug.LogWarning("선택된 아이템이 없습니다. 승급을 수행할 수 없습니다.");
+        }
+    }
+
+
+    //----------------메인 패널 전환 버튼 이벤트-------------------------------------
 
     private void OnCharacterButtonClicked()
     {
-        if(!characterMainPanel.activeSelf)
+        if (!characterMainPanel.activeSelf)
         {
             characterMainPanel.SetActive(true);
             heroMainPanel.SetActive(false);
@@ -121,13 +155,14 @@ public class BlackSmithUIController : MonoBehaviour
 
     private void PerformCharacterLevelUp()//캐릭터 패널 레벨 업
     {
-        Debug.Log("캐릭터 레벨업");
+        Debug.Log("캐릭터 레벨업 버튼 클릭");
+        PerformArmorItemLevelUp(); // 아이템 레벨업 수행
     }
 
     private void PerformCharacterUpgrade()//캐릭터 패널 승급
     {
-        Debug.Log("캐릭터 승급");
-
+        Debug.Log("캐릭터 승급 버튼 클릭");
+        PerformArmorItemAdvancement(); // 아이템 승급 수행
     }
 
     //----------------영웅 업그레이드 패널 버튼 이벤트-------------------------------------
